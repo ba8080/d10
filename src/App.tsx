@@ -19,7 +19,12 @@ import {
   Zap,
   Clock,
   Award,
-  RotateCcw
+  RotateCcw,
+  Mail,
+  FileText,
+  Scale,
+  Cookie,
+  ArrowUp
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
@@ -102,7 +107,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed inset-0 z-[90] bg-black pt-24 px-8"
+            className="md:hidden fixed inset-0 z-[110] bg-black pt-24 px-8"
           >
             <div className="flex flex-col gap-8">
               {navLinks.map((link) => (
@@ -396,7 +401,7 @@ const Pricing = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 md:py-20 border-t border-white/5" dir="rtl">
+    <footer className="bg-black text-white py-12 md:py-20 border-t border-white/5" dir="rtl" role="contentinfo">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
           <div className="text-center md:text-right">
@@ -406,152 +411,416 @@ const Footer = () => {
             <p className="text-white/40 text-sm font-light max-w-xs">
               העתיד של דיאגנוסטיקת הרכב כבר כאן. פותח בישראל עם אהבה לטכנולוגיה ורכבים.
             </p>
+            <p className="text-white/30 text-xs mt-3">
+              <a href="mailto:support@d10.store" className="hover:text-white transition-colors">support@d10.store</a>
+            </p>
           </div>
 
-          <div className="flex gap-6 md:gap-12 text-xs font-bold uppercase tracking-widest text-white/40">
-            <a href="#features" className="hover:text-white transition-colors">יכולות</a>
-            <a href="#pricing" className="hover:text-white transition-colors">חבילות</a>
-            <a href="#" className="hover:text-white transition-colors">פרטיות</a>
+          {/* Legal Links */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/40">
+            <a href="#privacy" className="hover:text-white transition-colors">מדיניות פרטיות</a>
+            <a href="#terms" className="hover:text-white transition-colors">תנאי שימוש</a>
+            <a href="#accessibility" className="hover:text-white transition-colors">נגישות</a>
+            <a href="#returns" className="hover:text-white transition-colors">ביטולים והחזרות</a>
           </div>
 
           <div className="flex gap-6">
+            <a href="mailto:support@d10.store" aria-label="שלח אימייל" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+              <Mail size={18} />
+            </a>
             <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
               <Globe size={18} />
-            </div>
-            <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
-              <Activity size={18} />
             </div>
           </div>
         </div>
 
-        <div className="mt-10 md:mt-20 pt-8 border-t border-white/5 text-center text-[10px] text-white/20 uppercase tracking-[0.2em]">
-          © 2026 D10 AI · כל הזכויות שמורות · פותח בישראל 🇮🇱
+        <div className="mt-10 md:mt-20 pt-8 border-t border-white/5 text-center space-y-2">
+          <p className="text-[10px] text-white/20 uppercase tracking-[0.2em]">
+            © 2026 D10 · כל הזכויות שמורות · פותח בישראל 🇮🇱
+          </p>
+          <p className="text-[9px] text-white/15 leading-relaxed max-w-lg mx-auto">
+            המידע באתר זה הוא לצורכי מידע כללי בלבד. מומלץ להתייעץ עם עורך דין ישראלי מוסמך לפני פרסום.
+          </p>
         </div>
       </div>
     </footer>
   );
 };
 
+// --- Cookie Consent Banner ---
+
+const CookieConsentBanner = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem('d10_cookie_consent');
+    if (!consent) setVisible(true);
+  }, []);
+
+  const handleAccept = () => {
+    localStorage.setItem('d10_cookie_consent', 'granted');
+    if (typeof window.fbq === 'function') {
+      window.fbq('consent', 'grant');
+    }
+    setVisible(false);
+  };
+
+  const handleDecline = () => {
+    localStorage.setItem('d10_cookie_consent', 'denied');
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-[200] p-4 md:p-6" dir="rtl">
+      <div className="max-w-3xl mx-auto glass border border-white/10 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="flex-1">
+          <p className="text-sm text-white/80 font-light leading-relaxed">
+            אתר זה משתמש בעוגיות (Cookies) ובכלי מעקב לצורך שיפור חוויית הגלישה וניתוח תנועה. 
+            למידע נוסף, ראה את <a href="#privacy" className="text-primary underline">מדיניות הפרטיות</a> שלנו.
+          </p>
+        </div>
+        <div className="flex gap-3 shrink-0">
+          <button onClick={handleAccept} className="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary-dark transition-colors">אשר</button>
+          <button onClick={handleDecline} className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">דחה</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- Legal Page Layout ---
+
+const LegalPage = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <div className="min-h-screen bg-[#050505] pt-28 pb-20" dir="rtl">
+    <div className="container mx-auto px-6 max-w-3xl">
+      <a href="#" className="inline-flex items-center gap-2 text-primary text-sm mb-8 hover:underline">→ חזרה לעמוד הראשי</a>
+      <h1 className="text-3xl md:text-4xl font-bold text-white mb-10 tracking-tight">{title}</h1>
+      <div className="prose-legal space-y-6 text-white/70 text-sm font-light leading-relaxed">
+        {children}
+      </div>
+    </div>
+  </div>
+);
+
+// --- Privacy Policy ---
+
+const PrivacyPolicy = () => (
+  <LegalPage title="מדיניות פרטיות">
+    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-white">1. כללי</h2>
+    <p>D10 ("החברה", "אנחנו") מפעילה את אתר www.d10.store ואת מוצרי D10 AI. מדיניות פרטיות זו מסבירה כיצד אנו אוספים, משתמשים ומגנים על המידע האישי שלך.</p>
+    
+    <h2 className="text-lg font-bold text-white">2. מידע שאנו אוספים</h2>
+    <p>אנו עשויים לאסוף את סוגי המידע הבאים:</p>
+    <ul className="list-disc pr-6 space-y-1">
+      <li>פרטי קשר: שם, כתובת דוא"ל, מספר טלפון (בעת יצירת קשר או הזמנה)</li>
+      <li>מידע על הזמנות: פרטי רכישה, כתובת למשלוח, פרטי תשלום</li>
+      <li>נתוני גלישה: כתובת IP, סוג דפדפן, דפים שנצפו, זמני גלישה</li>
+      <li>עוגיות וכלי מעקב: Meta Pixel, Google Analytics (בכפוף להסכמתך)</li>
+    </ul>
+    
+    <h2 className="text-lg font-bold text-white">3. מטרות השימוש במידע</h2>
+    <ul className="list-disc pr-6 space-y-1">
+      <li>עיבוד הזמנות ומשלוחים</li>
+      <li>מתן שירות לקוחות ותמיכה טכנית</li>
+      <li>שיפור האתר והמוצרים שלנו</li>
+      <li>שליחת עדכונים ותקשורת שיווקית (בכפוף להסכמתך בלבד)</li>
+      <li>ניתוח סטטיסטי ומגמות שימוש</li>
+    </ul>
+    
+    <h2 className="text-lg font-bold text-white">4. שיתוף מידע עם צדדים שלישיים</h2>
+    <p>אנו עשויים לשתף מידע עם ספקי שירות צד שלישי הנדרשים לתפעול העסק, כגון:</p>
+    <ul className="list-disc pr-6 space-y-1">
+      <li>Meta (Facebook) — לצורך פרסום ממוקד (Meta Pixel)</li>
+      <li>שירותי שילוח ולוגיסטיקה</li>
+      <li>מעבדי תשלומים</li>
+    </ul>
+    <p>אנו לא מוכרים את המידע האישי שלך לצדדים שלישיים.</p>
+    
+    <h2 className="text-lg font-bold text-white">5. תקופת שמירת המידע</h2>
+    <p>אנו שומרים מידע אישי כל עוד הוא נדרש למטרות שלשמן נאסף, או כנדרש על פי חוק. מידע הקשור לעסקאות יישמר לפחות 7 שנים לצורכי מס וחשבונאות.</p>
+    
+    <h2 className="text-lg font-bold text-white">6. עוגיות (Cookies)</h2>
+    <p>האתר משתמש בעוגיות חיוניות לתפעול האתר ובעוגיות אנליטיות/שיווקיות (בכפוף להסכמתך). ניתן לשלוט בעוגיות דרך הגדרות הדפדפן.</p>
+    
+    <h2 className="text-lg font-bold text-white">7. זכויותיך</h2>
+    <p>בהתאם לחוק הגנת הפרטיות, התשמ"א-1981, עומדות לך הזכויות הבאות:</p>
+    <ul className="list-disc pr-6 space-y-1">
+      <li>עיון במידע האישי שלך</li>
+      <li>תיקון מידע שגוי</li>
+      <li>בקשה למחיקת מידע</li>
+      <li>הסרה מרשימות תפוצה שיווקיות</li>
+    </ul>
+    
+    <h2 className="text-lg font-bold text-white">8. יצירת קשר</h2>
+    <p>לשאלות בנושא פרטיות או למימוש זכויותיך, ניתן לפנות אלינו בדוא"ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
+  </LegalPage>
+);
+
+// --- Terms of Use ---
+
+const TermsOfUse = () => (
+  <LegalPage title="תנאי שימוש">
+    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-white">1. כללי</h2>
+    <p>ברוכים הבאים לאתר www.d10.store המופעל על ידי D10 ("החברה"). השימוש באתר ובמוצרים שלנו מהווה הסכמה לתנאים אלה.</p>
+    
+    <h2 className="text-lg font-bold text-white">2. תיאור המוצר</h2>
+    <p>D10 AI הוא מכשיר דיאגנוסטי לרכב המתחבר ליציאת OBD2 ומספק מידע על מצב הרכב באמצעות אפליקציה ייעודית.</p>
+    <p className="text-yellow-400/80 font-medium">⚠️ חשוב: המוצר מספק מידע אינפורמטיבי בלבד ואינו מהווה תחליף לבדיקה מקצועית של רכב על ידי מוסכניק מוסמך. אין להסתמך על המוצר לצורך קבלת החלטות בטיחותיות.</p>
+    
+    <h2 className="text-lg font-bold text-white">3. תאימות</h2>
+    <p>המוצר תואם לרוב כלי הרכב המצוידים ביציאת OBD2 (1996 ומעלה). החברה אינה מתחייבת לתאימות מלאה עם כל דגם רכב. מומלץ לבדוק תאימות לפני הרכישה.</p>
+    
+    <h2 className="text-lg font-bold text-white">4. רכישות ותשלומים</h2>
+    <p>המחירים באתר כוללים מע"מ אלא אם צוין אחרת. החברה שומרת לעצמה את הזכות לעדכן מחירים. מחיר שאושר בעת ההזמנה הוא המחיר הקובע.</p>
+    
+    <h2 className="text-lg font-bold text-white">5. הגבלת אחריות</h2>
+    <p>החברה אינה אחראית לנזקים ישירים או עקיפים הנובעים משימוש במוצר, לרבות נזקים לרכב, אובדן נתונים, או הסתמכות על מידע שסופק על ידי המוצר. השימוש במוצר הוא על אחריות המשתמש.</p>
+    
+    <h2 className="text-lg font-bold text-white">6. קניין רוחני</h2>
+    <p>כל התכנים באתר, לרבות טקסטים, עיצובים, לוגואים ותוכנה, הם קניינה של D10 ואין להעתיקם ללא אישור.</p>
+    
+    <h2 className="text-lg font-bold text-white">7. דין וסמכות שיפוט</h2>
+    <p>תנאים אלה כפופים לחוקי מדינת ישראל. סמכות השיפוט הבלעדית תהא לבתי המשפט המוסמכים בישראל.</p>
+    
+    <h2 className="text-lg font-bold text-white">8. יצירת קשר</h2>
+    <p>לשאלות בנוגע לתנאי השימוש: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
+  </LegalPage>
+);
+
+// --- Accessibility Statement ---
+
+const AccessibilityStatement = () => (
+  <LegalPage title="הצהרת נגישות">
+    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-white">מחויבות לנגישות</h2>
+    <p>D10 מחויבת להנגשת האתר והשירותים שלה לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998 ותקנות הנגישות.</p>
+    
+    <h2 className="text-lg font-bold text-white">מה עשינו</h2>
+    <ul className="list-disc pr-6 space-y-1">
+      <li>שימוש ב-HTML סמנטי עם היררכיית כותרות נכונה</li>
+      <li>תמיכה בניווט מקלדת מלא</li>
+      <li>תמיכה בקוראי מסך (ARIA labels)</li>
+      <li>ניגודיות צבעים מספקת</li>
+      <li>תמיכה מלאה בעברית (RTL)</li>
+      <li>טפסים עם תוויות נגישות</li>
+      <li>טקסט חלופי לתמונות</li>
+    </ul>
+    
+    <h2 className="text-lg font-bold text-white">מגבלות ידועות</h2>
+    <p>ייתכן שחלק מהתכנים באתר אינם נגישים באופן מלא. אנו עובדים באופן שוטף לשיפור הנגישות.</p>
+    
+    <h2 className="text-lg font-bold text-white">יצירת קשר בנושא נגישות</h2>
+    <p>נתקלתם בבעיית נגישות? נשמח לשמוע ולטפל. פנו אלינו בדוא"ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
+  </LegalPage>
+);
+
+// --- Returns & Cancellation Policy ---
+
+const ReturnsCancellationPolicy = () => (
+  <LegalPage title="מדיניות ביטולים והחזרות">
+    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-white">1. זכות ביטול</h2>
+    <p>בהתאם לחוק הגנת הצרכן, התשמ"א-1981, הינך רשאי/ת לבטל עסקה תוך 14 ימים מיום קבלת המוצר או מיום קבלת מסמך הגילוי (המאוחר מביניהם), בתנאי שהמוצר לא נפגע ולא נעשה בו שימוש.</p>
+    
+    <h2 className="text-lg font-bold text-white">2. תהליך ביטול</h2>
+    <p>לביטול עסקה, יש לשלוח הודעה בדוא"ל ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a> עם פרטי ההזמנה. נאשר את קבלת הבקשה תוך 2 ימי עסקים.</p>
+    
+    <h2 className="text-lg font-bold text-white">3. החזר כספי</h2>
+    <p>ההחזר הכספי יבוצע תוך 14 ימים מקבלת בקשת הביטול, באמצעי התשלום המקורי. החברה רשאית לגבות דמי ביטול בשיעור של עד 5% ממחיר המוצר או 100 ש"ח, הנמוך מביניהם.</p>
+    
+    <h2 className="text-lg font-bold text-white">4. החזרת המוצר</h2>
+    <p>המוצר יוחזר באריזתו המקורית, תקין ושלם. עלויות משלוח ההחזרה יחולו על הלקוח, אלא אם המוצר התקבל פגום.</p>
+    
+    <h2 className="text-lg font-bold text-white">5. מוצר פגום</h2>
+    <p>קיבלת מוצר פגום? פנה/י אלינו מיידית ב: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a> ונטפל בהחלפה או החזר מלא כולל עלויות משלוח.</p>
+    
+    <h2 className="text-lg font-bold text-white">6. אחריות</h2>
+    <p>המוצר מגיע עם אחריות יצרן כמפורט בעמוד המוצר. האחריות מכסה תקלות ייצור ואינה מכסה נזק שנגרם משימוש לא תקין.</p>
+  </LegalPage>
+);
+
 // --- Main App ---
 
+declare global {
+  interface Window { fbq: any; }
+}
+
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<string>('');
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['privacy', 'terms', 'accessibility', 'returns'].includes(hash)) {
+        setCurrentPage(hash);
+        window.scrollTo(0, 0);
+      } else {
+        setCurrentPage('');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  // Activate Meta Pixel if previously consented
+  useEffect(() => {
+    const consent = localStorage.getItem('d10_cookie_consent');
+    if (consent === 'granted' && typeof window.fbq === 'function') {
+      window.fbq('consent', 'grant');
+    }
+  }, []);
+
+  const renderLegalPage = () => {
+    switch (currentPage) {
+      case 'privacy': return <PrivacyPolicy />;
+      case 'terms': return <TermsOfUse />;
+      case 'accessibility': return <AccessibilityStatement />;
+      case 'returns': return <ReturnsCancellationPolicy />;
+      default: return null;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black font-sans selection:bg-white selection:text-black">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[300] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md">דלג לתוכן</a>
       <Navbar />
       
-      <main>
-        <Hero />
-        
-        {/* Stats Bar - Apple Style */}
-        <div className="bg-black py-12 border-y border-white/5 overflow-hidden">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-24">
-              {[
-                { label: "תאימות", value: "99%" },
-                { label: "דיוק", value: "99.9%" },
-                { label: "משלוח", value: "חינם" },
-                { label: "אחריות", value: "מלאה" }
-              ].map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/40">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <ProductShowcase />
-        <FeatureSection />
-        <FullScreenImage />
-        
-        {/* Secondary Showcase */}
-        <section className="py-16 md:py-32 bg-black" dir="rtl">
-          <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1 }}
-              >
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-tight">
-                  הכל תחת שליטה.
-                </h2>
-                <p className="text-white/50 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
-                  האפליקציה שלנו מעניקה לך מבט מעמיק אל תוך המערכות המורכבות ביותר של הרכב שלך. בלי קודים מסובכים, בלי אי-ודאות. רק מידע נקי וברור.
-                </p>
-                <div className="space-y-6">
+      {currentPage ? (
+        <>
+          {renderLegalPage()}
+          <Footer />
+        </>
+      ) : (
+        <>
+          <main id="main-content" role="main">
+            <Hero />
+            
+            {/* Stats Bar */}
+            <div className="bg-black py-12 border-y border-white/5 overflow-hidden">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-24">
                   {[
-                    { title: "דוחות בזמן אמת", desc: "קבל התראות מיידיות על כל שינוי במצב הרכב." },
-                    { title: "היסטוריית טיפולים", desc: "נהל את כל היסטוריית הטיפולים של הרכב במקום אחד." },
-                    { title: "חיסכון בדלק", desc: "טיפים מבוססי AI לשיפור צריכת הדלק של הרכב שלך." }
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4">
-                      <div className="mt-1">
-                        <div className="w-2 h-2 rounded-full bg-white" />
-                      </div>
-                      <div>
-                        <h5 className="text-white font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h5>
-                        <p className="text-white/40 text-xs font-light">{item.desc}</p>
-                      </div>
+                    { label: "תאימות", value: "99%" },
+                    { label: "דיוק", value: "99.9%" },
+                    { label: "משלוח", value: "חינם" },
+                    { label: "אחריות", value: "מלאה" }
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-white/40">{stat.label}</div>
                     </div>
                   ))}
                 </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="relative"
-              >
-                <img 
-                  src="https://picsum.photos/seed/phone/800/1200?grayscale" 
-                  alt="Phone Interface" 
-                  className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-white/10 shadow-2xl"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <Pricing />
-        
-        {/* Final CTA - Apple Style */}
-        <section className="py-20 md:py-40 bg-primary text-white text-center relative overflow-hidden" dir="rtl">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary opacity-90" />
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-          
-          <div className="container mx-auto px-6 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-            >
-              <h2 className="text-3xl sm:text-5xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tighter">
-                העתיד של הרכב שלך <br className="hidden md:inline" /> מתחיל כאן.
-              </h2>
-              <p className="text-white/80 text-base sm:text-xl md:text-2xl mb-8 md:mb-12 max-w-2xl mx-auto font-light px-2">
-                הצטרף למהפכת הדיאגנוסטיקה החכמה עם D10 AI.
-              </p>
-              <a href="#pricing" className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block">
-                הזמן את ה-D10 AI שלך
-              </a>
-              <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] font-bold uppercase tracking-widest text-white/60">
-                <div className="flex items-center gap-2"><Clock size={14} /> משלוח מהיר</div>
-                <div className="flex items-center gap-2"><Award size={14} /> אחריות מלאה</div>
-                <div className="flex items-center gap-2"><RotateCcw size={14} /> 30 יום החזרה</div>
               </div>
-            </motion.div>
-          </div>
-        </section>
-      </main>
+            </div>
 
-      <Footer />
+            <ProductShowcase />
+            <FeatureSection />
+            <FullScreenImage />
+            
+            {/* Secondary Showcase */}
+            <section className="py-16 md:py-32 bg-black" dir="rtl">
+              <div className="container mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                  >
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-tight">
+                      הכל תחת שליטה.
+                    </h2>
+                    <p className="text-white/50 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
+                      האפליקציה שלנו מעניקה לך מבט מעמיק אל תוך המערכות המורכבות ביותר של הרכב שלך. בלי קודים מסובכים, בלי אי-ודאות. רק מידע נקי וברור.
+                    </p>
+                    <div className="space-y-6">
+                      {[
+                        { title: "דוחות בזמן אמת", desc: "קבל התראות מיידיות על כל שינוי במצב הרכב." },
+                        { title: "היסטוריית טיפולים", desc: "נהל את כל היסטוריית הטיפולים של הרכב במקום אחד." },
+                        { title: "חיסכון בדלק", desc: "טיפים מבוססי AI לשיפור צריכת הדלק של הרכב שלך." }
+                      ].map((item, i) => (
+                        <div key={i} className="flex gap-4">
+                          <div className="mt-1">
+                            <div className="w-2 h-2 rounded-full bg-white" />
+                          </div>
+                          <div>
+                            <h5 className="text-white font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h5>
+                            <p className="text-white/40 text-xs font-light">{item.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                    className="relative"
+                  >
+                    <img 
+                      src="https://picsum.photos/seed/phone/800/1200?grayscale" 
+                      alt="ממשק אפליקציית D10 AI לדיאגנוסטיקת רכב" 
+                      className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-white/10 shadow-2xl"
+                      referrerPolicy="no-referrer"
+                    />
+                  </motion.div>
+                </div>
+              </div>
+            </section>
+
+            <Pricing />
+            
+            {/* Final CTA */}
+            <section className="py-20 md:py-40 bg-primary text-white text-center relative overflow-hidden" dir="rtl">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary opacity-90" />
+              <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+              
+              <div className="container mx-auto px-6 relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1 }}
+                >
+                  <h2 className="text-3xl sm:text-5xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tighter">
+                    העתיד של הרכב שלך <br className="hidden md:inline" /> מתחיל כאן.
+                  </h2>
+                  <p className="text-white/80 text-base sm:text-xl md:text-2xl mb-8 md:mb-12 max-w-2xl mx-auto font-light px-2">
+                    הצטרף למהפכת הדיאגנוסטיקה החכמה עם D10 AI.
+                  </p>
+                  <a href="#pricing" className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block">
+                    הזמן את ה-D10 AI שלך
+                  </a>
+                  <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] font-bold uppercase tracking-widest text-white/60">
+                    <div className="flex items-center gap-2"><Clock size={14} /> משלוח מהיר</div>
+                    <div className="flex items-center gap-2"><Award size={14} /> אחריות מלאה</div>
+                    <div className="flex items-center gap-2"><RotateCcw size={14} /> 30 יום החזרה</div>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
+            {/* Disclaimer */}
+            <div className="bg-[#050505] py-6 px-6 text-center" dir="rtl">
+              <p className="text-white/30 text-[10px] max-w-2xl mx-auto leading-relaxed">
+                * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
+              </p>
+            </div>
+          </main>
+
+          <Footer />
+        </>
+      )}
+
+      <CookieConsentBanner />
     </div>
   );
 }
