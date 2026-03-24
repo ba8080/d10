@@ -47,6 +47,12 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: 'יכולות', href: '#features' },
     { name: 'איך זה עובד', href: '#how' },
@@ -55,6 +61,7 @@ const Navbar = () => {
   ];
 
   return (
+    <>
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-12 py-4",
       isScrolled ? "glass border-b border-white/10" : "bg-transparent"
@@ -93,45 +100,69 @@ const Navbar = () => {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(true)}
+          aria-label="פתח תפריט"
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          <Menu />
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed inset-0 z-[110] bg-black pt-24 px-8"
-          >
-            <div className="flex flex-col gap-8">
-              {navLinks.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-medium text-white/90 border-b border-white/10 pb-4"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <a 
-                href="#pricing" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="bg-white text-black text-center py-4 rounded-md font-bold text-lg"
-              >
-                הזמן עכשיו
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
+
+    {/* Mobile Menu - outside nav, above everything */}
+    <AnimatePresence>
+      {isMobileMenuOpen && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="md:hidden fixed inset-0 z-[200] bg-black"
+          dir="rtl"
+        >
+          {/* Header with logo + close */}
+          <div className="flex justify-between items-center px-6 py-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <Activity className="text-white w-5 h-5" />
+              </div>
+              <span className="text-2xl font-bold tracking-tighter text-white">
+                D10 <span className="font-light text-primary">AI</span>
+              </span>
+            </div>
+            <button 
+              className="text-white p-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="סגור תפריט"
+            >
+              <X size={28} />
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-6 px-8 pt-8">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-2xl font-medium text-white/90 border-b border-white/10 pb-4"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a 
+              href="#pricing" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="bg-white text-black text-center py-4 rounded-md font-bold text-lg mt-4"
+            >
+              הזמן עכשיו
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 
