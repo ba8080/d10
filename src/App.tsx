@@ -24,7 +24,8 @@ import {
   FileText,
   Scale,
   Cookie,
-  ArrowUp
+  ArrowUp,
+  Accessibility
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
@@ -673,6 +674,143 @@ const ReturnsCancellationPolicy = () => (
   </LegalPage>
 );
 
+// --- Accessibility Widget ---
+
+const AccessibilityWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [settings, setSettings] = useState({
+    largeText: false,
+    highContrast: false,
+    readableFont: false,
+    highlightLinks: false,
+  });
+
+  const toggleSetting = (key: keyof typeof settings) => {
+    setSettings(prev => {
+      const newVal = !prev[key];
+      const bodyCls = document.body.classList;
+      
+      if (key === 'largeText') newVal ? bodyCls.add('a11y-large-text') : bodyCls.remove('a11y-large-text');
+      if (key === 'highContrast') newVal ? bodyCls.add('a11y-high-contrast') : bodyCls.remove('a11y-high-contrast');
+      if (key === 'readableFont') newVal ? bodyCls.add('a11y-readable-font') : bodyCls.remove('a11y-readable-font');
+      if (key === 'highlightLinks') newVal ? bodyCls.add('a11y-highlight-links') : bodyCls.remove('a11y-highlight-links');
+      
+      localStorage.setItem(`a11y_${String(key)}`, String(newVal));
+      return { ...prev, [key]: newVal };
+    });
+  };
+
+  const resetSettings = () => {
+    setSettings({
+      largeText: false,
+      highContrast: false,
+      readableFont: false,
+      highlightLinks: false,
+    });
+    document.body.classList.remove('a11y-large-text', 'a11y-high-contrast', 'a11y-readable-font', 'a11y-highlight-links');
+    ['largeText', 'highContrast', 'readableFont', 'highlightLinks'].forEach(key => localStorage.removeItem(`a11y_${key}`));
+  };
+
+  useEffect(() => {
+    // Restore settings from localStorage on mount
+    const savedSettings = { ...settings };
+    let hasSaved = false;
+    
+    (['largeText', 'highContrast', 'readableFont', 'highlightLinks'] as Array<keyof typeof settings>).forEach(key => {
+      const stringKey = String(key);
+      if (localStorage.getItem(`a11y_${stringKey}`) === 'true') {
+        savedSettings[key] = true;
+        document.body.classList.add(`a11y-${stringKey.replace(/([A-Z])/g, '-$1').toLowerCase()}`);
+        hasSaved = true;
+      }
+    });
+    
+    if (hasSaved) setSettings(savedSettings);
+  }, []);
+
+  return (
+    <>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-6 right-6 z-[999] bg-primary text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform border-2 border-white/20"
+        aria-label="תפריט נגישות"
+      >
+        <Accessibility size={28} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-24 right-6 z-[1000] w-72 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200"
+            dir="rtl"
+          >
+            <div className="bg-primary p-4 flex justify-between items-center text-white">
+              <h2 className="font-bold flex items-center gap-2">
+                <Accessibility size={20} /> תפריט נגישות
+              </h2>
+              <button onClick={() => setIsOpen(false)} aria-label="סגור תפריט"><X size={20} /></button>
+            </div>
+            <div className="p-4 flex flex-col gap-3">
+              <button 
+                onClick={() => toggleSetting('largeText')}
+                className={`flex justify-between items-center p-3 rounded-xl border transition-colors ${settings.largeText ? 'bg-primary/10 border-primary text-primary' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+              >
+                <span className="font-bold text-sm">הגדלת טקסט</span>
+                <div className={`w-10 h-6 rounded-full flex items-center p-1 transition-colors ${settings.largeText ? 'bg-primary justify-end' : 'bg-gray-300 justify-start'}`}>
+                  <div className="w-4 h-4 bg-white rounded-full shadow-sm" />
+                </div>
+              </button>
+              
+              <button 
+                onClick={() => toggleSetting('highContrast')}
+                className={`flex justify-between items-center p-3 rounded-xl border transition-colors ${settings.highContrast ? 'bg-primary/10 border-primary text-primary' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+              >
+                <span className="font-bold text-sm">ניגודיות גבוהה</span>
+                <div className={`w-10 h-6 rounded-full flex items-center p-1 transition-colors ${settings.highContrast ? 'bg-primary justify-end' : 'bg-gray-300 justify-start'}`}>
+                  <div className="w-4 h-4 bg-white rounded-full shadow-sm" />
+                </div>
+              </button>
+
+              <button 
+                onClick={() => toggleSetting('readableFont')}
+                className={`flex justify-between items-center p-3 rounded-xl border transition-colors ${settings.readableFont ? 'bg-primary/10 border-primary text-primary' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+              >
+                <span className="font-bold text-sm">גופן קריא קלאסי</span>
+                <div className={`w-10 h-6 rounded-full flex items-center p-1 transition-colors ${settings.readableFont ? 'bg-primary justify-end' : 'bg-gray-300 justify-start'}`}>
+                  <div className="w-4 h-4 bg-white rounded-full shadow-sm" />
+                </div>
+              </button>
+
+              <button 
+                onClick={() => toggleSetting('highlightLinks')}
+                className={`flex justify-between items-center p-3 rounded-xl border transition-colors ${settings.highlightLinks ? 'bg-primary/10 border-primary text-primary' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+              >
+                <span className="font-bold text-sm">הדגשת קישורים</span>
+                <div className={`w-10 h-6 rounded-full flex items-center p-1 transition-colors ${settings.highlightLinks ? 'bg-primary justify-end' : 'bg-gray-300 justify-start'}`}>
+                  <div className="w-4 h-4 bg-white rounded-full shadow-sm" />
+                </div>
+              </button>
+            </div>
+            
+            <div className="p-4 bg-gray-50 border-t border-gray-100">
+              <button 
+                onClick={resetSettings}
+                className="w-full py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-xl transition-colors text-sm"
+              >
+                איפוס הגדרות נגישות
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
 // --- Main App ---
 
 declare global {
@@ -851,6 +989,7 @@ export default function App() {
       )}
 
       <CookieConsentBanner />
+      <AccessibilityWidget />
     </div>
   );
 }

@@ -77,3 +77,29 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* --- Accessibility Utility Classes --- */
+body.a11y-large-text {
+  font-size: 110% !important;
+}
+body.a11y-large-text p, body.a11y-large-text a, body.a11y-large-text span, body.a11y-large-text div {
+  font-size: 110% !important;
+  line-height: 1.6 !important;
+}
+
+body.a11y-high-contrast {
+  filter: contrast(125%) saturate(120%) !important;
+}
+
+body.a11y-readable-font, body.a11y-readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0.05em !important;
+}
+
+body.a11y-highlight-links a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px !important;
+  color: #ffeb3b !important;
+  font-weight: 800 !important;
+}
