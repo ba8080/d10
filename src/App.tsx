@@ -169,20 +169,23 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-[#050505] pt-24 md:pt-32 pb-16" dir="rtl">
-      {/* Background Image - Tesla Style */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://picsum.photos/seed/car-tech/1920/1080" 
-          alt="Car Technology" 
-          className="w-full h-full object-cover opacity-30"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505]" />
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 pb-16 overflow-hidden" dir="rtl">
+      {/* Background Video & Overlay */}
+      <div className="absolute inset-0 z-0 bg-black">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover opacity-50"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
         
         {/* Animated Glows */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 blur-[120px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse z-20" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 blur-[120px] rounded-full animate-pulse delay-1000 z-20" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
