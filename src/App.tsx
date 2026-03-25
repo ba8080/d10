@@ -435,6 +435,15 @@ const Pricing = () => {
 };
 
 const Footer = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('support@d10.store');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <footer className="bg-black text-white py-12 md:py-20 border-t border-white/5" dir="rtl" role="contentinfo">
       <div className="container mx-auto px-6">
@@ -447,7 +456,13 @@ const Footer = () => {
               העתיד של דיאגנוסטיקת הרכב כבר כאן. פותח בישראל עם אהבה לטכנולוגיה ורכבים.
             </p>
             <p className="text-white/30 text-xs mt-3">
-              <a href="mailto:support@d10.store" className="hover:text-white transition-colors">support@d10.store</a>
+              <a 
+                href="mailto:support@d10.store" 
+                onClick={handleCopyEmail}
+                className="hover:text-white transition-colors"
+              >
+                {copied ? 'הועתק ללוח!' : 'support@d10.store'}
+              </a>
             </p>
           </div>
 
@@ -460,8 +475,14 @@ const Footer = () => {
           </div>
 
           <div className="flex gap-6">
-            <a href="mailto:support@d10.store" aria-label="שלח אימייל" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
-              <Mail size={18} />
+            <a 
+              href="mailto:support@d10.store" 
+              onClick={handleCopyEmail}
+              title={copied ? 'הועתק ללוח!' : 'שלח אימייל'}
+              aria-label="שלח אימייל" 
+              className="relative w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              {copied ? <Check size={18} /> : <Mail size={18} />}
             </a>
             <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
               <Globe size={18} />
@@ -472,8 +493,6 @@ const Footer = () => {
         <div className="mt-10 md:mt-20 pt-8 border-t border-white/5 text-center space-y-2">
           <p className="text-[10px] text-white/20 uppercase tracking-[0.2em]">
             © 2026 D10 · כל הזכויות שמורות · פותח בישראל 🇮🇱
-          </p>
-          <p className="text-[9px] text-white/15 leading-relaxed max-w-lg mx-auto">
           </p>
         </div>
       </div>
@@ -937,7 +956,7 @@ export default function App() {
                     className="relative"
                   >
                     <img 
-                      src="https://picsum.photos/seed/phone/800/1200?grayscale" 
+                      src="/app-mockup.jpg" 
                       alt="ממשק אפליקציית D10 AI לדיאגנוסטיקת רכב" 
                       className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-white/10 shadow-2xl"
                       referrerPolicy="no-referrer"
