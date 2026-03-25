@@ -247,8 +247,8 @@ const ProductShowcase = () => {
         >
           <div className="absolute inset-0 bg-blue-500/10 blur-[150px] rounded-full" />
           <img 
-            src="https://picsum.photos/seed/obd2/1200/800" 
-            alt="D10 AI Device" 
+            src="/smart-diagnostic.jpg" 
+            alt="D10 AI Smart Diagnostic Assistant" 
             className="relative z-10 w-full rounded-2xl shadow-2xl border border-white/5"
             referrerPolicy="no-referrer"
           />
