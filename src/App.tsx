@@ -796,7 +796,7 @@ export default function App() {
                     className="relative"
                   >
                     <img 
-                      src="https://picsum.photos/seed/phone/800/1200?grayscale" 
+                      src="/app-mockup.png" 
                       alt="ממשק אפליקציית D10 AI לדיאגנוסטיקת רכב" 
                       className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-white/10 shadow-2xl"
                       referrerPolicy="no-referrer"
