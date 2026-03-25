@@ -328,8 +328,8 @@ const FullScreenImage = () => {
   return (
     <section className="relative h-[50vh] md:h-[80vh] bg-black overflow-hidden" dir="rtl">
       <img 
-        src="https://picsum.photos/seed/interior/1920/1080?grayscale" 
-        alt="Car Interior" 
+        src="/smart-driving.jpg" 
+        alt="D10 AI Handheld Device" 
         className="w-full h-full object-cover opacity-60"
         referrerPolicy="no-referrer"
       />
