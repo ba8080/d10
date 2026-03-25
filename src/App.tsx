@@ -470,7 +470,6 @@ const Footer = () => {
             © 2026 D10 · כל הזכויות שמורות · פותח בישראל 🇮🇱
           </p>
           <p className="text-[9px] text-white/15 leading-relaxed max-w-lg mx-auto">
-            המידע באתר זה הוא לצורכי מידע כללי בלבד. מומלץ להתייעץ עם עורך דין ישראלי מוסמך לפני פרסום.
           </p>
         </div>
       </div>
