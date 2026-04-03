@@ -12,6 +12,7 @@ html {
   scroll-behavior: smooth;
   background-color: #050505;
   overflow-x: hidden;
+  font-size: 16px;
 }
 
 body {
@@ -20,6 +21,13 @@ body {
   color: #fff;
   background-color: #050505;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Ensure minimum readable text sizes */
+p, li {
+  line-height: 1.7;
 }
 
 /* Custom scrollbar - Minimalist */

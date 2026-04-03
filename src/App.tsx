@@ -25,7 +25,13 @@ import {
   Scale,
   Cookie,
   ArrowUp,
-  Accessibility
+  Accessibility,
+  HelpCircle,
+  Users,
+  Battery,
+  Wifi,
+  Car,
+  Lock
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
@@ -57,8 +63,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'יכולות', href: '#features' },
     { name: 'איך זה עובד', href: '#how' },
-    { name: 'לקוחות', href: '#testimonials' },
     { name: 'חבילות', href: '#pricing' },
+    { name: 'שאלות נפוצות', href: '#faq' },
   ];
 
   return (
@@ -221,6 +227,25 @@ const Hero = () => {
         </a>
       </motion.div>
 
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="container mx-auto px-6 relative z-10 flex flex-wrap justify-center gap-4 md:gap-8 mt-8 md:mt-12"
+      >
+        {[
+          { icon: <Check size={14} />, text: "משלוח חינם" },
+          { icon: <RotateCcw size={14} />, text: "30 יום החזרה" },
+          { icon: <ShieldCheck size={14} />, text: "תאימות 99%" },
+          { icon: <Lock size={14} />, text: "הצפנת AES-256" },
+        ].map((item, i) => (
+          <div key={i} className="flex items-center gap-2 text-white/50 text-xs md:text-sm font-medium">
+            <span className="text-primary">{item.icon}</span>
+            {item.text}
+          </div>
+        ))}
+      </motion.div>
+
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
         <ChevronDown size={32} strokeWidth={1} />
       </div>
@@ -324,6 +349,108 @@ const FeatureSection = () => {
   );
 };
 
+const TechnicalSpecs = () => {
+  const specs = [
+    { category: "\u05d7\u05d5\u05de\u05e8\u05d4", icon: <Cpu className="w-4 h-4" />, items: [
+      { label: "\u05e9\u05d1\u05d1", value: "ELM327 V2.1" },
+      { label: "\u05d7\u05d9\u05d1\u05d5\u05e8", value: "Bluetooth 5.0 BLE" },
+      { label: "\u05e6\u05e8\u05d9\u05db\u05d4 (\u05e9\u05d9\u05e0\u05d4)", value: "< 1mA" },
+      { label: "\u05e6\u05e8\u05d9\u05db\u05d4 (\u05e4\u05e2\u05d9\u05dc)", value: "< 50mA" },
+    ]},
+    { category: "\u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9\u05dd", icon: <Wifi className="w-4 h-4" />, items: [
+      { label: "CAN", value: "ISO 15765-4" },
+      { label: "K-Line", value: "ISO 9141-2" },
+      { label: "KWP2000", value: "ISO 14230-4" },
+      { label: "J1850", value: "SAE J1850" },
+    ]},
+    { category: "\u05d0\u05d1\u05d8\u05d7\u05d4 \u05d5\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd", icon: <Lock className="w-4 h-4" />, items: [
+      { label: "\u05d4\u05e6\u05e4\u05e0\u05d4", value: "AES-256" },
+      { label: "\u05e6\u05d9\u05de\u05d5\u05d3", value: "Secure BLE" },
+      { label: "\u05d0\u05d7\u05e1\u05d5\u05df", value: "\u05de\u05e7\u05d5\u05de\u05d9 \u05d1\u05dc\u05d1\u05d3" },
+      { label: "\u05d9\u05d9\u05e6\u05d5\u05d0", value: "CSV / PDF" },
+    ]},
+  ];
+
+  return (
+    <section className="py-16 md:py-32 bg-black" dir="rtl">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
+            <Cpu size={12} /> \u05de\u05e4\u05e8\u05d8 \u05d8\u05db\u05e0\u05d9
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05d1\u05e0\u05d5\u05d9 \u05dc\u05d1\u05d9\u05e6\u05d5\u05e2\u05d9\u05dd</h2>
+          <p className="text-white/50 font-light max-w-xl mx-auto text-base">\u05db\u05dc \u05d4\u05e4\u05e8\u05d8\u05d9\u05dd \u05d4\u05d8\u05db\u05e0\u05d9\u05d9\u05dd \u05e9\u05d0\u05ea\u05d4 \u05e6\u05e8\u05d9\u05da \u05db\u05d3\u05d9 \u05dc\u05d4\u05d9\u05d5\u05ea \u05d1\u05d8\u05d5\u05d7 \u05d1\u05de\u05d5\u05e6\u05e8.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+          {specs.map((group, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: i * 0.1 }}
+              className="p-6 md:p-8 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all"
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <div className="text-primary">{group.icon}</div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-primary">{group.category}</h3>
+              </div>
+              <div className="space-y-4">
+                {group.items.map((item, j) => (
+                  <div key={j} className="flex justify-between items-center">
+                    <span className="text-white/50 text-sm">{item.label}</span>
+                    <span className="text-white font-semibold text-sm font-mono">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CompatibilityChecker = () => {
+  const brands = [
+    "Toyota", "Hyundai", "Kia", "BMW", "Mercedes-Benz", "Audi",
+    "Volkswagen", "Mazda", "Honda", "Nissan", "Subaru", "\u0160koda",
+    "Seat", "Mitsubishi", "Peugeot", "Citro\u00ebn", "Ford", "Chevrolet"
+  ];
+
+  return (
+    <section className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+      <div className="container mx-auto px-6 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-bold uppercase tracking-widest mb-4">
+          <Car size={12} /> \u05ea\u05d0\u05d9\u05de\u05d5\u05ea
+        </div>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05ea\u05d5\u05d0\u05dd \u05dc\u05e8\u05db\u05d1 \u05e9\u05dc\u05da?</h2>
+        <p className="text-white/50 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-base">
+          D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05db\u05dc \u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2 \u2014 \u05db\u05dc\u05d5\u05de\u05e8 <span className="text-white font-medium">\u05db\u05de\u05e2\u05d8 \u05db\u05dc \u05e8\u05db\u05d1 \u05de\u05e9\u05e0\u05ea 1996 \u05d5\u05de\u05e2\u05dc\u05d4</span>. \u05ea\u05d5\u05de\u05da \u05d1\u05d9\u05d5\u05ea\u05e8 \u05de-10,000 \u05d3\u05d2\u05de\u05d9\u05dd.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
+          {brands.map((brand, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.03 }}
+              className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all cursor-default"
+            >
+              {brand}
+            </motion.div>
+          ))}
+        </div>
+        <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10">
+          <span className="text-white/60 text-sm">\u05dc\u05d0 \u05d1\u05d8\u05d5\u05d7 \u05d0\u05dd \u05d4\u05e8\u05db\u05d1 \u05e9\u05dc\u05da \u05ea\u05d5\u05d0\u05dd?</span>
+          <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">\u05e9\u05dc\u05d7 \u05dc\u05e0\u05d5 \u05d0\u05ea \u05d3\u05d2\u05dd \u05d4\u05e8\u05db\u05d1 \u2190</a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const FullScreenImage = () => {
   return (
     <section className="relative h-[50vh] md:h-[80vh] bg-black overflow-hidden" dir="rtl">
@@ -359,7 +486,10 @@ const Pricing = () => {
     {
       name: "סולו",
       price: "299",
-      features: ["יחידה אחת", "אפליקציה בעברית", "אחריות שנה"],
+      perUnit: null as string | null,
+      savings: null as string | null,
+      subtitle: "ליחידה אחת",
+      features: ["יחידה אחת", "אפליקציה מלאה בעברית", "אחריות שנה", "תמיכה בדוא\"ל", "ייצוא נתונים CSV/PDF"],
       cta: "הזמן עכשיו",
       highlight: false,
       color: "border-white/10"
@@ -367,15 +497,21 @@ const Pricing = () => {
     {
       name: "משפחתי",
       price: "719",
-      features: ["3 יחידות", "אפליקציה בעברית", "אחריות שנה", "תמיכה מועדפת"],
-      cta: "הזמן עכשיו",
+      perUnit: "~₪240",
+      savings: "חוסך 20%",
+      subtitle: "מושלם למשפחה עם כמה רכבים",
+      features: ["3 יחידות", "אפליקציה מלאה בעברית", "אחריות שנה", "תמיכה מועדפת", "לוח בקרה משפחתי", "ייצוא נתונים CSV/PDF"],
+      cta: "הכי פופולרי",
       highlight: true,
       color: "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
     },
     {
       name: "אולטימייט",
       price: "799",
-      features: ["4 יחידות", "אפליקציה בעברית", "אחריות שנתיים", "תמיכה VIP"],
+      perUnit: "~₪200",
+      savings: "חוסך 33%",
+      subtitle: "לבעלי מספר רכבים או עסקים קטנים",
+      features: ["4 יחידות", "אפליקציה מלאה בעברית", "אחריות שנתיים", "תמיכה VIP", "לוח בקרה מרכזי", "ייצוא נתונים מתקדם"],
       cta: "הזמן עכשיו",
       highlight: false,
       color: "border-white/10"
@@ -387,7 +523,7 @@ const Pricing = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-10 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">בחר את החבילה שלך</h2>
-          <p className="text-white/50 font-light">מחירים שקופים. ללא דמי מנוי.</p>
+          <p className="text-white/50 font-light text-base">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
@@ -399,23 +535,33 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
               className={cn(
-                "p-6 sm:p-8 md:p-12 rounded-2xl border flex flex-col items-center text-center transition-all duration-500",
+                "p-6 sm:p-8 md:p-12 rounded-2xl border flex flex-col items-center text-center transition-all duration-500 relative",
                 b.color,
                 !b.highlight && "bg-white/5 hover:border-white/30"
               )}
             >
+              {b.savings && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-white text-xs font-bold rounded-full">
+                  {b.savings}
+                </div>
+              )}
               <h4 className={cn(
-                "text-sm font-bold uppercase tracking-widest mb-4",
+                "text-sm font-bold uppercase tracking-widest mb-2",
                 b.highlight ? "text-primary" : "opacity-60"
               )}>{b.name}</h4>
-              <div className="flex items-baseline gap-1 mb-4 md:mb-8">
+              <p className="text-white/40 text-sm mb-4">{b.subtitle}</p>
+              <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl md:text-5xl font-bold text-white">₪{b.price}</span>
               </div>
+              {b.perUnit && (
+                <p className="text-white/40 text-sm mb-6 md:mb-8">{b.perUnit} ליחידה</p>
+              )}
+              {!b.perUnit && <div className="mb-6 md:mb-8" />}
               
               <ul className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-grow">
                 {b.features.map((f, j) => (
                   <li key={j} className="text-sm font-light text-white/80 flex items-center gap-2 justify-center">
-                    <Check size={14} className="text-primary" /> {f}
+                    <Check size={14} className="text-primary shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
@@ -427,6 +573,19 @@ const Pricing = () => {
                 {b.cta}
               </button>
             </motion.div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-10 md:mt-16 text-white/40">
+          {[
+            { icon: <Clock size={16} />, text: "\u05de\u05e9\u05dc\u05d5\u05d7 \u05de\u05d4\u05d9\u05e8" },
+            { icon: <RotateCcw size={16} />, text: "30 \u05d9\u05d5\u05dd \u05dc\u05d4\u05d7\u05d6\u05e8\u05d4" },
+            { icon: <ShieldCheck size={16} />, text: "\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea \u05de\u05dc\u05d0\u05d4" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm">
+              {item.icon}
+              <span>{item.text}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -833,6 +992,65 @@ const AccessibilityWidget = () => {
   );
 };
 
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqs = [
+    { question: "\u05d4\u05d0\u05dd D10 AI \u05de\u05e8\u05d5\u05e7\u05df \u05d0\u05ea \u05e1\u05d5\u05dc\u05dc\u05ea \u05d4\u05e8\u05db\u05d1?", answer: "\u05dc\u05d0. D10 AI \u05e2\u05d5\u05d1\u05e8 \u05d0\u05d5\u05d8\u05d5\u05de\u05d8\u05d9\u05ea \u05dc\u05de\u05e6\u05d1 \u05e9\u05d9\u05e0\u05d4 \u05e2\u05dd \u05e6\u05e8\u05d9\u05db\u05ea \u05d7\u05e9\u05de\u05dc \u05e9\u05dc \u05e4\u05d7\u05d5\u05ea \u05de-1mA \u2014 \u05d6\u05e0\u05d9\u05d7 \u05dc\u05d7\u05dc\u05d5\u05d8\u05d9\u05df. \u05d0\u05e4\u05e9\u05e8 \u05dc\u05d4\u05e9\u05d0\u05d9\u05e8 \u05d0\u05d5\u05ea\u05d5 \u05de\u05d7\u05d5\u05d1\u05e8 24/7 \u05dc\u05dc\u05d0 \u05d7\u05e9\u05e9." },
+    { question: "\u05d0\u05d9\u05dc\u05d5 \u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9 OBD2 \u05e0\u05ea\u05de\u05db\u05d9\u05dd?", answer: "D10 AI \u05ea\u05d5\u05de\u05da \u05d1\u05db\u05dc \u05d4\u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9\u05dd \u05d4\u05e1\u05d8\u05e0\u05d3\u05e8\u05d8\u05d9\u05d9\u05dd: CAN (ISO 15765-4), K-Line (ISO 9141-2), KWP2000 (ISO 14230-4) \u05d5-SAE J1850 PWM/VPW. \u05d6\u05d4 \u05de\u05db\u05e1\u05d4 \u05d0\u05ea \u05db\u05dc \u05db\u05dc\u05d9 \u05d4\u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2." },
+    { question: "\u05d4\u05d0\u05dd \u05d4\u05de\u05d9\u05d3\u05e2 \u05e9\u05dc\u05d9 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7?", answer: "\u05d1\u05d4\u05d7\u05dc\u05d8. \u05db\u05dc \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05de\u05d5\u05e6\u05e4\u05e0\u05d9\u05dd \u05d1-AES-256 \u05d5\u05d4\u05d7\u05d9\u05d1\u05d5\u05e8 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Secure BLE Pairing. \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05e0\u05e9\u05de\u05e8\u05d9\u05dd \u05de\u05e7\u05d5\u05de\u05d9\u05ea \u05d1\u05de\u05db\u05e9\u05d9\u05e8 \u05e9\u05dc\u05da \u05d1\u05dc\u05d1\u05d3 \u2014 \u05dc\u05dc\u05d0 \u05e2\u05e0\u05df, \u05dc\u05dc\u05d0 \u05e9\u05d9\u05ea\u05d5\u05e3 \u05e2\u05dd \u05e6\u05d3\u05d3\u05d9\u05dd \u05e9\u05dc\u05d9\u05e9\u05d9\u05d9\u05dd." },
+    { question: "\u05d4\u05d0\u05dd D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05e8\u05db\u05d1 \u05e9\u05dc\u05d9?", answer: "D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05db\u05de\u05e2\u05d8 \u05db\u05dc \u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2, \u05db\u05dc\u05d5\u05de\u05e8 \u05e8\u05d5\u05d1 \u05db\u05dc\u05d9 \u05d4\u05e8\u05db\u05d1 \u05de\u05e9\u05e0\u05ea 1996 \u05d5\u05de\u05e2\u05dc\u05d4. \u05d6\u05d4 \u05db\u05d5\u05dc\u05dc \u05d9\u05e6\u05e8\u05e0\u05d9\u05dd \u05db\u05de\u05d5 Toyota, Hyundai, Kia, BMW, Mercedes, Volkswagen \u05d5\u05e2\u05d5\u05d3. \u05dc\u05d0 \u05d1\u05d8\u05d5\u05d7? \u05e9\u05dc\u05d7 \u05dc\u05e0\u05d5 \u05d0\u05ea \u05d3\u05d2\u05dd \u05d4\u05e8\u05db\u05d1 \u05d5\u05e0\u05d1\u05d3\u05d5\u05e7 \u05e2\u05d1\u05d5\u05e8\u05da." },
+    { question: "\u05d0\u05d9\u05da \u05de\u05d9\u05d9\u05e6\u05d0\u05d9\u05dd \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05de\u05d4\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4?", answer: "\u05e0\u05d9\u05ea\u05df \u05dc\u05d9\u05d9\u05e6\u05d0 \u05d0\u05ea \u05db\u05dc \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05d1\u05e4\u05d5\u05e8\u05de\u05d8 CSV \u05d0\u05d5 PDF \u05d9\u05e9\u05d9\u05e8\u05d5\u05ea \u05de\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea \u05d4\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4. \u05de\u05d5\u05e9\u05dc\u05dd \u05dc\u05e9\u05d9\u05ea\u05d5\u05e3 \u05e2\u05dd \u05d4\u05de\u05d5\u05e1\u05db\u05e0\u05d9\u05e7 \u05e9\u05dc\u05da \u05d0\u05d5 \u05dc\u05ea\u05d9\u05e2\u05d5\u05d3 \u05d0\u05d9\u05e9\u05d9." },
+    { question: "\u05dc\u05de\u05d4 \u05db\u05d3\u05d0\u05d9 \u05dc\u05e7\u05e0\u05d5\u05ea \u05d7\u05d1\u05d9\u05dc\u05d4 \u05e9\u05dc \u05db\u05de\u05d4 \u05d9\u05d7\u05d9\u05d3\u05d5\u05ea?", answer: "\u05d7\u05d1\u05d9\u05dc\u05d5\u05ea \u05d4\u05de\u05e9\u05e4\u05d7\u05d4 \u05d5\u05d4\u05d0\u05d5\u05dc\u05d8\u05d9\u05de\u05d9\u05d9\u05d8 \u05de\u05d5\u05e9\u05dc\u05de\u05d5\u05ea \u05dc\u05de\u05e9\u05e4\u05d7\u05d5\u05ea \u05e2\u05dd \u05db\u05de\u05d4 \u05e8\u05db\u05d1\u05d9\u05dd. \u05e0\u05d9\u05ea\u05df \u05dc\u05e1\u05e0\u05db\u05e8\u05df \u05d0\u05ea \u05db\u05dc \u05d4\u05d9\u05d7\u05d9\u05d3\u05d5\u05ea \u05dc\u05d7\u05e9\u05d1\u05d5\u05df \u05d0\u05d7\u05d3 \u05d5\u05dc\u05e0\u05d4\u05dc \u05d0\u05ea \u05db\u05dc \u05d4\u05e8\u05db\u05d1\u05d9\u05dd \u05de\u05dc\u05d5\u05d7 \u05d1\u05e7\u05e8\u05d4 \u05d0\u05d7\u05d3 \u2014 \u05d5\u05d2\u05dd \u05dc\u05d7\u05e1\u05d5\u05da \u05e2\u05d3 33% \u05dc\u05e2\u05d5\u05de\u05ea \u05e8\u05db\u05d9\u05e9\u05d4 \u05d1\u05d5\u05d3\u05d3\u05ea." }
+  ];
+
+  return (
+    <section id="faq" className="py-16 md:py-32 bg-black" dir="rtl">
+      <div className="container mx-auto px-6 max-w-3xl">
+        <div className="text-center mb-12 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
+            <HelpCircle size={12} /> \u05e9\u05d0\u05dc\u05d5\u05ea \u05e0\u05e4\u05d5\u05e6\u05d5\u05ea
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05e9\u05d0\u05dc\u05d5\u05ea \u05d5\u05ea\u05e9\u05d5\u05d1\u05d5\u05ea</h2>
+          <p className="text-white/50 font-light text-base">\u05db\u05dc \u05de\u05d4 \u05e9\u05e6\u05e8\u05d9\u05da \u05dc\u05d3\u05e2\u05ea \u05dc\u05e4\u05e0\u05d9 \u05d4\u05e8\u05db\u05d9\u05e9\u05d4</p>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="border border-white/10 rounded-xl overflow-hidden"
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full flex justify-between items-center p-5 md:p-6 text-right hover:bg-white/[0.02] transition-colors"
+              >
+                <span className="text-white font-semibold text-base">{faq.question}</span>
+                <ChevronDown size={20} className={cn("text-white/40 transition-transform duration-300 shrink-0 mr-4", openIndex === i && "rotate-180")} />
+              </button>
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-5 md:px-6 pb-5 md:pb-6 text-white/60 leading-relaxed text-base">{faq.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Main App ---
 
 declare global {
@@ -901,8 +1119,8 @@ export default function App() {
                     { label: "אחריות", value: "מלאה" }
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
-                      <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-white/40">{stat.label}</div>
+                      <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-white/40">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -911,6 +1129,8 @@ export default function App() {
 
             <ProductShowcase />
             <FeatureSection />
+            <TechnicalSpecs />
+            <CompatibilityChecker />
             <FullScreenImage />
             
             {/* Secondary Showcase */}
@@ -933,7 +1153,8 @@ export default function App() {
                       {[
                         { title: "דוחות בזמן אמת", desc: "קבל התראות מיידיות על כל שינוי במצב הרכב." },
                         { title: "היסטוריית טיפולים", desc: "נהל את כל היסטוריית הטיפולים של הרכב במקום אחד." },
-                        { title: "חיסכון בדלק", desc: "טיפים מבוססי AI לשיפור צריכת הדלק של הרכב שלך." }
+                        { title: "חיסכון בדלק", desc: "טיפים מבוססי AI לשיפור צריכת הדלק של הרכב שלך." },
+                        { title: "ניהול מספר רכבים", desc: "יש לך יותר מרכב אחד? סנכרן מספר יחידות D10 AI לחשבון אחד ונהל את כל הרכבים מלוח בקרה אחד." }
                       ].map((item, i) => (
                         <div key={i} className="flex gap-4">
                           <div className="mt-1">
@@ -967,7 +1188,8 @@ export default function App() {
             </section>
 
             <Pricing />
-            
+            <FAQ />
+
             {/* Final CTA */}
             <section className="py-20 md:py-40 bg-primary text-white text-center relative overflow-hidden" dir="rtl">
               <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary opacity-90" />
