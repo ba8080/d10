@@ -332,13 +332,13 @@ const FeatureSection = () => {
               className="group"
             >
               <div className={cn(
-                "w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-6 transition-all duration-500 border",
+                "w-11 h-11 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-6 transition-all duration-500 border",
                 f.color
               )}>
                 {f.icon}
               </div>
               <h4 className="text-base md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">{f.title}</h4>
-              <p className="text-white/50 font-light leading-relaxed text-xs md:text-sm">
+              <p className="text-white/50 font-light leading-relaxed text-sm">
                 {f.desc}
               </p>
             </motion.div>
@@ -730,7 +730,8 @@ const Pricing = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-10 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">בחר את החבילה שלך</h2>
-          <p className="text-white/50 font-light text-base">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
+          <p className="text-white/50 font-light text-base mb-4">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
+          <p className="text-yellow-400 text-sm font-bold">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
@@ -774,7 +775,7 @@ const Pricing = () => {
               </ul>
 
               <button className={cn(
-                "w-full py-3 rounded-md font-bold text-xs uppercase tracking-widest transition-all duration-300",
+                "w-full py-4 rounded-md font-bold text-sm uppercase tracking-widest transition-all duration-300 min-h-[48px]",
                 b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-white text-black hover:bg-white/90"
               )}>
                 {b.cta}
@@ -833,20 +834,20 @@ const Footer = () => {
           </div>
 
           {/* Legal Links */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/40">
-            <a href="#privacy" className="hover:text-white transition-colors">מדיניות פרטיות</a>
-            <a href="#terms" className="hover:text-white transition-colors">תנאי שימוש</a>
-            <a href="#accessibility" className="hover:text-white transition-colors">נגישות</a>
-            <a href="#returns" className="hover:text-white transition-colors">ביטולים והחזרות</a>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs font-bold uppercase tracking-widest text-white/40">
+            <a href="#privacy" className="hover:text-white transition-colors py-2 px-1 min-h-[44px] flex items-center">מדיניות פרטיות</a>
+            <a href="#terms" className="hover:text-white transition-colors py-2 px-1 min-h-[44px] flex items-center">תנאי שימוש</a>
+            <a href="#accessibility" className="hover:text-white transition-colors py-2 px-1 min-h-[44px] flex items-center">נגישות</a>
+            <a href="#returns" className="hover:text-white transition-colors py-2 px-1 min-h-[44px] flex items-center">ביטולים והחזרות</a>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             <a 
               href="mailto:support@d10.store" 
               onClick={handleCopyEmail}
               title={copied ? 'הועתק ללוח!' : 'שלח אימייל'}
               aria-label="שלח אימייל" 
-              className="relative w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+              className="relative w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
             >
               {copied ? <Check size={18} /> : <Mail size={18} />}
             </a>
@@ -855,9 +856,27 @@ const Footer = () => {
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a 
+              href="https://www.facebook.com/d10ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a 
+              href="https://www.tiktok.com/@d10_ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
             </a>
           </div>
         </div>
@@ -1375,6 +1394,19 @@ export default function App() {
             <CompareSection />
             <FeatureSection />
             <HowItWorks />
+
+            {/* Mid-page CTA */}
+            <section className="py-12 md:py-20 bg-gradient-to-b from-[#050505] to-black" dir="rtl">
+              <div className="container mx-auto px-6 text-center">
+                <p className="text-yellow-400 text-sm font-bold mb-3">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
+                <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">מוכן להתחיל?</h3>
+                <p className="text-white/50 text-base mb-6 max-w-lg mx-auto">החל מ-₪299. משלוח חינם. 30 יום החזרה.</p>
+                <a href="#pricing" className="inline-block px-10 py-4 bg-primary text-black font-bold text-base rounded-lg hover:bg-primary/90 transition-all active:scale-95 min-h-[48px]">
+                  ראה את החבילות
+                </a>
+              </div>
+            </section>
+
             <Testimonials />
             <TechnicalSpecs />
             <CompatibilityChecker />
@@ -1467,9 +1499,32 @@ export default function App() {
               </div>
             </section>
 
+            {/* Newsletter Signup */}
+            <section className="py-12 md:py-20 bg-[#050505] border-t border-white/5" dir="rtl">
+              <div className="container mx-auto px-6 text-center max-w-xl">
+                <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">עדכונים וטיפים לרכב</h3>
+                <p className="text-white/50 text-sm mb-6">הירשמו לניוזלטר וקבלו טיפים לתחזוקת הרכב, עדכוני מוצר, ומבצעים בלעדיים.</p>
+                <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 max-w-md mx-auto">
+                  <input 
+                    type="email" 
+                    placeholder="האימייל שלך" 
+                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-primary/50 min-h-[48px]"
+                  />
+                  <button 
+                    type="submit" 
+                    className="px-6 py-3 bg-primary text-black font-bold text-sm rounded-lg hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap min-h-[48px]"
+                  >
+                    הירשמו
+                  </button>
+                </form>
+                <p className="text-white/20 text-xs mt-3">ללא ספם. ביטול בכל עת.</p>
+              </div>
+            </section>
+
             {/* Disclaimer */}
             <div className="bg-[#050505] py-6 px-6 text-center" dir="rtl">
-              <p className="text-white/30 text-[10px] max-w-2xl mx-auto leading-relaxed">
+              <p className="text-white/30 text-xs max-w-2xl mx-auto leading-relaxed">
                 * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
               </p>
             </div>
