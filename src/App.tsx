@@ -220,7 +220,7 @@ const Hero = () => {
         className="container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
       >
         <a href="#pricing" className="btn-tesla btn-tesla-primary w-full sm:w-auto text-center px-8 sm:px-12">
-          הזמן עכשיו — החל מ-₪149
+          הזמן עכשיו — החל מ-₪299
         </a>
         <a href="#features" className="btn-tesla btn-tesla-secondary w-full sm:w-auto text-center px-8 sm:px-12">
           למד עוד
@@ -1223,7 +1223,7 @@ const MobileStickyBar = () => {
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-white font-bold text-sm">D10 AI</div>
-          <div className="text-white/50 text-xs">החל מ-₪149 · משלוח חינם</div>
+          <div className="text-white/50 text-xs">החל מ-₪299 · משלוח חינם</div>
         </div>
         <a 
           href="#pricing" 
