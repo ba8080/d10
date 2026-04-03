@@ -442,7 +442,7 @@ const HowItWorks = () => {
             איך זה עובד
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
-          <p className="text-white/50 font-light text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
+          <p className="text-white/70 text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 md:gap-12 max-w-5xl mx-auto">
           {steps.map((step, i) => (
@@ -454,9 +454,9 @@ const HowItWorks = () => {
               transition={{ duration: 0.8, delay: i * 0.15 }}
               className="text-center md:text-right"
             >
-              <div className="text-5xl md:text-7xl font-black text-white/[0.06] mb-4 leading-none">{step.num}</div>
+              <div className="text-5xl md:text-7xl font-black text-white/[0.15] mb-4 leading-none">{step.num}</div>
               <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed font-light">{step.desc}</p>
+              <p className="text-white/70 text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
         </div>
