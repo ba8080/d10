@@ -220,7 +220,7 @@ const Hero = () => {
         className="container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
       >
         <a href="#pricing" className="btn-tesla btn-tesla-primary w-full sm:w-auto text-center px-8 sm:px-12">
-          הזמן עכשיו
+          הזמן עכשיו — החל מ-₪149
         </a>
         <a href="#features" className="btn-tesla btn-tesla-secondary w-full sm:w-auto text-center px-8 sm:px-12">
           למד עוד
@@ -1159,7 +1159,7 @@ const AccessibilityWidget = () => {
                 </div>
               </button>
               
-              <button 
+<button 
                 onClick={() => toggleSetting('highContrast')}
                 className={`flex justify-between items-center p-3 rounded-xl border transition-colors ${settings.highContrast ? 'bg-primary/10 border-primary text-primary' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
               >
@@ -1202,6 +1202,37 @@ const AccessibilityWidget = () => {
         )}
       </AnimatePresence>
     </>
+  );
+};
+
+const MobileStickyBar = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 600);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-[200] md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 safe-area-pb" dir="rtl">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-white font-bold text-sm">D10 AI</div>
+          <div className="text-white/50 text-xs">החל מ-₪149 · משלוח חינם</div>
+        </div>
+        <a 
+          href="#pricing" 
+          className="px-6 py-2.5 bg-primary text-black font-bold text-sm rounded-lg hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap"
+        >
+          קנה עכשיו
+        </a>
+      </div>
+    </div>
   );
 };
 
@@ -1448,6 +1479,7 @@ export default function App() {
         </>
       )}
 
+      <MobileStickyBar />
       <CookieConsentBanner />
       <AccessibilityWidget />
     </div>
