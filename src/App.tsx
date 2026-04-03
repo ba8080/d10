@@ -351,23 +351,23 @@ const FeatureSection = () => {
 
 const TechnicalSpecs = () => {
   const specs = [
-    { category: "\u05d7\u05d5\u05de\u05e8\u05d4", icon: <Cpu className="w-4 h-4" />, items: [
-      { label: "\u05e9\u05d1\u05d1", value: "ELM327 V2.1" },
-      { label: "\u05d7\u05d9\u05d1\u05d5\u05e8", value: "Bluetooth 5.0 BLE" },
-      { label: "\u05e6\u05e8\u05d9\u05db\u05d4 (\u05e9\u05d9\u05e0\u05d4)", value: "< 1mA" },
-      { label: "\u05e6\u05e8\u05d9\u05db\u05d4 (\u05e4\u05e2\u05d9\u05dc)", value: "< 50mA" },
+    { category: "חומרה", icon: <Cpu className="w-4 h-4" />, items: [
+      { label: "שבב", value: "ELM327 V2.1" },
+      { label: "חיבור", value: "Bluetooth 5.0 BLE" },
+      { label: "צריכה (שינה)", value: "< 1mA" },
+      { label: "צריכה (פעיל)", value: "< 50mA" },
     ]},
-    { category: "\u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9\u05dd", icon: <Wifi className="w-4 h-4" />, items: [
+    { category: "פרוטוקולים", icon: <Wifi className="w-4 h-4" />, items: [
       { label: "CAN", value: "ISO 15765-4" },
       { label: "K-Line", value: "ISO 9141-2" },
       { label: "KWP2000", value: "ISO 14230-4" },
       { label: "J1850", value: "SAE J1850" },
     ]},
-    { category: "\u05d0\u05d1\u05d8\u05d7\u05d4 \u05d5\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd", icon: <Lock className="w-4 h-4" />, items: [
-      { label: "\u05d4\u05e6\u05e4\u05e0\u05d4", value: "AES-256" },
-      { label: "\u05e6\u05d9\u05de\u05d5\u05d3", value: "Secure BLE" },
-      { label: "\u05d0\u05d7\u05e1\u05d5\u05df", value: "\u05de\u05e7\u05d5\u05de\u05d9 \u05d1\u05dc\u05d1\u05d3" },
-      { label: "\u05d9\u05d9\u05e6\u05d5\u05d0", value: "CSV / PDF" },
+    { category: "אבטחה ונתונים", icon: <Lock className="w-4 h-4" />, items: [
+      { label: "הצפנה", value: "AES-256" },
+      { label: "צימוד", value: "Secure BLE" },
+      { label: "אחסון", value: "מקומי בלבד" },
+      { label: "ייצוא", value: "CSV / PDF" },
     ]},
   ];
 
@@ -376,10 +376,10 @@ const TechnicalSpecs = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
-            <Cpu size={12} /> \u05de\u05e4\u05e8\u05d8 \u05d8\u05db\u05e0\u05d9
+            <Cpu size={12} /> מפרט טכני
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05d1\u05e0\u05d5\u05d9 \u05dc\u05d1\u05d9\u05e6\u05d5\u05e2\u05d9\u05dd</h2>
-          <p className="text-white/50 font-light max-w-xl mx-auto text-base">\u05db\u05dc \u05d4\u05e4\u05e8\u05d8\u05d9\u05dd \u05d4\u05d8\u05db\u05e0\u05d9\u05d9\u05dd \u05e9\u05d0\u05ea\u05d4 \u05e6\u05e8\u05d9\u05da \u05db\u05d3\u05d9 \u05dc\u05d4\u05d9\u05d5\u05ea \u05d1\u05d8\u05d5\u05d7 \u05d1\u05de\u05d5\u05e6\u05e8.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">בנוי לביצועים</h2>
+          <p className="text-white/50 font-light max-w-xl mx-auto text-base">כל הפרטים הטכניים שאתה צריך כדי להיות בטוח במוצר.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
           {specs.map((group, i) => (
@@ -414,19 +414,19 @@ const TechnicalSpecs = () => {
 const CompatibilityChecker = () => {
   const brands = [
     "Toyota", "Hyundai", "Kia", "BMW", "Mercedes-Benz", "Audi",
-    "Volkswagen", "Mazda", "Honda", "Nissan", "Subaru", "\u0160koda",
-    "Seat", "Mitsubishi", "Peugeot", "Citro\u00ebn", "Ford", "Chevrolet"
+    "Volkswagen", "Mazda", "Honda", "Nissan", "Subaru", "Škoda",
+    "Seat", "Mitsubishi", "Peugeot", "Citroën", "Ford", "Chevrolet"
   ];
 
   return (
     <section className="py-16 md:py-32 bg-[#050505]" dir="rtl">
       <div className="container mx-auto px-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-bold uppercase tracking-widest mb-4">
-          <Car size={12} /> \u05ea\u05d0\u05d9\u05de\u05d5\u05ea
+          <Car size={12} /> תאימות
         </div>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05ea\u05d5\u05d0\u05dd \u05dc\u05e8\u05db\u05d1 \u05e9\u05dc\u05da?</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">תואם לרכב שלך?</h2>
         <p className="text-white/50 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-base">
-          D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05db\u05dc \u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2 \u2014 \u05db\u05dc\u05d5\u05de\u05e8 <span className="text-white font-medium">\u05db\u05de\u05e2\u05d8 \u05db\u05dc \u05e8\u05db\u05d1 \u05de\u05e9\u05e0\u05ea 1996 \u05d5\u05de\u05e2\u05dc\u05d4</span>. \u05ea\u05d5\u05de\u05da \u05d1\u05d9\u05d5\u05ea\u05e8 \u05de-10,000 \u05d3\u05d2\u05de\u05d9\u05dd.
+          D10 AI תואם לכל רכב עם יציאת OBD2 — כלומר <span className="text-white font-medium">כמעט כל רכב משנת 1996 ומעלה</span>. תומך ביותר מ-10,000 דגמים.
         </p>
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
           {brands.map((brand, i) => (
@@ -443,8 +443,8 @@ const CompatibilityChecker = () => {
           ))}
         </div>
         <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10">
-          <span className="text-white/60 text-sm">\u05dc\u05d0 \u05d1\u05d8\u05d5\u05d7 \u05d0\u05dd \u05d4\u05e8\u05db\u05d1 \u05e9\u05dc\u05da \u05ea\u05d5\u05d0\u05dd?</span>
-          <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">\u05e9\u05dc\u05d7 \u05dc\u05e0\u05d5 \u05d0\u05ea \u05d3\u05d2\u05dd \u05d4\u05e8\u05db\u05d1 \u2190</a>
+          <span className="text-white/60 text-sm">לא בטוח אם הרכב שלך תואם?</span>
+          <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">שלח לנו את דגם הרכב ←</a>
         </div>
       </div>
     </section>
@@ -995,12 +995,12 @@ const AccessibilityWidget = () => {
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const faqs = [
-    { question: "\u05d4\u05d0\u05dd D10 AI \u05de\u05e8\u05d5\u05e7\u05df \u05d0\u05ea \u05e1\u05d5\u05dc\u05dc\u05ea \u05d4\u05e8\u05db\u05d1?", answer: "\u05dc\u05d0. D10 AI \u05e2\u05d5\u05d1\u05e8 \u05d0\u05d5\u05d8\u05d5\u05de\u05d8\u05d9\u05ea \u05dc\u05de\u05e6\u05d1 \u05e9\u05d9\u05e0\u05d4 \u05e2\u05dd \u05e6\u05e8\u05d9\u05db\u05ea \u05d7\u05e9\u05de\u05dc \u05e9\u05dc \u05e4\u05d7\u05d5\u05ea \u05de-1mA \u2014 \u05d6\u05e0\u05d9\u05d7 \u05dc\u05d7\u05dc\u05d5\u05d8\u05d9\u05df. \u05d0\u05e4\u05e9\u05e8 \u05dc\u05d4\u05e9\u05d0\u05d9\u05e8 \u05d0\u05d5\u05ea\u05d5 \u05de\u05d7\u05d5\u05d1\u05e8 24/7 \u05dc\u05dc\u05d0 \u05d7\u05e9\u05e9." },
-    { question: "\u05d0\u05d9\u05dc\u05d5 \u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9 OBD2 \u05e0\u05ea\u05de\u05db\u05d9\u05dd?", answer: "D10 AI \u05ea\u05d5\u05de\u05da \u05d1\u05db\u05dc \u05d4\u05e4\u05e8\u05d5\u05d8\u05d5\u05e7\u05d5\u05dc\u05d9\u05dd \u05d4\u05e1\u05d8\u05e0\u05d3\u05e8\u05d8\u05d9\u05d9\u05dd: CAN (ISO 15765-4), K-Line (ISO 9141-2), KWP2000 (ISO 14230-4) \u05d5-SAE J1850 PWM/VPW. \u05d6\u05d4 \u05de\u05db\u05e1\u05d4 \u05d0\u05ea \u05db\u05dc \u05db\u05dc\u05d9 \u05d4\u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2." },
-    { question: "\u05d4\u05d0\u05dd \u05d4\u05de\u05d9\u05d3\u05e2 \u05e9\u05dc\u05d9 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7?", answer: "\u05d1\u05d4\u05d7\u05dc\u05d8. \u05db\u05dc \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05de\u05d5\u05e6\u05e4\u05e0\u05d9\u05dd \u05d1-AES-256 \u05d5\u05d4\u05d7\u05d9\u05d1\u05d5\u05e8 \u05de\u05d0\u05d5\u05d1\u05d8\u05d7 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Secure BLE Pairing. \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05e0\u05e9\u05de\u05e8\u05d9\u05dd \u05de\u05e7\u05d5\u05de\u05d9\u05ea \u05d1\u05de\u05db\u05e9\u05d9\u05e8 \u05e9\u05dc\u05da \u05d1\u05dc\u05d1\u05d3 \u2014 \u05dc\u05dc\u05d0 \u05e2\u05e0\u05df, \u05dc\u05dc\u05d0 \u05e9\u05d9\u05ea\u05d5\u05e3 \u05e2\u05dd \u05e6\u05d3\u05d3\u05d9\u05dd \u05e9\u05dc\u05d9\u05e9\u05d9\u05d9\u05dd." },
-    { question: "\u05d4\u05d0\u05dd D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05e8\u05db\u05d1 \u05e9\u05dc\u05d9?", answer: "D10 AI \u05ea\u05d5\u05d0\u05dd \u05dc\u05db\u05de\u05e2\u05d8 \u05db\u05dc \u05e8\u05db\u05d1 \u05e2\u05dd \u05d9\u05e6\u05d9\u05d0\u05ea OBD2, \u05db\u05dc\u05d5\u05de\u05e8 \u05e8\u05d5\u05d1 \u05db\u05dc\u05d9 \u05d4\u05e8\u05db\u05d1 \u05de\u05e9\u05e0\u05ea 1996 \u05d5\u05de\u05e2\u05dc\u05d4. \u05d6\u05d4 \u05db\u05d5\u05dc\u05dc \u05d9\u05e6\u05e8\u05e0\u05d9\u05dd \u05db\u05de\u05d5 Toyota, Hyundai, Kia, BMW, Mercedes, Volkswagen \u05d5\u05e2\u05d5\u05d3. \u05dc\u05d0 \u05d1\u05d8\u05d5\u05d7? \u05e9\u05dc\u05d7 \u05dc\u05e0\u05d5 \u05d0\u05ea \u05d3\u05d2\u05dd \u05d4\u05e8\u05db\u05d1 \u05d5\u05e0\u05d1\u05d3\u05d5\u05e7 \u05e2\u05d1\u05d5\u05e8\u05da." },
-    { question: "\u05d0\u05d9\u05da \u05de\u05d9\u05d9\u05e6\u05d0\u05d9\u05dd \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05de\u05d4\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4?", answer: "\u05e0\u05d9\u05ea\u05df \u05dc\u05d9\u05d9\u05e6\u05d0 \u05d0\u05ea \u05db\u05dc \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05d1\u05e4\u05d5\u05e8\u05de\u05d8 CSV \u05d0\u05d5 PDF \u05d9\u05e9\u05d9\u05e8\u05d5\u05ea \u05de\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea \u05d4\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4. \u05de\u05d5\u05e9\u05dc\u05dd \u05dc\u05e9\u05d9\u05ea\u05d5\u05e3 \u05e2\u05dd \u05d4\u05de\u05d5\u05e1\u05db\u05e0\u05d9\u05e7 \u05e9\u05dc\u05da \u05d0\u05d5 \u05dc\u05ea\u05d9\u05e2\u05d5\u05d3 \u05d0\u05d9\u05e9\u05d9." },
-    { question: "\u05dc\u05de\u05d4 \u05db\u05d3\u05d0\u05d9 \u05dc\u05e7\u05e0\u05d5\u05ea \u05d7\u05d1\u05d9\u05dc\u05d4 \u05e9\u05dc \u05db\u05de\u05d4 \u05d9\u05d7\u05d9\u05d3\u05d5\u05ea?", answer: "\u05d7\u05d1\u05d9\u05dc\u05d5\u05ea \u05d4\u05de\u05e9\u05e4\u05d7\u05d4 \u05d5\u05d4\u05d0\u05d5\u05dc\u05d8\u05d9\u05de\u05d9\u05d9\u05d8 \u05de\u05d5\u05e9\u05dc\u05de\u05d5\u05ea \u05dc\u05de\u05e9\u05e4\u05d7\u05d5\u05ea \u05e2\u05dd \u05db\u05de\u05d4 \u05e8\u05db\u05d1\u05d9\u05dd. \u05e0\u05d9\u05ea\u05df \u05dc\u05e1\u05e0\u05db\u05e8\u05df \u05d0\u05ea \u05db\u05dc \u05d4\u05d9\u05d7\u05d9\u05d3\u05d5\u05ea \u05dc\u05d7\u05e9\u05d1\u05d5\u05df \u05d0\u05d7\u05d3 \u05d5\u05dc\u05e0\u05d4\u05dc \u05d0\u05ea \u05db\u05dc \u05d4\u05e8\u05db\u05d1\u05d9\u05dd \u05de\u05dc\u05d5\u05d7 \u05d1\u05e7\u05e8\u05d4 \u05d0\u05d7\u05d3 \u2014 \u05d5\u05d2\u05dd \u05dc\u05d7\u05e1\u05d5\u05da \u05e2\u05d3 33% \u05dc\u05e2\u05d5\u05de\u05ea \u05e8\u05db\u05d9\u05e9\u05d4 \u05d1\u05d5\u05d3\u05d3\u05ea." }
+    { question: "האם D10 AI מרוקן את סוללת הרכב?", answer: "לא. D10 AI עובר אוטומטית למצב שינה עם צריכת חשמל של פחות מ-1mA — זניח לחלוטין. אפשר להשאיר אותו מחובר 24/7 ללא חשש." },
+    { question: "אילו פרוטוקולי OBD2 נתמכים?", answer: "D10 AI תומך בכל הפרוטוקולים הסטנדרטיים: CAN (ISO 15765-4), K-Line (ISO 9141-2), KWP2000 (ISO 14230-4) ו-SAE J1850 PWM/VPW. זה מכסה את כל כלי הרכב עם יציאת OBD2." },
+    { question: "האם המידע שלי מאובטח?", answer: "בהחלט. כל הנתונים מוצפנים ב-AES-256 והחיבור מאובטח באמצעות Secure BLE Pairing. הנתונים נשמרים מקומית במכשיר שלך בלבד — ללא ענן, ללא שיתוף עם צדדים שלישיים." },
+    { question: "האם D10 AI תואם לרכב שלי?", answer: "D10 AI תואם לכמעט כל רכב עם יציאת OBD2, כלומר רוב כלי הרכב משנת 1996 ומעלה. זה כולל יצרנים כמו Toyota, Hyundai, Kia, BMW, Mercedes, Volkswagen ועוד. לא בטוח? שלח לנו את דגם הרכב ונבדוק עבורך." },
+    { question: "איך מייצאים נתונים מהאפליקציה?", answer: "ניתן לייצא את כל הנתונים בפורמט CSV או PDF ישירות מהגדרות האפליקציה. מושלם לשיתוף עם המוסכניק שלך או לתיעוד אישי." },
+    { question: "למה כדאי לקנות חבילה של כמה יחידות?", answer: "חבילות המשפחה והאולטימייט מושלמות למשפחות עם כמה רכבים. ניתן לסנכרן את כל היחידות לחשבון אחד ולנהל את כל הרכבים מלוח בקרה אחד — וגם לחסוך עד 33% לעומת רכישה בודדת." }
   ];
 
   return (
@@ -1008,10 +1008,10 @@ const FAQ = () => {
       <div className="container mx-auto px-6 max-w-3xl">
         <div className="text-center mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
-            <HelpCircle size={12} /> \u05e9\u05d0\u05dc\u05d5\u05ea \u05e0\u05e4\u05d5\u05e6\u05d5\u05ea
+            <HelpCircle size={12} /> שאלות נפוצות
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">\u05e9\u05d0\u05dc\u05d5\u05ea \u05d5\u05ea\u05e9\u05d5\u05d1\u05d5\u05ea</h2>
-          <p className="text-white/50 font-light text-base">\u05db\u05dc \u05de\u05d4 \u05e9\u05e6\u05e8\u05d9\u05da \u05dc\u05d3\u05e2\u05ea \u05dc\u05e4\u05e0\u05d9 \u05d4\u05e8\u05db\u05d9\u05e9\u05d4</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שאלות ותשובות</h2>
+          <p className="text-white/50 font-light text-base">כל מה שצריך לדעת לפני הרכישה</p>
         </div>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
