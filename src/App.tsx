@@ -202,13 +202,13 @@ const Hero = () => {
           className="max-w-4xl"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-4 md:mb-6">
-            <Zap size={12} /> המהפכה כבר כאן
+            <Zap size={12} /> מוצר ישראלי · מבצע השקה
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
-            D10 <span className="text-primary">AI</span>
+            סוף ללחץ <span className="text-primary">לפני המוסך.</span>
           </h1>
           <p className="text-base md:text-2xl text-white/70 font-light tracking-wide mb-6 md:mb-8 max-w-2xl mx-auto px-2">
-            המוסכניק האישי שלך. <span className="text-white">בכל מקום.</span> תובנות חכמות בזמן אמת על מצב הרכב שלך.
+            ה-D10 מתחבר לרכב שלך, מנתח בזמן אמת עם בינה מלאכותית, ומסביר לך <span className="text-white">בעברית פשוטה</span> — לפני שאתה מוציא שקל אחד.
           </p>
         </motion.div>
       </div>
@@ -279,9 +279,9 @@ const ProductShowcase = () => {
           />
           
           <div className="absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 z-20 bg-black/80 backdrop-blur-xl border border-white/10 p-8 rounded-2xl max-w-xs hidden md:block">
-            <h4 className="text-xl font-bold text-white mb-2">דיוק של 99.9%</h4>
+            <h4 className="text-xl font-bold text-white mb-2">3M+ קודי תקלות</h4>
             <p className="text-sm text-white/60 font-light leading-relaxed">
-              המערכת מנתחת מיליוני נקודות נתונים בזמן אמת כדי לספק לך את המידע המדויק ביותר על מצב הרכב שלך.
+              המערכת לא רק זורקת קוד טכני. ה-AI מתרגם לעברית: מה הבעיה, עד כמה חמורה, ואם אפשר להמשיך לנסוע — בשניות.
             </p>
           </div>
         </motion.div>
@@ -293,26 +293,26 @@ const ProductShowcase = () => {
 const FeatureSection = () => {
   const features = [
     {
-      title: "ניתוח AI מתקדם",
-      desc: "אלגוריתמים של למידת מכונה המנתחים את נתוני הרכב ומספקים תובנות בעברית פשוטה.",
+      title: "ניתוח תקלות מבוסס AI",
+      desc: "ה-AI מתרגם לעברית: מה הבעיה, עד כמה חמורה, ואם אפשר להמשיך לנסוע — בשניות. לא עוד קודים טכניים.",
       icon: <Cpu className="w-6 h-6" />,
       color: "bg-blue-500/10 text-blue-500 border-blue-500/20"
     },
     {
       title: "חיבור מיידי",
-      desc: "התקנה תוך פחות מ-30 שניות. פשוט חבר לפורט ה-OBD2 והתחל לקבל נתונים.",
+      desc: "חבר ל-OBD2, פתח אפליקציה, קבל תשובות. 5 שניות. אין כלים, אין התקנות מסובכות.",
       icon: <Zap className="w-6 h-6" />,
       color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20"
     },
     {
-      title: "אפליקציה ייעודית",
-      desc: "ממשק משתמש נקי ומודרני המעניק לך שליטה מלאה על כל המידע של הרכב שלך.",
-      icon: <Smartphone className="w-6 h-6" />,
+      title: "100% עברית",
+      desc: "ממשק מלא והסברי תקלות בשפת האם שלך. בלי אנגלית, בלי קודים מוזרים. פותח בישראל, עבור ישראלים.",
+      icon: <Globe className="w-6 h-6" />,
       color: "bg-purple-500/10 text-purple-500 border-purple-500/20"
     },
     {
-      title: "אבטחה מקסימלית",
-      desc: "הנתונים שלך מוצפנים ומאובטחים. רק אתה יכול לגשת למידע של הרכב שלך.",
+      title: "חיסכון עצום",
+      desc: "הערכת עלות תיקון לפני המוסך. מגיע למוסכניק עם ידע — מונע עקיצות ותיקונים מיותרים.",
       icon: <ShieldCheck className="w-6 h-6" />,
       color: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
     }
@@ -341,6 +341,122 @@ const FeatureSection = () => {
               <p className="text-white/50 font-light leading-relaxed text-xs md:text-sm">
                 {f.desc}
               </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CompareSection = () => {
+  return (
+    <section className="py-16 md:py-32 bg-black" dir="rtl">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-bold uppercase tracking-widest mb-4">
+            נורת המנוע נדלקה
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שתי דרכים. בחר את שלך.</h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+          {/* Without D10 */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="p-6 md:p-8 rounded-2xl border border-red-500/20 bg-red-500/[0.03]"
+          >
+            <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-4">בלי D10</div>
+            <h3 className="text-xl font-bold text-white mb-6">לחץ ואי ודאות</h3>
+            <div className="space-y-4">
+              {[
+                "לא יודע אם בטוח לנסוע",
+                "גרירה למוסך רק \"לבדיקת מחשב\"",
+                "קודים טכניים שאתה לא מבין",
+                "משלם אלפים על תיקון שאולי לא צריך"
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <X size={16} className="text-red-400 shrink-0 mt-1" />
+                  <span className={cn("text-white/70 text-sm", i === 3 && "font-bold text-white")}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* With D10 */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="p-6 md:p-8 rounded-2xl border border-primary/20 bg-primary/[0.03]"
+          >
+            <div className="text-xs font-bold uppercase tracking-widest text-primary mb-4">עם D10 AI</div>
+            <h3 className="text-xl font-bold text-white mb-6">שליטה מלאה</h3>
+            <div className="space-y-4">
+              {[
+                "יודע מיד אם אפשר להמשיך לנסוע",
+                "הסבר בעברית פשוטה מה הבעיה",
+                "הערכת מחיר לפני שנכנסים למוסך",
+                "מגיע למוסך עם ידע — לא תותחנים עליך"
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Check size={16} className="text-primary shrink-0 mt-1" />
+                  <span className={cn("text-white/70 text-sm", i === 3 && "font-bold text-white")}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const HowItWorks = () => {
+  const steps = [
+    {
+      num: "01",
+      title: "חבר לרכב",
+      desc: "חבר את ה-D10 לפורט ה-OBD2 מתחת לדאשבורד (5 שניות). אין כלים, אין התקנות מסובכות. כמו לחבר USB."
+    },
+    {
+      num: "02",
+      title: "פתח את האפליקציה",
+      desc: "ה-D10 מתחבר בלוטות' לטלפון. ה-AI מנתח ומציג תמונה מלאה של בריאות הרכב — הכל בעברית."
+    },
+    {
+      num: "03",
+      title: "קבל תשובות ברורות",
+      desc: "תקלה? ה-AI מסביר מה זה, כמה דחוף, כמה יעלה התיקון. אתה מחליט — מעודכן ובביטחון."
+    }
+  ];
+
+  return (
+    <section id="how" className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
+            איך זה עובד
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
+          <p className="text-white/50 font-light text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 md:gap-12 max-w-5xl mx-auto">
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: i * 0.15 }}
+              className="text-center md:text-right"
+            >
+              <div className="text-5xl md:text-7xl font-black text-white/[0.06] mb-4 leading-none">{step.num}</div>
+              <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+              <p className="text-white/50 text-sm leading-relaxed font-light">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -1113,10 +1229,10 @@ export default function App() {
               <div className="container mx-auto px-6">
                 <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-24">
                   {[
-                    { label: "תאימות", value: "99%" },
-                    { label: "דיוק", value: "99.9%" },
-                    { label: "משלוח", value: "חינם" },
-                    { label: "אחריות", value: "מלאה" }
+                    { label: "תאימות לרכבים", value: "99%" },
+                    { label: "קודי תקלות במאגר", value: "3M+" },
+                    { label: "חיבור תוך שניות", value: "5שנ׳" },
+                    { label: "נהגים חכמים", value: "1,240+" }
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
                       <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
@@ -1128,7 +1244,9 @@ export default function App() {
             </div>
 
             <ProductShowcase />
+            <CompareSection />
             <FeatureSection />
+            <HowItWorks />
             <TechnicalSpecs />
             <CompatibilityChecker />
             <FullScreenImage />
@@ -1144,16 +1262,16 @@ export default function App() {
                     transition={{ duration: 1 }}
                   >
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-tight">
-                      הכל תחת שליטה.
+                      האפליקציה עובדת רק עם D10.
                     </h2>
                     <p className="text-white/50 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
-                      האפליקציה שלנו מעניקה לך מבט מעמיק אל תוך המערכות המורכבות ביותר של הרכב שלך. בלי קודים מסובכים, בלי אי-ודאות. רק מידע נקי וברור.
+                      לא עוד אפליקציות גנריות מחו"ל. פיתחנו בישראל, עבור ישראלים — ממשק מלא בעברית, הסברים שמתאימים לשוק המקומי, וגישה למאגרי משרד התחבורה.
                     </p>
                     <div className="space-y-6">
                       {[
-                        { title: "דוחות בזמן אמת", desc: "קבל התראות מיידיות על כל שינוי במצב הרכב." },
-                        { title: "היסטוריית טיפולים", desc: "נהל את כל היסטוריית הטיפולים של הרכב במקום אחד." },
-                        { title: "חיסכון בדלק", desc: "טיפים מבוססי AI לשיפור צריכת הדלק של הרכב שלך." },
+                        { title: "הערכת עלות תיקון", desc: "יודע מראש כמה יעלה התיקון — מגיע למוסך עם ידע, לא תותחנים עליך." },
+                        { title: "גישה למאגרי משרד התחבורה", desc: "הצלבת נתונים חכמה — מידע מדויק על הרכב שלך, ריקולים, והיסטוריה ישירות מהמקור." },
+                        { title: "עדכוני AI שוטפים", desc: "המערכת לומדת ומשתפרת כל הזמן. רכבים חדשים, תקלות חדשות — תמיד מעודכן." },
                         { title: "ניהול מספר רכבים", desc: "יש לך יותר מרכב אחד? סנכרן מספר יחידות D10 AI לחשבון אחד ונהל את כל הרכבים מלוח בקרה אחד." }
                       ].map((item, i) => (
                         <div key={i} className="flex gap-4">
