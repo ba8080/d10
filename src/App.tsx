@@ -465,6 +465,97 @@ const HowItWorks = () => {
   );
 };
 
+const Testimonials = () => {
+  const reviews = [
+    {
+      text: "נורת המנוע נדלקה ונבהלתי. חיברתי את ה-D10 וזה אמר לי שזה חיישן חמצן — לא דחוף. חסכתי גרירה של 400 שקל.",
+      name: "אבי כ.",
+      car: "מאזדה 3, 2019",
+      saved: "חסך ₪400"
+    },
+    {
+      text: "הגעתי למוסך עם הדוח מהאפליקציה. המוסכניק הופתע שאני יודע בדיוק מה הבעיה. חסכתי לפחות 2,000 ש״ח על תיקונים מיותרים.",
+      name: "דנה ר.",
+      car: "יונדאי טוסון, 2021",
+      saved: "חסכה ₪2,000"
+    },
+    {
+      text: "כמכונאי חובב, זה הכלי הכי שימושי שקניתי. הכל בעברית, הכל ברור. ממליץ לכל מי שיש לו רכב.",
+      name: "יוסי מ.",
+      car: "טויוטה קורולה, 2020",
+      saved: ""
+    },
+    {
+      text: "האוטו שלי הראה נורה כתומה בדרך לעבודה. במקום להיכנס ללחץ, פתחתי את האפליקציה. ה-AI הסביר שזה בעיה לא דחופה ונתן לי הערכת מחיר. הגעתי למוסך מוכנה.",
+      name: "מיכל ש.",
+      car: "סקודה אוקטביה, 2022",
+      saved: "חסכה ₪1,200"
+    },
+    {
+      text: "יש לי 3 רכבים במשפחה. קניתי את חבילת המשפחה ועכשיו אני מנהל את כולם מאפליקציה אחת. שווה כל שקל.",
+      name: "רון ד.",
+      car: "3 רכבים משפחתיים",
+      saved: ""
+    },
+    {
+      text: "המוסכניק רצה לגבות 3,500 ש״ח על החלפת ממיר קטליטי. ה-D10 הראה שהבעיה היא חיישן O2 פשוט ב-350 ש״ח. חיסכון של 3,000+.",
+      name: "עמית ל.",
+      car: "פולקסווגן גולף, 2018",
+      saved: "חסך ₪3,000+"
+    }
+  ];
+
+  return (
+    <section id="testimonials" className="py-16 md:py-32 bg-black" dir="rtl">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-[11px] font-bold uppercase tracking-widest mb-4">
+            ★★★★★ מה אומרים עלינו
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">נהגים חכמים כבר משתמשים.</h2>
+          <p className="text-white/50 font-light text-base">הצטרפו ל-1,240+ נהגים שכבר חוסכים אלפי שקלים ומגיעים למוסך עם ידע.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {reviews.map((review, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all flex flex-col"
+            >
+              <div className="text-yellow-400 text-sm mb-4">★★★★★</div>
+              <p className="text-white/70 text-sm leading-relaxed mb-6 flex-grow">"{review.text}"</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-white font-bold text-sm">{review.name}</div>
+                  <div className="text-white/30 text-xs">{review.car}</div>
+                </div>
+                {review.saved && (
+                  <div className="px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold">
+                    {review.saved}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <a 
+            href="https://www.instagram.com/d10_ai/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/40 text-sm hover:text-white transition-colors"
+          >
+            עוד ביקורות ב-Instagram →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const TechnicalSpecs = () => {
   const specs = [
     { category: "חומרה", icon: <Cpu className="w-4 h-4" />, items: [
@@ -759,9 +850,15 @@ const Footer = () => {
             >
               {copied ? <Check size={18} /> : <Mail size={18} />}
             </a>
-            <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
-              <Globe size={18} />
-            </div>
+            <a 
+              href="https://www.instagram.com/d10_ai/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
           </div>
         </div>
 
@@ -1247,6 +1344,7 @@ export default function App() {
             <CompareSection />
             <FeatureSection />
             <HowItWorks />
+            <Testimonials />
             <TechnicalSpecs />
             <CompatibilityChecker />
             <FullScreenImage />
