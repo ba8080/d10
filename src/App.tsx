@@ -74,14 +74,19 @@ const Navbar = () => {
       isScrolled ? "glass border-b border-white/10" : "bg-transparent"
     )} dir="rtl">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState('', '', '/'); }}
+          className="flex items-center gap-2 cursor-pointer"
+          aria-label="חזרה לעמוד הראשי"
+        >
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Activity className="text-white w-5 h-5" />
           </div>
           <span className="text-2xl font-bold tracking-tighter text-white">
             D10 <span className="font-light text-primary">AI</span>
           </span>
-        </div>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-10">
@@ -130,14 +135,19 @@ const Navbar = () => {
         >
           {/* Header with logo + close */}
           <div className="flex justify-between items-center px-6 py-4">
-            <div className="flex items-center gap-2">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState('', '', '/'); }}
+              className="flex items-center gap-2 cursor-pointer"
+              aria-label="חזרה לעמוד הראשי"
+            >
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <Activity className="text-white w-5 h-5" />
               </div>
               <span className="text-2xl font-bold tracking-tighter text-white">
                 D10 <span className="font-light text-primary">AI</span>
               </span>
-            </div>
+            </a>
             <button 
               className="text-white p-2"
               onClick={() => setIsMobileMenuOpen(false)}
