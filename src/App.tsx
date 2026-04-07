@@ -219,7 +219,12 @@ const Hero = () => {
         transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
       >
-        <a href="#pricing" className="btn-tesla btn-tesla-primary w-full sm:w-auto text-center px-8 sm:px-12">
+        <a
+          href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-tesla btn-tesla-primary w-full sm:w-auto text-center px-8 sm:px-12"
+        >
           הזמן עכשיו — החל מ-₪299
         </a>
         <a href="#features" className="btn-tesla btn-tesla-secondary w-full sm:w-auto text-center px-8 sm:px-12">
@@ -689,6 +694,8 @@ const FullScreenImage = () => {
 };
 
 const Pricing = () => {
+  const SOLO_PAYMENT_URL = "https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c";
+
   const bundles = [
     {
       name: "סולו",
@@ -699,7 +706,8 @@ const Pricing = () => {
       features: ["יחידה אחת", "אפליקציה מלאה בעברית", "אחריות שנה", "תמיכה בדוא\"ל", "ייצוא נתונים CSV/PDF"],
       cta: "הזמן עכשיו",
       highlight: false,
-      color: "border-white/10"
+      color: "border-white/10",
+      paymentUrl: SOLO_PAYMENT_URL
     },
     {
       name: "משפחתי",
@@ -710,20 +718,24 @@ const Pricing = () => {
       features: ["3 יחידות", "אפליקציה מלאה בעברית", "אחריות שנה", "תמיכה מועדפת", "לוח בקרה משפחתי", "ייצוא נתונים CSV/PDF"],
       cta: "הכי פופולרי",
       highlight: true,
-      color: "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
+      color: "border-primary bg-primary/5 shadow-2xl shadow-primary/10",
+      paymentUrl: "https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=717&Coin=1&FixTash=False&Info=D10_3_bunddle&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5B3x~D10_3_bunddle~3~239%5D&sendemail=True&tmp=1&signature=da705b380753b049004ea69ad5152e0f0ba447a1cc89eb71fae15c6aa0876c9f"
     },
     {
       name: "אולטימייט",
-      price: "799",
+      price: "800",
       perUnit: "~₪200",
       savings: "חוסך 33%",
       subtitle: "לבעלי מספר רכבים או עסקים קטנים",
       features: ["4 יחידות", "אפליקציה מלאה בעברית", "אחריות שנתיים", "תמיכה VIP", "לוח בקרה מרכזי", "ייצוא נתונים מתקדם"],
       cta: "הזמן עכשיו",
       highlight: false,
-      color: "border-white/10"
+      color: "border-white/10",
+      paymentUrl: "https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=800&Coin=1&FixTash=False&Info=D10_4_bunddle&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&sendemail=True&tmp=1&signature=e4be36b9fd6a9f887aca12fbaae6d85770913acc40622940f310c070f3d0cd4f"
     }
   ];
+
+  const soloPaymentUrl = SOLO_PAYMENT_URL;
 
   return (
     <section id="pricing" className="py-16 md:py-32 bg-[#050505]" dir="rtl">
@@ -774,12 +786,17 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <button className={cn(
-                "w-full py-4 rounded-md font-bold text-sm uppercase tracking-widest transition-all duration-300 min-h-[48px]",
-                b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-white text-black hover:bg-white/90"
-              )}>
+              <a
+                href={b.paymentUrl}
+                target={b.paymentUrl.startsWith('http') ? '_blank' : undefined}
+                rel={b.paymentUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className={cn(
+                  "w-full py-4 rounded-md font-bold text-sm uppercase tracking-widest transition-all duration-300 min-h-[48px] flex items-center justify-center",
+                  b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-white text-black hover:bg-white/90"
+                )}
+              >
                 {b.cta}
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>
@@ -1244,8 +1261,10 @@ const MobileStickyBar = () => {
           <div className="text-white font-bold text-sm">D10 AI</div>
           <div className="text-white/50 text-xs">החל מ-₪299 · משלוח חינם</div>
         </div>
-        <a 
-          href="#pricing" 
+        <a
+          href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+          target="_blank"
+          rel="noopener noreferrer"
           className="px-6 py-2.5 bg-primary text-black font-bold text-sm rounded-lg hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap"
         >
           קנה עכשיו
@@ -1401,8 +1420,13 @@ export default function App() {
                 <p className="text-yellow-400 text-sm font-bold mb-3">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
                 <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">מוכן להתחיל?</h3>
                 <p className="text-white/50 text-base mb-6 max-w-lg mx-auto">החל מ-₪299. משלוח חינם. 30 יום החזרה.</p>
-                <a href="#pricing" className="inline-block px-10 py-4 bg-primary text-black font-bold text-base rounded-lg hover:bg-primary/90 transition-all active:scale-95 min-h-[48px]">
-                  ראה את החבילות
+                <a
+                  href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-10 py-4 bg-primary text-black font-bold text-base rounded-lg hover:bg-primary/90 transition-all active:scale-95 min-h-[48px]"
+                >
+                  קנה עכשיו — ₪299
                 </a>
               </div>
             </section>
@@ -1487,7 +1511,12 @@ export default function App() {
                   <p className="text-white/80 text-base sm:text-xl md:text-2xl mb-8 md:mb-12 max-w-2xl mx-auto font-light px-2">
                     הצטרף למהפכת הדיאגנוסטיקה החכמה עם D10 AI.
                   </p>
-                  <a href="#pricing" className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block">
+                  <a
+                    href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block"
+                  >
                     הזמן את ה-D10 AI שלך
                   </a>
                   <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] font-bold uppercase tracking-widest text-white/60">
