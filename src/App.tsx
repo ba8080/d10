@@ -600,8 +600,8 @@ const TechnicalSpecs = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
             <Cpu size={12} /> מפרט טכני
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">בנוי לביצועים</h2>
-          <p className="text-white/50 font-light max-w-xl mx-auto text-base">כל הפרטים הטכניים שאתה צריך כדי להיות בטוח במוצר.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">למי שרוצה לדעת יותר</h2>
+          <p className="text-white/50 font-light max-w-xl mx-auto text-base">הפרטים הטכניים בשביל מי שמעוניין. לרוב הקונים — החיבור פשוט והתוצאות מדברות בעד עצמן.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
           {specs.map((group, i) => (
@@ -647,8 +647,11 @@ const CompatibilityChecker = () => {
           <Car size={12} /> תאימות
         </div>
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">תואם לרכב שלך?</h2>
-        <p className="text-white/50 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-base">
-          D10 AI תואם לכל רכב עם יציאת OBD2 — כלומר <span className="text-white font-medium">כמעט כל רכב משנת 1996 ומעלה</span>. תומך ביותר מ-10,000 דגמים.
+        <p className="text-white/50 font-light max-w-2xl mx-auto mb-4 text-base">
+          לכל רכב יצרני יש שקע אבחון קטן מתחת להגה — <span className="text-white font-medium">D10 AI מתחבר אליו בשניות</span>, בלי כלים, בלי טכנאי.
+        </p>
+        <p className="text-white/30 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-sm">
+          תואם לכמעט כל רכב משנת 1996 ומעלה. יותר מ-10,000 דגמים נתמכים.
         </p>
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
           {brands.map((brand, i) => (
