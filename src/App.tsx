@@ -195,11 +195,11 @@ const Hero = () => {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover opacity-75"
+          className="w-full h-full object-cover opacity-70"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 z-10" />
         
         {/* Animated Glows */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse z-20" />
@@ -641,7 +641,7 @@ const CompatibilityChecker = () => {
     { name: "Hyundai", slug: "hyundai", color: "#002C5F" },
     { name: "Kia", slug: "kia", color: "#05141F" },
     { name: "BMW", slug: "bmw", color: "#0066B1" },
-    { name: "Mercedes-Benz", slug: "mercedes", color: "#242424" },
+    { name: "Mercedes-Benz", slug: "mercedes-benz", color: "#242424" },
     { name: "Audi", slug: "audi", color: "#BB0A30" },
     { name: "Volkswagen", slug: "volkswagen", color: "#151F5D" },
     { name: "Mazda", slug: "mazda", color: "#101010" },
@@ -672,16 +672,15 @@ const CompatibilityChecker = () => {
     </div>
   );
 
-  const MarqueeRow = ({ brands, direction = "left", duration = 35 }: { brands: typeof brandsRow1; direction?: string; duration?: number }) => {
-    const animationClass = direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
+  const MarqueeRow = ({ brands, speed = 35 }: { brands: typeof brandsRow1; speed?: number }) => {
     return (
       <div className="relative overflow-hidden py-2">
         {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
         <div
-          className={`flex ${animationClass}`}
-          style={{ animationDuration: `${duration}s` }}
+          className="flex animate-marquee-rtl"
+          style={{ animationDuration: `${speed}s` }}
         >
           {/* Duplicate the list 3x for seamless loop */}
           {[...brands, ...brands, ...brands].map((brand, i) => (
@@ -716,8 +715,8 @@ const CompatibilityChecker = () => {
 
       {/* Scrolling logo rows */}
       <div className="space-y-4 mb-12">
-        <MarqueeRow brands={brandsRow1} direction="left" duration={40} />
-        <MarqueeRow brands={brandsRow2} direction="right" duration={45} />
+        <MarqueeRow brands={brandsRow1} speed={40} />
+        <MarqueeRow brands={brandsRow2} speed={50} />
       </div>
 
       <div className="text-center">
