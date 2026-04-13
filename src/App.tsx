@@ -186,85 +186,109 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Map scroll to video time
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      if (videoRef.current && isVideoReady) {
+        const duration = videoRef.current.duration;
+        if (duration && isFinite(duration)) {
+          videoRef.current.currentTime = v * duration;
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, isVideoReady]);
+
+  // Text opacity: fades out as user scrolls past 30%
+  const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
+  // Video overlay lightens as user scrolls
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.6, 0.15]);
+
   return (
-    <section className="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 pb-16 overflow-hidden" dir="rtl">
-      {/* Background Video & Overlay */}
-      <div className="absolute inset-0 z-0 bg-black">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="w-full h-full object-cover opacity-70"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 z-10" />
-        
-        {/* Animated Glows */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse z-20" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 blur-[120px] rounded-full animate-pulse delay-1000 z-20" />
-      </div>
+    <section ref={containerRef} className="relative h-[300vh]" dir="rtl">
+      {/* Sticky video container */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Background Video — scroll scrubbed */}
+        <div className="absolute inset-0 z-0 bg-black">
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+            onLoadedMetadata={() => setIsVideoReady(true)}
+          >
+            <source src="/scroll-video.mp4" type="video/mp4" />
+          </video>
+          <motion.div
+            className="absolute inset-0 bg-black z-10"
+            style={{ opacity: overlayOpacity }}
+          />
 
-      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+          {/* Animated Glows */}
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse z-20" />
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 blur-[120px] rounded-full animate-pulse delay-1000 z-20" />
+        </div>
+
+        {/* Hero Text Content — fades out on scroll */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl"
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center px-6"
+          style={{ opacity: textOpacity, y: textY }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-4 md:mb-6">
-            <Zap size={12} /> מוצר ישראלי · מבצע השקה
+          <div className="text-center max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-4 md:mb-6">
+              <Zap size={12} /> מוצר ישראלי · מבצע השקה
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
+              סוף ללחץ <span className="text-primary">לפני המוסך.</span>
+            </h1>
+            <p className="text-base md:text-2xl text-white/70 font-light tracking-wide mb-6 md:mb-8 max-w-2xl mx-auto px-2">
+              מערכת AI מקורית — מתאם חומרה ייחודי ואפליקציית אייפון שנבנו יחד מהיסוד. מתחברת לרכב שלך, קוראת את הנתונים בזמן אמת, <span className="text-white">ומסבירה לך בדיוק מה קורה</span> — לפני שאתה מוציא שקל אחד.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8">
+              <a
+                href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-tesla btn-tesla-primary cta-glow w-full sm:w-auto text-center px-8 sm:px-12"
+              >
+                הזמן עכשיו — החל מ-₪299
+              </a>
+              <a href="#features" className="btn-tesla btn-tesla-secondary-dark w-full sm:w-auto text-center px-8 sm:px-12">
+                למד עוד
+              </a>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+              {[
+                { icon: <Check size={14} />, text: "משלוח חינם" },
+                { icon: <RotateCcw size={14} />, text: "30 יום החזרה" },
+                { icon: <ShieldCheck size={14} />, text: "כל רכב מ-1996" },
+                { icon: <Lock size={14} />, text: "הצפנת AES-256" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 text-white/50 text-xs md:text-sm font-medium">
+                  <span className="text-primary">{item.icon}</span>
+                  {item.text}
+                </div>
+              ))}
+            </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
-            סוף ללחץ <span className="text-primary">לפני המוסך.</span>
-          </h1>
-          <p className="text-base md:text-2xl text-white/70 font-light tracking-wide mb-6 md:mb-8 max-w-2xl mx-auto px-2">
-            מערכת AI מקורית — מתאם חומרה ייחודי ואפליקציית אייפון שנבנו יחד מהיסוד. מתחברת לרכב שלך, קוראת את הנתונים בזמן אמת, <span className="text-white">ומסבירה לך בדיוק מה קורה</span> — לפני שאתה מוציא שקל אחד.
-          </p>
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
+            <ChevronDown size={32} strokeWidth={1} />
+          </div>
         </motion.div>
-      </div>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-      >
-        <a
-          href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-tesla btn-tesla-primary cta-glow w-full sm:w-auto text-center px-8 sm:px-12"
-        >
-          הזמן עכשיו — החל מ-₪299
-        </a>
-        <a href="#features" className="btn-tesla btn-tesla-secondary-dark w-full sm:w-auto text-center px-8 sm:px-12">
-          למד עוד
-        </a>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="container mx-auto px-6 relative z-10 flex flex-wrap justify-center gap-4 md:gap-8 mt-8 md:mt-12"
-      >
-        {[
-          { icon: <Check size={14} />, text: "משלוח חינם" },
-          { icon: <RotateCcw size={14} />, text: "30 יום החזרה" },
-          { icon: <ShieldCheck size={14} />, text: "כל רכב מ-1996" },
-          { icon: <Lock size={14} />, text: "הצפנת AES-256" },
-        ].map((item, i) => (
-          <div key={i} className="flex items-center gap-2 text-white/50 text-xs md:text-sm font-medium">
-            <span className="text-primary">{item.icon}</span>
-            {item.text}
-          </div>
-        ))}
-      </motion.div>
-
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
-        <ChevronDown size={32} strokeWidth={1} />
       </div>
     </section>
   );
@@ -641,7 +665,7 @@ const CompatibilityChecker = () => {
     { name: "Hyundai", slug: "hyundai", color: "#002C5F" },
     { name: "Kia", slug: "kia", color: "#05141F" },
     { name: "BMW", slug: "bmw", color: "#0066B1" },
-    { name: "Mercedes-Benz", slug: "mercedes-benz", color: "#242424" },
+    { name: "Mercedes-Benz", slug: "mercedesbenz", color: "242424" },
     { name: "Audi", slug: "audi", color: "#BB0A30" },
     { name: "Volkswagen", slug: "volkswagen", color: "#151F5D" },
     { name: "Mazda", slug: "mazda", color: "#101010" },
@@ -662,12 +686,18 @@ const CompatibilityChecker = () => {
 
   const LogoItem = ({ brand }: { brand: { name: string; slug: string; color: string } }) => (
     <div className="group flex flex-col items-center justify-center gap-3 min-w-[120px] md:min-w-[150px] px-6 py-5 mx-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
-      <img
-        src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace('#', '')}`}
-        alt={brand.name}
-        className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-        loading="lazy"
-      />
+      {brand.slug === "mercedesbenz" ? (
+        <svg className="w-10 h-10 md:w-12 md:h-12 opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.846c5.595 0 10.154 4.559 10.154 10.154S17.595 22.154 12 22.154 1.846 17.595 1.846 12 6.405 1.846 12 1.846zm0 .923A9.231 9.231 0 0 0 2.769 12 9.231 9.231 0 0 0 12 21.231 9.231 9.231 0 0 0 21.231 12 9.231 9.231 0 0 0 12 2.769zm0 1.48l3.552 6.95H8.448L12 4.25zm-4.17 7.873h8.34L12 19.36l-4.17-7.237zm-.785-.462L3.938 12.8a8.273 8.273 0 0 1 3.385-6.588l-.278 5.449zm9.91 0l-.278-5.449A8.273 8.273 0 0 1 20.062 12.8l-3.107-1.139zm-9.478.924l3.107 5.449a8.273 8.273 0 0 1-6.492-2.537l3.385-2.912zm9.046 0l3.385 2.912a8.273 8.273 0 0 1-6.492 2.537l3.107-5.449z"/>
+        </svg>
+      ) : (
+        <img
+          src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace('#', '')}`}
+          alt={brand.name}
+          className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+          loading="lazy"
+        />
+      )}
       <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-700 transition-colors duration-200">{brand.name}</span>
     </div>
   );
