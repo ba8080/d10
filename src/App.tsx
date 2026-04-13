@@ -368,10 +368,10 @@ const FeatureSection = () => {
 
 const CompareSection = () => {
   return (
-    <section className="py-16 md:py-32 bg-black" dir="rtl">
+    <section className="py-16 md:py-32 bg-white" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-500 text-[11px] font-bold uppercase tracking-widest mb-4">
             נורת המנוע נדלקה
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שתי דרכים. בחר את שלך.</h2>
@@ -452,10 +452,10 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how" className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+    <section id="how" className="py-16 md:py-32 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
             איך זה עובד
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
