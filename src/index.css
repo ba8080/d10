@@ -231,6 +231,33 @@ body.a11y-highlight-links a {
   font-weight: 800 !important;
 }
 
+/* ===== Infinite Marquee Scroll ===== */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-right linear infinite;
+  will-change: transform;
+}
+
+/* Pause marquee on hover for accessibility */
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
 /* ===== Selection Colors ===== */
 ::selection {
   background: #2563EB;

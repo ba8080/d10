@@ -195,11 +195,11 @@ const Hero = () => {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover opacity-50"
+          className="w-full h-full object-cover opacity-75"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />
         
         {/* Animated Glows */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full animate-pulse z-20" />
@@ -636,42 +636,94 @@ const TechnicalSpecs = () => {
 };
 
 const CompatibilityChecker = () => {
-  const brands = [
-    "Toyota", "Hyundai", "Kia", "BMW", "Mercedes-Benz", "Audi",
-    "Volkswagen", "Mazda", "Honda", "Nissan", "Subaru", "Škoda",
-    "Seat", "Mitsubishi", "Peugeot", "Citroën", "Ford", "Chevrolet"
+  const brandsRow1 = [
+    { name: "Toyota", slug: "toyota", color: "#EB0A1E" },
+    { name: "Hyundai", slug: "hyundai", color: "#002C5F" },
+    { name: "Kia", slug: "kia", color: "#05141F" },
+    { name: "BMW", slug: "bmw", color: "#0066B1" },
+    { name: "Mercedes-Benz", slug: "mercedes", color: "#242424" },
+    { name: "Audi", slug: "audi", color: "#BB0A30" },
+    { name: "Volkswagen", slug: "volkswagen", color: "#151F5D" },
+    { name: "Mazda", slug: "mazda", color: "#101010" },
+    { name: "Honda", slug: "honda", color: "#E40521" },
   ];
 
-  return (
-    <section className="py-16 md:py-32 bg-slate-50" dir="rtl">
-      <div className="container mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-bold uppercase tracking-widest mb-4">
-          <Car size={12} /> תאימות
-        </div>
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">תואם לרכב שלך?</h2>
-        <p className="text-slate-500 font-light max-w-2xl mx-auto mb-4 text-base">
-          לכל רכב יצרני יש שקע אבחון קטן מתחת להגה — <span className="text-slate-900 font-medium">D10 AI מתחבר אליו בשניות</span>, בלי כלים, בלי טכנאי.
-        </p>
-        <p className="text-slate-400 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-sm">
-          תואם לכמעט כל רכב משנת 1996 ומעלה. יותר מ-10,000 דגמים נתמכים.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
-          {brands.map((brand, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.03 }}
-              className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-700 text-sm font-medium hover:border-primary/30 hover:text-primary transition-all cursor-default shadow-sm"
-            >
-              {brand}
-            </motion.div>
+  const brandsRow2 = [
+    { name: "Nissan", slug: "nissan", color: "#C3002F" },
+    { name: "Subaru", slug: "subaru", color: "#013C74" },
+    { name: "Škoda", slug: "skoda", color: "#4BA82E" },
+    { name: "Mitsubishi", slug: "mitsubishi", color: "#E60012" },
+    { name: "Peugeot", slug: "peugeot", color: "#000000" },
+    { name: "Ford", slug: "ford", color: "#003478" },
+    { name: "Chevrolet", slug: "chevrolet", color: "#CD9834" },
+    { name: "Citroën", slug: "citroen", color: "#AC0000" },
+    { name: "Seat", slug: "seat", color: "#33302E" },
+  ];
+
+  const LogoItem = ({ brand }: { brand: { name: string; slug: string; color: string } }) => (
+    <div className="group flex flex-col items-center justify-center gap-3 min-w-[120px] md:min-w-[150px] px-6 py-5 mx-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+      <img
+        src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace('#', '')}`}
+        alt={brand.name}
+        className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+        loading="lazy"
+      />
+      <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-700 transition-colors duration-200">{brand.name}</span>
+    </div>
+  );
+
+  const MarqueeRow = ({ brands, direction = "left", duration = 35 }: { brands: typeof brandsRow1; direction?: string; duration?: number }) => {
+    const animationClass = direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
+    return (
+      <div className="relative overflow-hidden py-2">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div
+          className={`flex ${animationClass}`}
+          style={{ animationDuration: `${duration}s` }}
+        >
+          {/* Duplicate the list 3x for seamless loop */}
+          {[...brands, ...brands, ...brands].map((brand, i) => (
+            <LogoItem key={`${brand.slug}-${i}`} brand={brand} />
           ))}
         </div>
+      </div>
+    );
+  };
+
+  return (
+    <section className="py-16 md:py-32 bg-slate-50 overflow-hidden" dir="rtl">
+      <div className="container mx-auto px-6 text-center mb-10 md:mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-bold uppercase tracking-widest mb-4">
+            <Car size={12} /> תאימות
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">תואם לרכב שלך?</h2>
+          <p className="text-slate-500 font-light max-w-2xl mx-auto mb-4 text-base">
+            לכל רכב יצרני יש שקע אבחון קטן מתחת להגה — <span className="text-slate-900 font-medium">D10 AI מתחבר אליו בשניות</span>, בלי כלים, בלי טכנאי.
+          </p>
+          <p className="text-slate-400 font-light max-w-2xl mx-auto text-sm">
+            תואם לכמעט כל רכב משנת 1996 ומעלה. יותר מ-10,000 דגמים נתמכים.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Scrolling logo rows */}
+      <div className="space-y-4 mb-12">
+        <MarqueeRow brands={brandsRow1} direction="left" duration={40} />
+        <MarqueeRow brands={brandsRow2} direction="right" duration={45} />
+      </div>
+
+      <div className="text-center">
         <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-slate-200 shadow-sm">
           <span className="text-slate-500 text-sm">לא בטוח אם הרכב שלך תואם?</span>
-          <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">שלח לנו את דגם הרכב ←</a>
+          <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline cursor-pointer">שלח לנו את דגם הרכב ←</a>
         </div>
       </div>
     </section>
