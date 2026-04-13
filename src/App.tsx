@@ -71,7 +71,7 @@ const Navbar = () => {
     <>
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-12 py-4",
-      isScrolled ? "glass border-b border-white/10" : "bg-transparent"
+      isScrolled ? "glass border-b border-slate-200 shadow-sm" : "bg-transparent"
     )} dir="rtl">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         <a
@@ -83,7 +83,7 @@ const Navbar = () => {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Activity className="text-white w-5 h-5" />
           </div>
-          <span className="text-2xl font-bold tracking-tighter text-white">
+          <span className={cn("text-2xl font-bold tracking-tighter", isScrolled ? "text-slate-900" : "text-white")}>
             D10 <span className="font-light text-primary">AI</span>
           </span>
         </a>
@@ -94,7 +94,7 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-xs font-semibold text-white/80 uppercase tracking-widest transition-colors hover:text-white"
+              className={cn("text-xs font-semibold uppercase tracking-widest transition-colors", isScrolled ? "text-slate-600 hover:text-primary" : "text-white/80 hover:text-white")}
             >
               {link.name}
             </a>
@@ -104,7 +104,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-4">
           <a 
             href="#pricing" 
-            className="text-xs font-bold text-white/90 border border-white/20 px-6 py-2 rounded-md hover:bg-white hover:text-black transition-all duration-300"
+            className="text-xs font-bold text-white border border-primary bg-primary px-6 py-2 rounded-md hover:bg-primary-dark transition-all duration-300"
           >
             הזמן עכשיו
           </a>
@@ -112,7 +112,7 @@ const Navbar = () => {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-white p-2"
+          className={cn("md:hidden p-2", isScrolled ? "text-slate-900" : "text-white")}
           onClick={() => setIsMobileMenuOpen(true)}
           aria-label="פתח תפריט"
         >
@@ -130,7 +130,7 @@ const Navbar = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="md:hidden fixed inset-0 z-[200] bg-black"
+          className="md:hidden fixed inset-0 z-[200] bg-white"
           dir="rtl"
         >
           {/* Header with logo + close */}
@@ -144,12 +144,12 @@ const Navbar = () => {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <Activity className="text-white w-5 h-5" />
               </div>
-              <span className="text-2xl font-bold tracking-tighter text-white">
+              <span className="text-2xl font-bold tracking-tighter text-slate-900">
                 D10 <span className="font-light text-primary">AI</span>
               </span>
             </a>
             <button 
-              className="text-white p-2"
+              className="text-slate-900 p-2"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="סגור תפריט"
             >
@@ -163,7 +163,7 @@ const Navbar = () => {
                 key={link.name} 
                 href={link.href} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-2xl font-medium text-white/90 border-b border-white/10 pb-4"
+                className="text-2xl font-medium text-slate-800 border-b border-slate-100 pb-4"
               >
                 {link.name}
               </a>
@@ -171,7 +171,7 @@ const Navbar = () => {
             <a 
               href="#pricing" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="bg-white text-black text-center py-4 rounded-md font-bold text-lg mt-4"
+              className="bg-primary text-white text-center py-4 rounded-md font-bold text-lg mt-4"
             >
               הזמן עכשיו
             </a>
@@ -237,7 +237,7 @@ const Hero = () => {
         >
           הזמן עכשיו — החל מ-₪299
         </a>
-        <a href="#features" className="btn-tesla btn-tesla-secondary w-full sm:w-auto text-center px-8 sm:px-12">
+        <a href="#features" className="btn-tesla btn-tesla-secondary-dark w-full sm:w-auto text-center px-8 sm:px-12">
           למד עוד
         </a>
       </motion.div>
@@ -279,7 +279,7 @@ const ProductShowcase = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section ref={containerRef} className="py-16 md:py-32 bg-black overflow-hidden" dir="rtl">
+    <section ref={containerRef} className="py-16 md:py-32 bg-white overflow-hidden" dir="rtl">
       <div className="container mx-auto px-6">
         <motion.div 
           style={{ scale, opacity }}
@@ -289,13 +289,13 @@ const ProductShowcase = () => {
           <img 
             src="/smart-diagnostic.jpg" 
             alt="D10 AI Smart Diagnostic Assistant" 
-            className="relative z-10 w-full rounded-2xl shadow-2xl border border-white/5"
+            className="relative z-10 w-full rounded-2xl shadow-2xl border border-slate-200"
             referrerPolicy="no-referrer"
           />
           
-          <div className="absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 z-20 bg-black/80 backdrop-blur-xl border border-white/10 p-8 rounded-2xl max-w-xs hidden md:block">
-            <h4 className="text-xl font-bold text-white mb-2">מערכת סגורה ייחודית</h4>
-            <p className="text-sm text-white/60 font-light leading-relaxed">
+          <div className="absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 z-20 bg-white shadow-xl border border-slate-200 p-8 rounded-2xl max-w-xs hidden md:block">
+            <h4 className="text-xl font-bold text-slate-900 mb-2">מערכת סגורה ייחודית</h4>
+            <p className="text-sm text-slate-500 font-light leading-relaxed">
               המתאם והאפליקציה תוכננו יחד מהיסוד. אין מתאם גנרי, אין קודים גולמיים — רק דיוק לרכב שלך, רק D10 AI.
             </p>
           </div>
@@ -334,7 +334,7 @@ const FeatureSection = () => {
   ];
 
   return (
-    <section id="features" className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+    <section id="features" className="py-16 md:py-32 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
           {features.map((f, i) => (
@@ -352,8 +352,8 @@ const FeatureSection = () => {
               )}>
                 {f.icon}
               </div>
-              <h4 className="text-base md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">{f.title}</h4>
-              <p className="text-white/50 font-light leading-relaxed text-sm">
+              <h4 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-4 tracking-tight">{f.title}</h4>
+              <p className="text-slate-500 font-light leading-relaxed text-sm">
                 {f.desc}
               </p>
             </motion.div>
@@ -372,7 +372,7 @@ const CompareSection = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-bold uppercase tracking-widest mb-4">
             נורת המנוע נדלקה
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שתי דרכים. בחר את שלך.</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שתי דרכים. בחר את שלך.</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
           {/* Without D10 */}
@@ -381,10 +381,10 @@ const CompareSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="p-6 md:p-8 rounded-2xl border border-red-500/20 bg-red-500/[0.03]"
+            className="p-6 md:p-8 rounded-2xl border border-red-200 bg-red-50"
           >
             <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-4">בלי D10</div>
-            <h3 className="text-xl font-bold text-white mb-6">לחץ ואי ודאות</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-6">לחץ ואי ודאות</h3>
             <div className="space-y-4">
               {[
                 "נורה דולקת — אתה מנחש בלבד",
@@ -394,7 +394,7 @@ const CompareSection = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <X size={16} className="text-red-400 shrink-0 mt-1" />
-                  <span className={cn("text-white/70 text-sm", i === 3 && "font-bold text-white")}>{item}</span>
+                  <span className={cn("text-slate-600 text-sm", i === 3 && "font-bold text-slate-900")}>{item}</span>
                 </div>
               ))}
             </div>
@@ -406,10 +406,10 @@ const CompareSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="p-6 md:p-8 rounded-2xl border border-primary/20 bg-primary/[0.03]"
+            className="p-6 md:p-8 rounded-2xl border border-primary/20 bg-primary/[0.05]"
           >
             <div className="text-xs font-bold uppercase tracking-widest text-primary mb-4">עם D10 AI</div>
-            <h3 className="text-xl font-bold text-white mb-6">שליטה מלאה</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-6">שליטה מלאה</h3>
             <div className="space-y-4">
               {[
                 "קרא קוד תקלה בשניות ישירות מהאייפון",
@@ -419,7 +419,7 @@ const CompareSection = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <Check size={16} className="text-primary shrink-0 mt-1" />
-                  <span className={cn("text-white/70 text-sm", i === 3 && "font-bold text-white")}>{item}</span>
+                  <span className={cn("text-slate-600 text-sm", i === 3 && "font-bold text-slate-900")}>{item}</span>
                 </div>
               ))}
             </div>
@@ -456,8 +456,8 @@ const HowItWorks = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
             איך זה עובד
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
-          <p className="text-white/70 text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
+          <p className="text-slate-500 text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 md:gap-12 max-w-5xl mx-auto">
           {steps.map((step, i) => (
@@ -469,9 +469,9 @@ const HowItWorks = () => {
               transition={{ duration: 0.8, delay: i * 0.15 }}
               className="text-center md:text-right"
             >
-              <div className="text-5xl md:text-7xl font-black text-white/[0.15] mb-4 leading-none">{step.num}</div>
-              <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-              <p className="text-white/70 text-sm leading-relaxed">{step.desc}</p>
+              <div className="text-5xl md:text-7xl font-black text-primary/10 mb-4 leading-none">{step.num}</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -521,14 +521,14 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-16 md:py-32 bg-black" dir="rtl">
+    <section id="testimonials" className="py-16 md:py-32 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-[11px] font-bold uppercase tracking-widest mb-4">
             ★★★★★ מה אומרים עלינו
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">נהגים חכמים כבר משתמשים.</h2>
-          <p className="text-white/50 font-light text-base">הצטרפו ל-1,240+ נהגים שכבר חוסכים אלפי שקלים ומגיעים למוסך עם ידע.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">נהגים חכמים כבר משתמשים.</h2>
+          <p className="text-slate-500 font-light text-base">הצטרפו ל-1,240+ נהגים שכבר חוסכים אלפי שקלים ומגיעים למוסך עם ידע.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {reviews.map((review, i) => (
@@ -538,14 +538,14 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all flex flex-col"
+              className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all flex flex-col"
             >
               <div className="text-yellow-400 text-sm mb-4">★★★★★</div>
-              <p className="text-white/70 text-sm leading-relaxed mb-6 flex-grow">"{review.text}"</p>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">"{review.text}"</p>
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-white font-bold text-sm">{review.name}</div>
-                  <div className="text-white/30 text-xs">{review.car}</div>
+                  <div className="text-slate-900 font-bold text-sm">{review.name}</div>
+                  <div className="text-slate-400 text-xs">{review.car}</div>
                 </div>
                 {review.saved && (
                   <div className="px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold">
@@ -561,7 +561,7 @@ const Testimonials = () => {
             href="https://www.instagram.com/d10_ai/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/40 text-sm hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-slate-400 text-sm hover:text-primary transition-colors"
           >
             עוד ביקורות ב-Instagram →
           </a>
@@ -594,14 +594,14 @@ const TechnicalSpecs = () => {
   ];
 
   return (
-    <section className="py-16 md:py-32 bg-black" dir="rtl">
+    <section className="py-16 md:py-32 bg-white" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
             <Cpu size={12} /> מפרט טכני
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">למי שרוצה לדעת יותר</h2>
-          <p className="text-white/50 font-light max-w-xl mx-auto text-base">הפרטים הטכניים בשביל מי שמעוניין. לרוב הקונים — החיבור פשוט והתוצאות מדברות בעד עצמן.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">למי שרוצה לדעת יותר</h2>
+          <p className="text-slate-500 font-light max-w-xl mx-auto text-base">הפרטים הטכניים בשביל מי שמעוניין. לרוב הקונים — החיבור פשוט והתוצאות מדברות בעד עצמן.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
           {specs.map((group, i) => (
@@ -611,7 +611,7 @@ const TechnicalSpecs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="p-6 md:p-8 rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all"
+              className="p-6 md:p-8 rounded-2xl border border-slate-200 bg-slate-50 hover:border-primary/30 transition-all"
             >
               <div className="flex items-center gap-2 mb-6">
                 <div className="text-primary">{group.icon}</div>
@@ -620,8 +620,8 @@ const TechnicalSpecs = () => {
               <div className="space-y-4">
                 {group.items.map((item, j) => (
                   <div key={j} className="flex justify-between items-center">
-                    <span className="text-white/50 text-sm">{item.label}</span>
-                    <span className="text-white font-semibold text-sm font-mono">{item.value}</span>
+                    <span className="text-slate-400 text-sm">{item.label}</span>
+                    <span className="text-slate-900 font-semibold text-sm font-mono">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -641,16 +641,16 @@ const CompatibilityChecker = () => {
   ];
 
   return (
-    <section className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+    <section className="py-16 md:py-32 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-bold uppercase tracking-widest mb-4">
           <Car size={12} /> תאימות
         </div>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">תואם לרכב שלך?</h2>
-        <p className="text-white/50 font-light max-w-2xl mx-auto mb-4 text-base">
-          לכל רכב יצרני יש שקע אבחון קטן מתחת להגה — <span className="text-white font-medium">D10 AI מתחבר אליו בשניות</span>, בלי כלים, בלי טכנאי.
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">תואם לרכב שלך?</h2>
+        <p className="text-slate-500 font-light max-w-2xl mx-auto mb-4 text-base">
+          לכל רכב יצרני יש שקע אבחון קטן מתחת להגה — <span className="text-slate-900 font-medium">D10 AI מתחבר אליו בשניות</span>, בלי כלים, בלי טכנאי.
         </p>
-        <p className="text-white/30 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-sm">
+        <p className="text-slate-400 font-light max-w-2xl mx-auto mb-12 md:mb-16 text-sm">
           תואם לכמעט כל רכב משנת 1996 ומעלה. יותר מ-10,000 דגמים נתמכים.
         </p>
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto mb-12">
@@ -661,14 +661,14 @@ const CompatibilityChecker = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.03 }}
-              className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all cursor-default"
+              className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-700 text-sm font-medium hover:border-primary/30 hover:text-primary transition-all cursor-default shadow-sm"
             >
               {brand}
             </motion.div>
           ))}
         </div>
-        <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10">
-          <span className="text-white/60 text-sm">לא בטוח אם הרכב שלך תואם?</span>
+        <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-slate-200 shadow-sm">
+          <span className="text-slate-500 text-sm">לא בטוח אם הרכב שלך תואם?</span>
           <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">שלח לנו את דגם הרכב ←</a>
         </div>
       </div>
@@ -751,11 +751,11 @@ const Pricing = () => {
   const soloPaymentUrl = SOLO_PAYMENT_URL;
 
   return (
-    <section id="pricing" className="py-16 md:py-32 bg-[#050505]" dir="rtl">
+    <section id="pricing" className="py-16 md:py-32 bg-white" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-10 md:mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">בחר את החבילה שלך</h2>
-          <p className="text-white/50 font-light text-base mb-4">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">בחר את החבילה שלך</h2>
+          <p className="text-slate-500 font-light text-base mb-4">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
           <p className="text-yellow-400 text-sm font-bold">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
         </div>
 
@@ -770,7 +770,7 @@ const Pricing = () => {
               className={cn(
                 "p-6 sm:p-8 md:p-12 rounded-2xl border flex flex-col items-center text-center transition-all duration-500 relative",
                 b.color,
-                !b.highlight && "bg-white/5 hover:border-white/30"
+                !b.highlight && "bg-slate-50 hover:border-primary/30"
               )}
             >
               {b.savings && (
@@ -782,18 +782,18 @@ const Pricing = () => {
                 "text-sm font-bold uppercase tracking-widest mb-2",
                 b.highlight ? "text-primary" : "opacity-60"
               )}>{b.name}</h4>
-              <p className="text-white/40 text-sm mb-4">{b.subtitle}</p>
+              <p className="text-slate-400 text-sm mb-4">{b.subtitle}</p>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl md:text-5xl font-bold text-white">₪{b.price}</span>
+                <span className="text-4xl md:text-5xl font-bold text-slate-900">₪{b.price}</span>
               </div>
               {b.perUnit && (
-                <p className="text-white/40 text-sm mb-6 md:mb-8">{b.perUnit} ליחידה</p>
+                <p className="text-slate-400 text-sm mb-6 md:mb-8">{b.perUnit} ליחידה</p>
               )}
               {!b.perUnit && <div className="mb-6 md:mb-8" />}
               
               <ul className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-grow">
                 {b.features.map((f, j) => (
-                  <li key={j} className="text-sm font-light text-white/80 flex items-center gap-2 justify-center">
+                  <li key={j} className="text-sm font-light text-slate-700 flex items-center gap-2 justify-center">
                     <Check size={14} className="text-primary shrink-0" /> {f}
                   </li>
                 ))}
@@ -805,7 +805,7 @@ const Pricing = () => {
                 rel={b.paymentUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className={cn(
                   "w-full py-4 rounded-md font-bold text-sm uppercase tracking-widest transition-all duration-300 min-h-[48px] flex items-center justify-center",
-                  b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-white text-black hover:bg-white/90"
+                  b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-slate-900 text-white hover:bg-slate-800"
                 )}
               >
                 {b.cta}
@@ -814,7 +814,7 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-10 md:mt-16 text-white/40">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-10 md:mt-16 text-slate-400">
           {[
             { icon: <Clock size={16} />, text: "\u05de\u05e9\u05dc\u05d5\u05d7 \u05de\u05d4\u05d9\u05e8" },
             { icon: <RotateCcw size={16} />, text: "30 \u05d9\u05d5\u05dd \u05dc\u05d4\u05d7\u05d6\u05e8\u05d4" },
@@ -842,7 +842,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-12 md:py-20 border-t border-white/5" dir="rtl" role="contentinfo">
+    <footer className="bg-[#0F172A] text-white py-12 md:py-20 border-t border-slate-800" dir="rtl" role="contentinfo">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
           <div className="text-center md:text-right">
@@ -948,16 +948,16 @@ const CookieConsentBanner = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[200] p-4 md:p-6" dir="rtl">
-      <div className="max-w-3xl mx-auto glass border border-white/10 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="max-w-3xl mx-auto glass border border-slate-200 shadow-lg rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex-1">
-          <p className="text-sm text-white/80 font-light leading-relaxed">
+          <p className="text-sm text-slate-700 font-light leading-relaxed">
             אתר זה משתמש בעוגיות (Cookies) ובכלי מעקב לצורך שיפור חוויית הגלישה וניתוח תנועה. 
             למידע נוסף, ראה את <a href="#privacy" className="text-primary underline">מדיניות הפרטיות</a> שלנו.
           </p>
         </div>
         <div className="flex gap-3 shrink-0">
           <button onClick={handleAccept} className="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary-dark transition-colors">אשר</button>
-          <button onClick={handleDecline} className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">דחה</button>
+          <button onClick={handleDecline} className="px-6 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">דחה</button>
         </div>
       </div>
     </div>
@@ -967,11 +967,11 @@ const CookieConsentBanner = () => {
 // --- Legal Page Layout ---
 
 const LegalPage = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="min-h-screen bg-[#050505] pt-28 pb-20" dir="rtl">
+  <div className="min-h-screen bg-white pt-28 pb-20" dir="rtl">
     <div className="container mx-auto px-6 max-w-3xl">
       <a href="#" className="inline-flex items-center gap-2 text-primary text-sm mb-8 hover:underline">→ חזרה לעמוד הראשי</a>
-      <h1 className="text-3xl md:text-4xl font-bold text-white mb-10 tracking-tight">{title}</h1>
-      <div className="prose-legal space-y-6 text-white/70 text-sm font-light leading-relaxed">
+      <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-10 tracking-tight">{title}</h1>
+      <div className="prose-legal space-y-6 text-slate-600 text-sm font-light leading-relaxed">
         {children}
       </div>
     </div>
@@ -982,11 +982,11 @@ const LegalPage = ({ title, children }: { title: string; children: React.ReactNo
 
 const PrivacyPolicy = () => (
   <LegalPage title="מדיניות פרטיות">
-    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
-    <h2 className="text-lg font-bold text-white">1. כללי</h2>
+    <p className="text-slate-400 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-slate-900">1. כללי</h2>
     <p>D10 ("החברה", "אנחנו") מפעילה את אתר www.d10.store ואת מוצרי D10 AI. מדיניות פרטיות זו מסבירה כיצד אנו אוספים, משתמשים ומגנים על המידע האישי שלך.</p>
     
-    <h2 className="text-lg font-bold text-white">2. מידע שאנו אוספים</h2>
+    <h2 className="text-lg font-bold text-slate-900">2. מידע שאנו אוספים</h2>
     <p>אנו עשויים לאסוף את סוגי המידע הבאים:</p>
     <ul className="list-disc pr-6 space-y-1">
       <li>פרטי קשר: שם, כתובת דוא"ל, מספר טלפון (בעת יצירת קשר או הזמנה)</li>
@@ -995,7 +995,7 @@ const PrivacyPolicy = () => (
       <li>עוגיות וכלי מעקב: Meta Pixel, Google Analytics (בכפוף להסכמתך)</li>
     </ul>
     
-    <h2 className="text-lg font-bold text-white">3. מטרות השימוש במידע</h2>
+    <h2 className="text-lg font-bold text-slate-900">3. מטרות השימוש במידע</h2>
     <ul className="list-disc pr-6 space-y-1">
       <li>עיבוד הזמנות ומשלוחים</li>
       <li>מתן שירות לקוחות ותמיכה טכנית</li>
@@ -1004,7 +1004,7 @@ const PrivacyPolicy = () => (
       <li>ניתוח סטטיסטי ומגמות שימוש</li>
     </ul>
     
-    <h2 className="text-lg font-bold text-white">4. שיתוף מידע עם צדדים שלישיים</h2>
+    <h2 className="text-lg font-bold text-slate-900">4. שיתוף מידע עם צדדים שלישיים</h2>
     <p>אנו עשויים לשתף מידע עם ספקי שירות צד שלישי הנדרשים לתפעול העסק, כגון:</p>
     <ul className="list-disc pr-6 space-y-1">
       <li>Meta (Facebook) — לצורך פרסום ממוקד (Meta Pixel)</li>
@@ -1013,13 +1013,13 @@ const PrivacyPolicy = () => (
     </ul>
     <p>אנו לא מוכרים את המידע האישי שלך לצדדים שלישיים.</p>
     
-    <h2 className="text-lg font-bold text-white">5. תקופת שמירת המידע</h2>
+    <h2 className="text-lg font-bold text-slate-900">5. תקופת שמירת המידע</h2>
     <p>אנו שומרים מידע אישי כל עוד הוא נדרש למטרות שלשמן נאסף, או כנדרש על פי חוק. מידע הקשור לעסקאות יישמר לפחות 7 שנים לצורכי מס וחשבונאות.</p>
     
-    <h2 className="text-lg font-bold text-white">6. עוגיות (Cookies)</h2>
+    <h2 className="text-lg font-bold text-slate-900">6. עוגיות (Cookies)</h2>
     <p>האתר משתמש בעוגיות חיוניות לתפעול האתר ובעוגיות אנליטיות/שיווקיות (בכפוף להסכמתך). ניתן לשלוט בעוגיות דרך הגדרות הדפדפן.</p>
     
-    <h2 className="text-lg font-bold text-white">7. זכויותיך</h2>
+    <h2 className="text-lg font-bold text-slate-900">7. זכויותיך</h2>
     <p>בהתאם לחוק הגנת הפרטיות, התשמ"א-1981, עומדות לך הזכויות הבאות:</p>
     <ul className="list-disc pr-6 space-y-1">
       <li>עיון במידע האישי שלך</li>
@@ -1028,7 +1028,7 @@ const PrivacyPolicy = () => (
       <li>הסרה מרשימות תפוצה שיווקיות</li>
     </ul>
     
-    <h2 className="text-lg font-bold text-white">8. יצירת קשר</h2>
+    <h2 className="text-lg font-bold text-slate-900">8. יצירת קשר</h2>
     <p>לשאלות בנושא פרטיות או למימוש זכויותיך, ניתן לפנות אלינו בדוא"ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
   </LegalPage>
 );
@@ -1037,30 +1037,30 @@ const PrivacyPolicy = () => (
 
 const TermsOfUse = () => (
   <LegalPage title="תנאי שימוש">
-    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
-    <h2 className="text-lg font-bold text-white">1. כללי</h2>
+    <p className="text-slate-400 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-slate-900">1. כללי</h2>
     <p>ברוכים הבאים לאתר www.d10.store המופעל על ידי D10 ("החברה"). השימוש באתר ובמוצרים שלנו מהווה הסכמה לתנאים אלה.</p>
     
-    <h2 className="text-lg font-bold text-white">2. תיאור המוצר</h2>
+    <h2 className="text-lg font-bold text-slate-900">2. תיאור המוצר</h2>
     <p>D10 AI הוא מכשיר דיאגנוסטי לרכב המתחבר ליציאת OBD2 ומספק מידע על מצב הרכב באמצעות אפליקציה ייעודית.</p>
     <p className="text-yellow-400/80 font-medium">⚠️ חשוב: המוצר מספק מידע אינפורמטיבי בלבד ואינו מהווה תחליף לבדיקה מקצועית של רכב על ידי מוסכניק מוסמך. אין להסתמך על המוצר לצורך קבלת החלטות בטיחותיות.</p>
     
-    <h2 className="text-lg font-bold text-white">3. תאימות</h2>
+    <h2 className="text-lg font-bold text-slate-900">3. תאימות</h2>
     <p>המוצר תואם לרוב כלי הרכב המצוידים ביציאת OBD2 (1996 ומעלה). החברה אינה מתחייבת לתאימות מלאה עם כל דגם רכב. מומלץ לבדוק תאימות לפני הרכישה.</p>
     
-    <h2 className="text-lg font-bold text-white">4. רכישות ותשלומים</h2>
+    <h2 className="text-lg font-bold text-slate-900">4. רכישות ותשלומים</h2>
     <p>המחירים באתר כוללים מע"מ אלא אם צוין אחרת. החברה שומרת לעצמה את הזכות לעדכן מחירים. מחיר שאושר בעת ההזמנה הוא המחיר הקובע.</p>
     
-    <h2 className="text-lg font-bold text-white">5. הגבלת אחריות</h2>
+    <h2 className="text-lg font-bold text-slate-900">5. הגבלת אחריות</h2>
     <p>החברה אינה אחראית לנזקים ישירים או עקיפים הנובעים משימוש במוצר, לרבות נזקים לרכב, אובדן נתונים, או הסתמכות על מידע שסופק על ידי המוצר. השימוש במוצר הוא על אחריות המשתמש.</p>
     
-    <h2 className="text-lg font-bold text-white">6. קניין רוחני</h2>
+    <h2 className="text-lg font-bold text-slate-900">6. קניין רוחני</h2>
     <p>כל התכנים באתר, לרבות טקסטים, עיצובים, לוגואים ותוכנה, הם קניינה של D10 ואין להעתיקם ללא אישור.</p>
     
-    <h2 className="text-lg font-bold text-white">7. דין וסמכות שיפוט</h2>
+    <h2 className="text-lg font-bold text-slate-900">7. דין וסמכות שיפוט</h2>
     <p>תנאים אלה כפופים לחוקי מדינת ישראל. סמכות השיפוט הבלעדית תהא לבתי המשפט המוסמכים בישראל.</p>
     
-    <h2 className="text-lg font-bold text-white">8. יצירת קשר</h2>
+    <h2 className="text-lg font-bold text-slate-900">8. יצירת קשר</h2>
     <p>לשאלות בנוגע לתנאי השימוש: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
   </LegalPage>
 );
@@ -1069,11 +1069,11 @@ const TermsOfUse = () => (
 
 const AccessibilityStatement = () => (
   <LegalPage title="הצהרת נגישות">
-    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
-    <h2 className="text-lg font-bold text-white">מחויבות לנגישות</h2>
+    <p className="text-slate-400 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-slate-900">מחויבות לנגישות</h2>
     <p>D10 מחויבת להנגשת האתר והשירותים שלה לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998 ותקנות הנגישות.</p>
     
-    <h2 className="text-lg font-bold text-white">מה עשינו</h2>
+    <h2 className="text-lg font-bold text-slate-900">מה עשינו</h2>
     <ul className="list-disc pr-6 space-y-1">
       <li>שימוש ב-HTML סמנטי עם היררכיית כותרות נכונה</li>
       <li>תמיכה בניווט מקלדת מלא</li>
@@ -1084,10 +1084,10 @@ const AccessibilityStatement = () => (
       <li>טקסט חלופי לתמונות</li>
     </ul>
     
-    <h2 className="text-lg font-bold text-white">מגבלות ידועות</h2>
+    <h2 className="text-lg font-bold text-slate-900">מגבלות ידועות</h2>
     <p>ייתכן שחלק מהתכנים באתר אינם נגישים באופן מלא. אנו עובדים באופן שוטף לשיפור הנגישות.</p>
     
-    <h2 className="text-lg font-bold text-white">יצירת קשר בנושא נגישות</h2>
+    <h2 className="text-lg font-bold text-slate-900">יצירת קשר בנושא נגישות</h2>
     <p>נתקלתם בבעיית נגישות? נשמח לשמוע ולטפל. פנו אלינו בדוא"ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a></p>
   </LegalPage>
 );
@@ -1096,23 +1096,23 @@ const AccessibilityStatement = () => (
 
 const ReturnsCancellationPolicy = () => (
   <LegalPage title="מדיניות ביטולים והחזרות">
-    <p className="text-white/40 text-xs">עדכון אחרון: מרץ 2026</p>
-    <h2 className="text-lg font-bold text-white">1. זכות ביטול</h2>
+    <p className="text-slate-400 text-xs">עדכון אחרון: מרץ 2026</p>
+    <h2 className="text-lg font-bold text-slate-900">1. זכות ביטול</h2>
     <p>בהתאם לחוק הגנת הצרכן, התשמ"א-1981, הינך רשאי/ת לבטל עסקה תוך 14 ימים מיום קבלת המוצר או מיום קבלת מסמך הגילוי (המאוחר מביניהם), בתנאי שהמוצר לא נפגע ולא נעשה בו שימוש.</p>
     
-    <h2 className="text-lg font-bold text-white">2. תהליך ביטול</h2>
+    <h2 className="text-lg font-bold text-slate-900">2. תהליך ביטול</h2>
     <p>לביטול עסקה, יש לשלוח הודעה בדוא"ל ל: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a> עם פרטי ההזמנה. נאשר את קבלת הבקשה תוך 2 ימי עסקים.</p>
     
-    <h2 className="text-lg font-bold text-white">3. החזר כספי</h2>
+    <h2 className="text-lg font-bold text-slate-900">3. החזר כספי</h2>
     <p>ההחזר הכספי יבוצע תוך 14 ימים מקבלת בקשת הביטול, באמצעי התשלום המקורי. החברה רשאית לגבות דמי ביטול בשיעור של עד 5% ממחיר המוצר או 100 ש"ח, הנמוך מביניהם.</p>
     
-    <h2 className="text-lg font-bold text-white">4. החזרת המוצר</h2>
+    <h2 className="text-lg font-bold text-slate-900">4. החזרת המוצר</h2>
     <p>המוצר יוחזר באריזתו המקורית, תקין ושלם. עלויות משלוח ההחזרה יחולו על הלקוח, אלא אם המוצר התקבל פגום.</p>
     
-    <h2 className="text-lg font-bold text-white">5. מוצר פגום</h2>
+    <h2 className="text-lg font-bold text-slate-900">5. מוצר פגום</h2>
     <p>קיבלת מוצר פגום? פנה/י אלינו מיידית ב: <a href="mailto:support@d10.store" className="text-primary underline">support@d10.store</a> ונטפל בהחלפה או החזר מלא כולל עלויות משלוח.</p>
     
-    <h2 className="text-lg font-bold text-white">6. אחריות</h2>
+    <h2 className="text-lg font-bold text-slate-900">6. אחריות</h2>
     <p>המוצר מגיע עם אחריות יצרן כמפורט בעמוד המוצר. האחריות מכסה תקלות ייצור ואינה מכסה נזק שנגרם משימוש לא תקין.</p>
   </LegalPage>
 );
@@ -1268,17 +1268,17 @@ const MobileStickyBar = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[200] md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 safe-area-pb" dir="rtl">
+    <div className="fixed bottom-0 left-0 right-0 z-[200] md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-lg px-4 py-3 safe-area-pb" dir="rtl">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-white font-bold text-sm">D10 AI</div>
-          <div className="text-white/50 text-xs">החל מ-₪299 · משלוח חינם</div>
+          <div className="text-slate-900 font-bold text-sm">D10 AI</div>
+          <div className="text-slate-500 text-xs">החל מ-₪299 · משלוח חינם</div>
         </div>
         <a
           href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-2.5 bg-primary text-black font-bold text-sm rounded-lg hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap"
+          className="px-6 py-2.5 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary-dark transition-all active:scale-95 whitespace-nowrap"
         >
           קנה עכשיו
         </a>
@@ -1299,14 +1299,14 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 md:py-32 bg-black" dir="rtl">
+    <section id="faq" className="py-16 md:py-32 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6 max-w-3xl">
         <div className="text-center mb-12 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
             <HelpCircle size={12} /> שאלות נפוצות
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">שאלות ותשובות</h2>
-          <p className="text-white/50 font-light text-base">כל מה שצריך לדעת לפני הרכישה</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שאלות ותשובות</h2>
+          <p className="text-slate-500 font-light text-base">כל מה שצריך לדעת לפני הרכישה</p>
         </div>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
@@ -1316,14 +1316,14 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="border border-white/10 rounded-xl overflow-hidden"
+              className="border border-slate-200 rounded-xl overflow-hidden bg-white"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex justify-between items-center p-5 md:p-6 text-right hover:bg-white/[0.02] transition-colors"
+                className="w-full flex justify-between items-center p-5 md:p-6 text-right hover:bg-slate-50 transition-colors"
               >
-                <span className="text-white font-semibold text-base">{faq.question}</span>
-                <ChevronDown size={20} className={cn("text-white/40 transition-transform duration-300 shrink-0 mr-4", openIndex === i && "rotate-180")} />
+                <span className="text-slate-900 font-semibold text-base">{faq.question}</span>
+                <ChevronDown size={20} className={cn("text-slate-400 transition-transform duration-300 shrink-0 mr-4", openIndex === i && "rotate-180")} />
               </button>
               <AnimatePresence>
                 {openIndex === i && (
@@ -1334,7 +1334,7 @@ const FAQ = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="px-5 md:px-6 pb-5 md:pb-6 text-white/60 leading-relaxed text-base">{faq.answer}</p>
+                    <p className="px-5 md:px-6 pb-5 md:pb-6 text-slate-500 leading-relaxed text-base">{faq.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -1389,7 +1389,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black font-sans selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-white font-sans selection:bg-primary selection:text-white">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[300] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md">דלג לתוכן</a>
       <Navbar />
       
@@ -1404,7 +1404,7 @@ export default function App() {
             <Hero />
             
             {/* Stats Bar */}
-            <div className="bg-black py-12 border-y border-white/5 overflow-hidden">
+            <div className="bg-slate-50 py-12 border-y border-slate-200 overflow-hidden">
               <div className="container mx-auto px-6">
                 <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-24">
                   {[
@@ -1414,8 +1414,8 @@ export default function App() {
                     { label: "נהגים חכמים", value: "1,240+" }
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
-                      <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-white/40">{stat.label}</div>
+                      <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-slate-400">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -1428,16 +1428,16 @@ export default function App() {
             <HowItWorks />
 
             {/* Mid-page CTA */}
-            <section className="py-12 md:py-20 bg-gradient-to-b from-[#050505] to-black" dir="rtl">
+            <section className="py-12 md:py-20 bg-gradient-to-b from-slate-50 to-white" dir="rtl">
               <div className="container mx-auto px-6 text-center">
-                <p className="text-yellow-400 text-sm font-bold mb-3">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
-                <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">מוכן להתחיל?</h3>
-                <p className="text-white/50 text-base mb-6 max-w-lg mx-auto">החל מ-₪299. משלוח חינם. 30 יום החזרה.</p>
+                <p className="text-yellow-500 text-sm font-bold mb-3">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
+                <h3 className="text-2xl md:text-4xl font-bold text-slate-900 mb-4">מוכן להתחיל?</h3>
+                <p className="text-slate-500 text-base mb-6 max-w-lg mx-auto">החל מ-₪299. משלוח חינם. 30 יום החזרה.</p>
                 <a
                   href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-10 py-4 bg-primary text-black font-bold text-base rounded-lg hover:bg-primary/90 transition-all active:scale-95 min-h-[48px]"
+                  className="inline-block px-10 py-4 bg-primary text-white font-bold text-base rounded-lg hover:bg-primary-dark transition-all active:scale-95 min-h-[48px]"
                 >
                   קנה עכשיו — ₪299
                 </a>
@@ -1450,7 +1450,7 @@ export default function App() {
             <FullScreenImage />
             
             {/* Secondary Showcase */}
-            <section className="py-16 md:py-32 bg-black" dir="rtl">
+            <section className="py-16 md:py-32 bg-white" dir="rtl">
               <div className="container mx-auto px-6">
                 <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
                   <motion.div
@@ -1459,10 +1459,10 @@ export default function App() {
                     viewport={{ once: true }}
                     transition={{ duration: 1 }}
                   >
-                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 mb-6 md:mb-8 tracking-tight">
                       מערכת סגורה. תוצאות פתוחות.
                     </h2>
-                    <p className="text-white/50 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
+                    <p className="text-slate-500 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
                       D10 AI אינה אפליקציה שעובדת עם כל מתאם. האפליקציה פועלת אך ורק עם מתאם D10 AI המקורי — כמו שאפל ווץ' עובד רק עם אייפון. המערכת הסגורה הזאת היא מה שמאפשרת לנו לספק דיוק, מהירות ועומק AI שאף פתרון גנרי לא יכול להגיע אליו.
                     </p>
                     <div className="space-y-6">
@@ -1474,11 +1474,11 @@ export default function App() {
                       ].map((item, i) => (
                         <div key={i} className="flex gap-4">
                           <div className="mt-1">
-                            <div className="w-2 h-2 rounded-full bg-white" />
+                            <div className="w-2 h-2 rounded-full bg-primary" />
                           </div>
                           <div>
-                            <h5 className="text-white font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h5>
-                            <p className="text-white/40 text-xs font-light">{item.desc}</p>
+                            <h5 className="text-slate-900 font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h5>
+                            <p className="text-slate-400 text-xs font-light">{item.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -1495,7 +1495,7 @@ export default function App() {
                     <img 
                       src="/app-mockup.jpg" 
                       alt="ממשק אפליקציית D10 AI לדיאגנוסטיקת רכב" 
-                      className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-white/10 shadow-2xl"
+                      className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-slate-200 shadow-2xl"
                       referrerPolicy="no-referrer"
                     />
                   </motion.div>
@@ -1542,31 +1542,31 @@ export default function App() {
             </section>
 
             {/* Newsletter Signup */}
-            <section className="py-12 md:py-20 bg-[#050505] border-t border-white/5" dir="rtl">
+            <section className="py-12 md:py-20 bg-slate-50 border-t border-slate-200" dir="rtl">
               <div className="container mx-auto px-6 text-center max-w-xl">
                 <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">עדכונים וטיפים לרכב</h3>
-                <p className="text-white/50 text-sm mb-6">הירשמו לניוזלטר וקבלו טיפים לתחזוקת הרכב, עדכוני מוצר, ומבצעים בלעדיים.</p>
+                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">עדכונים וטיפים לרכב</h3>
+                <p className="text-slate-500 text-sm mb-6">הירשמו לניוזלטר וקבלו טיפים לתחזוקת הרכב, עדכוני מוצר, ומבצעים בלעדיים.</p>
                 <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 max-w-md mx-auto">
                   <input 
                     type="email" 
                     placeholder="האימייל שלך" 
-                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-primary/50 min-h-[48px]"
+                    className="flex-1 px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 text-sm placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 min-h-[48px]"
                   />
                   <button 
                     type="submit" 
-                    className="px-6 py-3 bg-primary text-black font-bold text-sm rounded-lg hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap min-h-[48px]"
+                    className="px-6 py-3 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary-dark transition-all active:scale-95 whitespace-nowrap min-h-[48px]"
                   >
                     הירשמו
                   </button>
                 </form>
-                <p className="text-white/20 text-xs mt-3">ללא ספם. ביטול בכל עת.</p>
+                <p className="text-slate-300 text-xs mt-3">ללא ספם. ביטול בכל עת.</p>
               </div>
             </section>
 
             {/* Disclaimer */}
-            <div className="bg-[#050505] py-6 px-6 text-center" dir="rtl">
-              <p className="text-white/30 text-xs max-w-2xl mx-auto leading-relaxed">
+            <div className="bg-slate-50 py-6 px-6 text-center" dir="rtl">
+              <p className="text-slate-300 text-xs max-w-2xl mx-auto leading-relaxed">
                 * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
               </p>
             </div>

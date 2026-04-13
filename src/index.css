@@ -3,14 +3,14 @@
 
 @theme {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --color-primary: #3B82F6;
-  --color-primary-dark: #2563EB;
+  --color-primary: #2563EB;
+  --color-primary-dark: #1D4ED8;
   --color-accent: #10B981;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #050505;
+  background-color: #ffffff;
   overflow-x: hidden;
   font-size: 16px;
 }
@@ -18,8 +18,8 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
-  background-color: #050505;
+  color: #0F172A;
+  background-color: #ffffff;
   overflow-x: hidden;
   font-size: 16px;
   line-height: 1.6;
@@ -40,17 +40,23 @@ p, li {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
 }
 
-/* Apple-style blur */
+/* Glass effects */
 .glass {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
@@ -61,7 +67,7 @@ p, li {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
-/* Tesla-style buttons */
+/* Buttons */
 .btn-tesla {
   @apply px-12 py-3 rounded-md font-medium transition-all duration-300 text-sm uppercase tracking-widest;
 }
@@ -71,6 +77,11 @@ p, li {
 }
 
 .btn-tesla-secondary {
+  @apply bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 active:scale-95;
+}
+
+/* Dark section buttons (hero/footer) */
+.btn-tesla-secondary-dark {
   @apply bg-white/10 text-white backdrop-blur-md border border-white/10 hover:bg-white/20 active:scale-95;
 }
 
@@ -108,6 +119,6 @@ body.a11y-highlight-links a {
   text-decoration: underline !important;
   text-decoration-thickness: 2px !important;
   text-underline-offset: 4px !important;
-  color: #ffeb3b !important;
+  color: #2563EB !important;
   font-weight: 800 !important;
 }
