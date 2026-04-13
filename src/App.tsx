@@ -70,8 +70,10 @@ const Navbar = () => {
   return (
     <>
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-12 py-4",
-      isScrolled ? "glass border-b border-slate-200 shadow-sm" : "bg-transparent"
+      "fixed z-[100] transition-all duration-500 px-6 md:px-12 py-4",
+      isScrolled 
+        ? "top-3 left-4 right-4 glass border border-slate-200 shadow-lg rounded-2xl" 
+        : "top-0 left-0 right-0 bg-transparent"
     )} dir="rtl">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         <a
@@ -233,7 +235,7 @@ const Hero = () => {
           href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-tesla btn-tesla-primary w-full sm:w-auto text-center px-8 sm:px-12"
+          className="btn-tesla btn-tesla-primary cta-glow w-full sm:w-auto text-center px-8 sm:px-12"
         >
           הזמן עכשיו — החל מ-₪299
         </a>
@@ -344,15 +346,15 @@ const FeatureSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="group"
+              className="group cursor-pointer"
             >
               <div className={cn(
-                "w-11 h-11 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-6 transition-all duration-500 border",
+                "w-11 h-11 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-6 transition-all duration-200 border group-hover:scale-110",
                 f.color
               )}>
                 {f.icon}
               </div>
-              <h4 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-4 tracking-tight">{f.title}</h4>
+              <h4 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-4 tracking-tight group-hover:text-primary transition-colors duration-200">{f.title}</h4>
               <p className="text-slate-500 font-light leading-relaxed text-sm">
                 {f.desc}
               </p>
@@ -381,7 +383,7 @@ const CompareSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="p-6 md:p-8 rounded-2xl border border-red-200 bg-red-50"
+            className="p-6 md:p-8 rounded-2xl border border-red-200 bg-red-50 hover:shadow-lg transition-all duration-200 cursor-pointer"
           >
             <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-4">בלי D10</div>
             <h3 className="text-xl font-bold text-slate-900 mb-6">לחץ ואי ודאות</h3>
@@ -406,7 +408,7 @@ const CompareSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="p-6 md:p-8 rounded-2xl border border-primary/20 bg-primary/[0.05]"
+            className="p-6 md:p-8 rounded-2xl border border-primary/20 bg-primary/[0.05] hover:shadow-lg transition-all duration-200 cursor-pointer"
           >
             <div className="text-xs font-bold uppercase tracking-widest text-primary mb-4">עם D10 AI</div>
             <h3 className="text-xl font-bold text-slate-900 mb-6">שליטה מלאה</h3>
@@ -467,10 +469,10 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.15 }}
-              className="text-center md:text-right"
+              className="text-center md:text-right cursor-pointer group"
             >
-              <div className="text-5xl md:text-7xl font-black text-primary/10 mb-4 leading-none">{step.num}</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+              <div className="text-5xl md:text-7xl font-black text-primary/10 mb-4 leading-none group-hover:text-primary/20 transition-colors duration-200">{step.num}</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors duration-200">{step.title}</h3>
               <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
@@ -538,7 +540,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all flex flex-col"
+              className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col"
             >
               <div className="text-yellow-400 text-sm mb-4">★★★★★</div>
               <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">"{review.text}"</p>
@@ -768,8 +770,9 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
               className={cn(
-                "p-6 sm:p-8 md:p-12 rounded-2xl border flex flex-col items-center text-center transition-all duration-500 relative",
+                "p-6 sm:p-8 md:p-12 rounded-2xl border flex flex-col items-center text-center transition-all duration-200 relative cursor-pointer hover:-translate-y-2 hover:shadow-xl",
                 b.color,
+                b.highlight && "pricing-highlight",
                 !b.highlight && "bg-slate-50 hover:border-primary/30"
               )}
             >
@@ -805,7 +808,7 @@ const Pricing = () => {
                 rel={b.paymentUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className={cn(
                   "w-full py-4 rounded-md font-bold text-sm uppercase tracking-widest transition-all duration-300 min-h-[48px] flex items-center justify-center",
-                  b.highlight ? "bg-primary text-white hover:bg-primary-dark" : "bg-slate-900 text-white hover:bg-slate-800"
+                  b.highlight ? "bg-primary text-white hover:bg-primary-dark cta-glow shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30" : "bg-slate-900 text-white hover:bg-slate-800"
                 )}
               >
                 {b.cta}
@@ -820,7 +823,7 @@ const Pricing = () => {
             { icon: <RotateCcw size={16} />, text: "30 \u05d9\u05d5\u05dd \u05dc\u05d4\u05d7\u05d6\u05e8\u05d4" },
             { icon: <ShieldCheck size={16} />, text: "\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea \u05de\u05dc\u05d0\u05d4" },
           ].map((item, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm">
+            <div key={i} className="flex items-center gap-2 text-sm trust-shimmer px-3 py-1 rounded-full">
               {item.icon}
               <span>{item.text}</span>
             </div>
@@ -1437,7 +1440,7 @@ export default function App() {
                   href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-10 py-4 bg-primary text-white font-bold text-base rounded-lg hover:bg-primary-dark transition-all active:scale-95 min-h-[48px]"
+                  className="inline-block px-10 py-4 bg-primary text-white font-bold text-base rounded-lg hover:bg-primary-dark transition-all active:scale-95 min-h-[48px] cta-glow shadow-lg shadow-primary/20 hover:shadow-xl"
                 >
                   קנה עכשיו — ₪299
                 </a>
@@ -1528,7 +1531,7 @@ export default function App() {
                     href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block"
+                    className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block cta-glow"
                   >
                     הזמן את ה-D10 AI שלך
                   </a>
