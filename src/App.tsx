@@ -218,7 +218,7 @@ const Hero = () => {
             סוף ללחץ <span className="text-primary">לפני המוסך.</span>
           </h1>
           <p className="text-sm md:text-xl text-white/70 font-light tracking-wide mb-6 md:mb-8 max-w-2xl mx-auto px-2">
-            מערכת AI מקורית — מתאם חומרה ייחודי ואפליקציית אייפון שנבנו יחד מהיסוד. מתחברת לרכב שלך, קוראת את הנתונים בזמן אמת, <span className="text-white">ומסבירה לך בדיוק מה קורה</span> — לפני שאתה מוציא שקל אחד.
+            מתחברת לרכב שלך, קוראת את הנתונים בזמן אמת, <span className="text-white">ומסבירה לך בדיוק מה קורה</span> — לפני שאתה מוציא שקל אחד.
           </p>
         </motion.div>
 
@@ -234,10 +234,10 @@ const Hero = () => {
             rel="noopener noreferrer"
             className="btn-tesla btn-tesla-primary cta-glow w-full sm:w-auto text-center px-8 sm:px-12"
           >
-            הזמן עכשיו — החל מ-₪299
+            הזמן עכשיו — ₪299
           </a>
-          <a href="#features" className="btn-tesla btn-tesla-secondary-dark w-full sm:w-auto text-center px-8 sm:px-12">
-            למד עוד
+          <a href="mailto:support@d10.store" className="btn-tesla btn-tesla-secondary-dark w-full sm:w-auto text-center px-8 sm:px-12">
+            לפרטים נוספים
           </a>
         </motion.div>
       </div>
@@ -417,7 +417,7 @@ const CompareSection = () => {
             <div className="space-y-4">
               {[
                 "קרא קוד תקלה בשניות ישירות מהאייפון",
-                "AI: מה הבעיה, רמת חומרה, בטוח לנסוע?",
+                "AI מסביר: מה הבעיה, כמה דחוף, בטוח לנסוע?",
                 "הערכת עלות תיקון לפני שנכנסים למוסך",
                 "מגיע לטכנאי עם הדוח — לא עם תמימות"
               ].map((item, i) => (
@@ -438,32 +438,35 @@ const HowItWorks = () => {
   const steps = [
     {
       num: "01",
-      title: "חבר את המתאם",
-      desc: "חבר את מתאם D10 AI לפורט ה-OBD2 מתחת לדאשבורד — 5 שניות. המתאם נשאר מחובר לתמיד, לא צריך להוציא אותו. אין כלים, אין התקנות."
+      title: "חבר לרכב",
+      desc: "חבר את המתאם לשקע מתחת להגה — לוקח 5 שניות. נשאר מחובר, לא צריך להוציא.",
+      icon: <Cpu className="w-6 h-6" />
     },
     {
       num: "02",
-      title: "פתח את D10 AI",
-      desc: "האפליקציה מאתרת את המתאם הייחודי דרך בלוטות' אוטומטית. קשירה בשנייה. מציגת דאשבורד חי, VIN ופרטי הרכב אוטומטית בללי הקלדה."
+      title: "פתח את האפליקציה",
+      desc: "האפליקציה מזהה את המתאם אוטומטית ומציגה את פרטי הרכב שלך מיד.",
+      icon: <Smartphone className="w-6 h-6" />
     },
     {
       num: "03",
-      title: "הבן את הרכב שלך",
-      desc: "הפעל סריקת תקלות מלאה. ה-AI מנתח כל קוד לפי הרכב המדויק שלך: מה זה, כמה דחוף, כמה יעלה התיקון, ומה לעשות עכשיו."
+      title: "קבל תשובות",
+      desc: "סריקה מלאה בלחיצה. תוצאות בעברית פשוטה — מה הבעיה, כמה דחוף, ומה לעשות.",
+      icon: <Search className="w-6 h-6" />
     }
   ];
 
   return (
-    <section id="how" className="py-16 md:py-32 bg-slate-50" dir="rtl">
+    <section id="how" className="py-16 md:py-24 bg-slate-50" dir="rtl">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12 md:mb-20">
+        <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
             איך זה עובד
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">שלושה שלבים. זהו.</h2>
-          <p className="text-slate-500 text-base max-w-xl mx-auto">אפילו סבתא שלך יכולה. בלי ידע טכני, בלי כלים מיוחדים.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">פשוט. מהיר. בלי ידע טכני.</h2>
+          <p className="text-slate-500 text-base max-w-xl mx-auto">שלושה שלבים פשוטים ואתה יודע בדיוק מה קורה ברכב שלך.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 md:gap-12 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-5xl mx-auto">
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -471,13 +474,29 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.15 }}
-              className="text-center md:text-right cursor-pointer group"
+              className="text-center group"
             >
-              <div className="text-5xl md:text-7xl font-black text-primary/10 mb-4 leading-none group-hover:text-primary/20 transition-colors duration-200">{step.num}</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors duration-200">{step.title}</h3>
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                {step.icon}
+              </div>
+              <div className="text-4xl font-black text-primary/15 mb-2 leading-none">{step.num}</div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
               <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Safety note + CTA */}
+        <div className="text-center mt-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
+            <ShieldCheck size={16} />
+            לא מזיק לרכב — פלאג אנד פליי בטוח לחלוטין. רק קורא נתונים.
+          </div>
+          <div className="block">
+            <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">
+              יש שאלות? דברו איתנו לפני הרכישה →
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -814,9 +833,12 @@ const Pricing = () => {
   return (
     <section id="pricing" className="py-16 md:py-32 bg-white" dir="rtl">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-10 md:mb-20">
+        <div className="text-center mb-10 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs font-bold uppercase tracking-widest mb-4 animate-pulse">
+            🔥 מחיר השקה — לזמן מוגבל
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">בחר את החבילה שלך</h2>
-          <p className="text-slate-500 font-light text-base mb-4">מחירים שקופים. ללא דמי מנוי. תשלום חד-פעמי בלבד.</p>
+          <p className="text-slate-500 font-light text-base mb-2">תשלום חד-פעמי. ללא מנוי. משלוח חינם.</p>
           <p className="text-yellow-400 text-sm font-bold">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
         </div>
 
@@ -876,17 +898,27 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-10 md:mt-16 text-slate-400">
-          {[
-            { icon: <Clock size={16} />, text: "\u05de\u05e9\u05dc\u05d5\u05d7 \u05de\u05d4\u05d9\u05e8" },
-            { icon: <RotateCcw size={16} />, text: "30 \u05d9\u05d5\u05dd \u05dc\u05d4\u05d7\u05d6\u05e8\u05d4" },
-            { icon: <ShieldCheck size={16} />, text: "\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea \u05de\u05dc\u05d0\u05d4" },
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm trust-shimmer px-3 py-1 rounded-full">
-              {item.icon}
-              <span>{item.text}</span>
-            </div>
-          ))}
+        {/* Trust Process Steps */}
+        <div className="max-w-2xl mx-auto mt-12 md:mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { icon: <Lock size={20} />, title: "תשלום מאובטח", desc: "הצפנת SSL 256-bit" },
+              { icon: <Clock size={20} />, title: "משלוח חינם", desc: "תוך 3 ימי עסקים" },
+              { icon: <RotateCcw size={20} />, title: "30 יום החזרה", desc: "החזר כספי מלא" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50 border border-slate-100">
+                <div className="text-primary mb-2">{item.icon}</div>
+                <div className="text-slate-900 font-bold text-sm">{item.title}</div>
+                <div className="text-slate-400 text-xs">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-slate-500 text-sm mb-2">הצטרפו ל-1,240+ נהגים מרוצים</p>
+            <a href="mailto:support@d10.store" className="text-primary text-sm font-bold hover:underline">
+              צריך עזרה בבחירה? דברו איתנו →
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1464,115 +1496,54 @@ export default function App() {
         <>
           <main id="main-content" role="main">
             <Hero />
-            
-            {/* Stats Bar */}
-            <div className="bg-slate-50 py-12 border-y border-slate-200 overflow-hidden">
-              <div className="container mx-auto px-6">
-                <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-6 md:gap-24">
+            <HowItWorks />
+            <CompareSection />
+            <Pricing />
+            <CompatibilityChecker />
+
+            {/* FAQ - Inline */}
+            <section id="faq" className="py-16 md:py-24 bg-white" dir="rtl">
+              <div className="container mx-auto px-6 max-w-3xl">
+                <div className="text-center mb-10 md:mb-16">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest mb-4">
+                    <HelpCircle size={12} /> שאלות נפוצות
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">יש שאלות? יש תשובות.</h2>
+                </div>
+                <div className="space-y-3">
                   {[
-                    { label: "תאימות לרכבים", value: "99%" },
-                    { label: "קודי תקלות במאגר", value: "3M+" },
-                    { label: "חיבור תוך שניות", value: "5שנ׳" },
-                    { label: "נהגים חכמים", value: "1,240+" }
-                  ].map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-slate-400">{stat.label}</div>
-                    </div>
+                    { q: "האם D10 יכול להזיק לרכב?", a: "ממש לא. D10 AI רק קורא נתונים מהמחשב של הרכב — בדיוק כמו שמוסך עושה. אין גישת כתיבה, אין סיכון. מאושר לכל רכב מ-1996." },
+                    { q: "מה קורה אחרי שאני מזמין?", a: "תקבל את D10 AI תוך 3 ימי עסקים. תחבר את המתאם לשקע מתחת להגה (5 שניות), תוריד את האפליקציה, ותתחיל לסרוק. הכל אוטומטי." },
+                    { q: "זה עובד על הרכב שלי?", a: "כמעט בוודאות. D10 AI תואם לכל רכב עם יציאת OBD2 — כמעט כל רכב פרטי מ-1996 ומעלה. טויוטה, יונדאי, קיא, BMW, מזדה, ועוד אלפי דגמים." },
+                    { q: "אני צריך ידע טכני?", a: "בכלל לא. האפליקציה מסבירה הכל בעברית פשוטה — מה הבעיה, כמה זה דחוף, ומה לעשות. בנינו את זה למי שלא מבין במכוניות." },
+                    { q: "מה ההבדל בין D10 לבדיקה במוסך?", a: "בדיקת מחשב במוסך עולה 80-200 ₪ לכל פעם. D10 AI נותן את אותה בדיקה בחינם, בלי הגבלה, ישר מהנייד — בכל מקום ובכל זמן." },
+                    { q: "יש מנוי חודשי?", a: "לא. תשלום חד-פעמי בלבד. אין מנוי, אין עלויות נוספות. מחיר השקה — ₪299 עם משלוח חינם." },
+                    { q: "מה אם אני לא מרוצה?", a: "30 יום להחזרה מלאה, בלי שאלות. אם לא חסכת כסף בביקור הראשון במוסך — נחזיר לך את הכסף." },
+                  ].map((item, i) => (
+                    <details key={i} className="group border border-slate-200 rounded-xl overflow-hidden hover:border-primary/30 transition-colors">
+                      <summary className="flex items-center justify-between p-5 cursor-pointer text-slate-900 font-bold text-sm hover:text-primary transition-colors">
+                        {item.q}
+                        <ChevronDown size={18} className="text-slate-400 group-open:rotate-180 transition-transform shrink-0 mr-4" />
+                      </summary>
+                      <div className="px-5 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                        {item.a}
+                      </div>
+                    </details>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            <ProductShowcase />
-            <CompareSection />
-            <FeatureSection />
-            <HowItWorks />
-
-            {/* Mid-page CTA */}
-            <section className="py-12 md:py-20 bg-gradient-to-b from-slate-50 to-white" dir="rtl">
-              <div className="container mx-auto px-6 text-center">
-                <p className="text-yellow-500 text-sm font-bold mb-3">★★★★★ 4.9/5 — 1,240+ נהגים מרוצים</p>
-                <h3 className="text-2xl md:text-4xl font-bold text-slate-900 mb-4">מוכן להתחיל?</h3>
-                <p className="text-slate-500 text-base mb-6 max-w-lg mx-auto">החל מ-₪299. משלוח חינם. 30 יום החזרה.</p>
-                <a
-                  href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-10 py-4 bg-primary text-white font-bold text-base rounded-lg hover:bg-primary-dark transition-all active:scale-95 min-h-[48px] cta-glow shadow-lg shadow-primary/20 hover:shadow-xl"
-                >
-                  קנה עכשיו — ₪299
-                </a>
+                <div className="text-center mt-8">
+                  <a href="mailto:support@d10.store" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+                    <Mail size={16} /> עוד שאלות? דברו איתנו
+                  </a>
+                </div>
               </div>
             </section>
 
             <Testimonials />
-            <TechnicalSpecs />
-            <CompatibilityChecker />
-            <FullScreenImage />
-            
-            {/* Secondary Showcase */}
-            <section className="py-16 md:py-32 bg-white" dir="rtl">
-              <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                  >
-                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 mb-6 md:mb-8 tracking-tight">
-                      מערכת סגורה. תוצאות פתוחות.
-                    </h2>
-                    <p className="text-slate-500 font-light leading-relaxed text-base md:text-lg mb-8 md:mb-10">
-                      D10 AI אינה אפליקציה שעובדת עם כל מתאם. האפליקציה פועלת אך ורק עם מתאם D10 AI המקורי — כמו שאפל ווץ' עובד רק עם אייפון. המערכת הסגורה הזאת היא מה שמאפשרת לנו לספק דיוק, מהירות ועומק AI שאף פתרון גנרי לא יכול להגיע אליו.
-                    </p>
-                    <div className="space-y-6">
-                      {[
-                        { title: "AI שמנתח לפי הרכב שלך", desc: "לא קוד גנרי — ניתוח מלא לפי דגם, שנת ייצור ונתוני חיישנים חיים. ספציפי לרכב שלך בלבד." },
-                        { title: "VIN אוטומטי + פרטי רכב מלאים", desc: "D10 AI קורא VIN ישירות מה-ECU ומביא דגם, שנה, צבע, סוג דלק ותאריך טסט — בלי הקלדה." },
-                        { title: "אנציקלופדיית נורות דאשבורד", desc: "כל נורת אזהרה מוסברת — רמת חומרה, מה המשמעות, ומה לעשות עכשיו. עובד גם ללא אינטרנט." },
-                        { title: "ניהול מספר רכבים", desc: "סנכרן מספר יחידות D10 AI לחשבון אחד. מושלם לחבילות המשפחה והאולטימייט." }
-                      ].map((item, i) => (
-                        <div key={i} className="flex gap-4">
-                          <div className="mt-1">
-                            <div className="w-2 h-2 rounded-full bg-primary" />
-                          </div>
-                          <div>
-                            <h5 className="text-slate-900 font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h5>
-                            <p className="text-slate-400 text-xs font-light">{item.desc}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                    className="relative"
-                  >
-                    <img 
-                      src="/app-mockup.jpg" 
-                      alt="ממשק אפליקציית D10 AI לדיאגנוסטיקת רכב" 
-                      className="w-full max-w-xs sm:max-w-sm mx-auto rounded-[2rem] sm:rounded-[3rem] border border-slate-200 shadow-2xl"
-                      referrerPolicy="no-referrer"
-                    />
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-
-            <Pricing />
-            <FAQ />
 
             {/* Final CTA */}
-            <section className="py-20 md:py-40 bg-primary text-white text-center relative overflow-hidden" dir="rtl">
+            <section className="py-20 md:py-32 bg-primary text-white text-center relative overflow-hidden" dir="rtl">
               <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary opacity-90" />
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-              
               <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -1580,56 +1551,38 @@ export default function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 1 }}
                 >
-                  <h2 className="text-3xl sm:text-5xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tighter">
-                    העתיד של הרכב שלך <br className="hidden md:inline" /> מתחיל כאן.
+                  <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 tracking-tighter">
+                    מוכן לחסוך אלפי שקלים?
                   </h2>
-                  <p className="text-white/80 text-base sm:text-xl md:text-2xl mb-8 md:mb-12 max-w-2xl mx-auto font-light px-2">
-                    הצטרף למהפכת הדיאגנוסטיקה החכמה עם D10 AI.
+                  <p className="text-white/80 text-base sm:text-xl mb-8 max-w-xl mx-auto font-light">
+                    הצטרף ל-1,240+ נהגים שכבר מגיעים למוסך עם ידע — לא עם תמימות.
                   </p>
-                  <a
-                    href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-12 py-5 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-black/10 inline-block cta-glow"
-                  >
-                    הזמן את ה-D10 AI שלך
-                  </a>
-                  <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] font-bold uppercase tracking-widest text-white/60">
-                    <div className="flex items-center gap-2"><Clock size={14} /> משלוח מהיר</div>
-                    <div className="flex items-center gap-2"><Award size={14} /> אחריות מלאה</div>
-                    <div className="flex items-center gap-2"><RotateCcw size={14} /> 30 יום החזרה</div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a
+                      href="https://pay.hyp.co.il/cgi-bin/yaadpay/yaadpay3ds.pl?Amount=299&Coin=1&FixTash=False&Info=D10AI&Masof=4502254941&MoreData=True&PageLang=HEB&Postpone=False&Pritim=True&ShowEngTashText=True&Tash=1&UTF8out=True&action=pay&freq=1&heshDesc=%5BD10AI~D10AI~1~299%5D&sendemail=True&tmp=3&signature=0994d7892e98fc94bc6b7ed74da8b493199690c2fb39d11d58cbd9724d4d989c"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-10 py-4 bg-white text-primary rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-xl cta-glow"
+                    >
+                      הזמן עכשיו — ₪299
+                    </a>
+                    <a href="mailto:support@d10.store" className="text-white/70 font-medium text-sm hover:text-white transition-colors underline underline-offset-4">
+                      לפרטים נוספים →
+                    </a>
+                  </div>
+                  <div className="mt-8 flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-white/50">
+                    <div className="flex items-center gap-2"><Check size={14} /> משלוח חינם</div>
+                    <div className="flex items-center gap-2"><RotateCcw size={14} /> 30 יום החזרה מלאה</div>
+                    <div className="flex items-center gap-2"><ShieldCheck size={14} /> תשלום מאובטח</div>
                   </div>
                 </motion.div>
-              </div>
-            </section>
-
-            {/* Newsletter Signup */}
-            <section className="py-12 md:py-20 bg-slate-50 border-t border-slate-200" dir="rtl">
-              <div className="container mx-auto px-6 text-center max-w-xl">
-                <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
-                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">עדכונים וטיפים לרכב</h3>
-                <p className="text-slate-500 text-sm mb-6">הירשמו לניוזלטר וקבלו טיפים לתחזוקת הרכב, עדכוני מוצר, ומבצעים בלעדיים.</p>
-                <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 max-w-md mx-auto">
-                  <input 
-                    type="email" 
-                    placeholder="האימייל שלך" 
-                    className="flex-1 px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 text-sm placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 min-h-[48px]"
-                  />
-                  <button 
-                    type="submit" 
-                    className="px-6 py-3 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary-dark transition-all active:scale-95 whitespace-nowrap min-h-[48px]"
-                  >
-                    הירשמו
-                  </button>
-                </form>
-                <p className="text-slate-300 text-xs mt-3">ללא ספם. ביטול בכל עת.</p>
               </div>
             </section>
 
             {/* Disclaimer */}
             <div className="bg-slate-50 py-6 px-6 text-center" dir="rtl">
               <p className="text-slate-300 text-xs max-w-2xl mx-auto leading-relaxed">
-                * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
+                * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ. כל שמות המותגים והלוגואים הם סימנים מסחריים של בעליהם.
               </p>
             </div>
           </main>
