@@ -65,10 +65,11 @@ export default function App() {
       ) : (
         <>
           <main id="main-content" role="main">
-            <Hero />
-            <PainPoints />
-            <SolutionOverview />
-            <FeatureDeepDive />
+            <Hero>
+              <PainPoints />
+              <SolutionOverview />
+              <FeatureDeepDive />
+            </Hero>
             <HowItWorks />
             <CompatibilityChecker />
             <Pricing />

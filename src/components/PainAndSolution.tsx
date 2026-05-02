@@ -11,20 +11,20 @@ export const PainPoints = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-warm" dir="rtl">
+    <section className="py-20 md:py-28 bg-transparent" dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-danger text-xs font-semibold uppercase tracking-[0.2em] mb-3">הבעיה</p>
-          <h2 className="text-3xl md:text-5xl font-black text-surface-dark tracking-tight leading-tight">כל נהג מכיר<br/>את הסיוט הזה.</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">כל נהג מכיר<br/>את הסיוט הזה.</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {pains.map((p, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }} className="pain-card group cursor-pointer">
+            <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }} className="card-dark group cursor-pointer p-6">
               <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-lg bg-danger/8 flex items-center justify-center text-danger shrink-0 mt-0.5 group-hover:bg-danger group-hover:text-white transition-colors">{p.icon}</div>
+                <div className="w-9 h-9 rounded-lg bg-danger/20 flex items-center justify-center text-danger shrink-0 mt-0.5 group-hover:bg-danger group-hover:text-white transition-colors">{p.icon}</div>
                 <div>
-                  <h3 className="text-sm font-bold text-surface-dark mb-1">{p.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
+                  <h3 className="text-sm font-bold text-white mb-1">{p.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             </motion.div>
@@ -36,7 +36,7 @@ export const PainPoints = () => {
 };
 
 export const SolutionOverview = () => (
-  <section className="py-20 md:py-28 bg-dark" dir="rtl">
+  <section className="py-20 md:py-28 bg-transparent" dir="rtl">
     <div className="max-w-5xl mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
