@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Check, ShieldCheck, RotateCcw, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn, SOLO_PAYMENT_URL } from '../utils';
@@ -49,41 +49,119 @@ export const Navbar = () => {
   );
 };
 
-export const Hero = () => (
-  <section className="relative min-h-[100svh] flex flex-col bg-dark overflow-hidden" dir="rtl">
-    <div className="absolute inset-0">
-      <img src="/hero-product.jpg" alt="" className="w-full h-full object-cover opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-b from-surface-dark/90 via-surface-dark/60 to-surface-dark" />
-    </div>
-
-    <div className="flex-grow flex items-center">
-      <div className="container mx-auto px-6 relative z-10 max-w-4xl">
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
-          <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-6">Smart Car Diagnostics</p>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
-            הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
-          </h1>
-          <p className="text-white/40 text-base md:text-lg max-w-md mb-8 leading-relaxed">צ'יפ OBD-II + אפליקציה + AI בעברית פשוטה. לדעת מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">הזמן עכשיו — ₪299</a>
-            <a href="#features" className="btn-outline border-white/20 text-white/70 hover:text-white hover:border-white/40 text-center">מה בפנים ↓</a>
-          </div>
-        </motion.div>
-      </div>
-    </div>
-
-    <div className="container mx-auto px-6 relative z-10 pb-8">
-      <div className="flex flex-wrap gap-6 text-white/25 text-xs font-medium">
-        {[
-          { icon: <Check size={12} />, t: "משלוח חינם" },
-          { icon: <RotateCcw size={12} />, t: "30 יום החזרה" },
-          { icon: <ShieldCheck size={12} />, t: "כל רכב מ-1996" },
-          { icon: <Lock size={12} />, t: "AES-256" },
-        ].map((i, idx) => (
-          <div key={idx} className="flex items-center gap-2"><span className="text-primary">{i.icon}</span>{i.t}</div>
-        ))}
-      </div>
-    </div>
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/15 animate-bounce"><ChevronDown size={28} strokeWidth={1} /></div>
-  </section>
+const FRAME_COUNT = 121;
+const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) =>
+  `/frames/frame${String(i + 1).padStart(4, '0')}.jpg`
 );
+
+export const Hero = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const currentFrameRef = useRef(0);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const section = sectionRef.current;
+    if (!canvas || !section) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const drawFrame = (index: number) => {
+      const img = imagesRef.current[index];
+      if (!img?.complete || !img.naturalWidth) return;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+      const w = img.naturalWidth * scale;
+      const h = img.naturalHeight * scale;
+      ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const scrollableHeight = section.offsetHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollableHeight));
+        const frameIndex = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
+        if (frameIndex !== currentFrameRef.current) {
+          currentFrameRef.current = frameIndex;
+          drawFrame(frameIndex);
+        }
+      });
+    };
+
+    const onResize = () => drawFrame(currentFrameRef.current);
+
+    let loaded = 0;
+    imagesRef.current = FRAMES.map((src, i) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loaded++;
+        if (i === 0) drawFrame(0);
+        if (loaded === FRAME_COUNT) onScroll();
+      };
+      return img;
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef} style={{ height: '300vh', position: 'relative' }} dir="rtl">
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#0c0c0a' }}>
+
+        {/* Canvas background */}
+        <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+
+        {/* Gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.7) 0%, rgba(12,12,10,0.3) 50%, rgba(12,12,10,0.8) 100%)' }} />
+
+        {/* Hero content */}
+        <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <div className="flex-grow flex items-center">
+            <div className="container mx-auto px-6 max-w-4xl">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
+                <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-6">Smart Car Diagnostics</p>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                  הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
+                </h1>
+                <p className="text-white/40 text-base md:text-lg max-w-md mb-8 leading-relaxed">צ'יפ OBD-II + אפליקציה + AI בעברית פשוטה. לדעת מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">הזמן עכשיו — ₪299</a>
+                  <a href="#features" className="btn-outline border-white/20 text-white/70 hover:text-white hover:border-white/40 text-center">מה בפנים ↓</a>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          <div className="container mx-auto px-6 pb-8">
+            <div className="flex flex-wrap gap-6 text-white/25 text-xs font-medium">
+              {[
+                { icon: <Check size={12} />, t: "משלוח חינם" },
+                { icon: <RotateCcw size={12} />, t: "30 יום החזרה" },
+                { icon: <ShieldCheck size={12} />, t: "כל רכב מ-1996" },
+                { icon: <Lock size={12} />, t: "AES-256" },
+              ].map((i, idx) => (
+                <div key={idx} className="flex items-center gap-2"><span className="text-primary">{i.icon}</span>{i.t}</div>
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/15 animate-bounce">
+            <ChevronDown size={28} strokeWidth={1} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
