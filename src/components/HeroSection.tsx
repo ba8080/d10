@@ -54,7 +54,7 @@ const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) =>
   `/frames/frame${String(i + 1).padStart(4, '0')}.jpg`
 );
 
-export const Hero = () => {
+export const Hero = ({ children }: { children?: React.ReactNode }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -117,17 +117,19 @@ export const Hero = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} style={{ height: '300vh', position: 'relative' }} dir="rtl">
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#0c0c0a' }}>
+    <div ref={sectionRef} style={{ position: 'relative', background: '#0c0c0a' }}>
 
-        {/* Canvas background */}
+      {/* Sticky canvas — stays pinned as content scrolls over it */}
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 0 }}>
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.7) 0%, rgba(12,12,10,0.3) 50%, rgba(12,12,10,0.85) 100%)' }} />
+      </div>
 
-        {/* Gradient overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.7) 0%, rgba(12,12,10,0.3) 50%, rgba(12,12,10,0.8) 100%)' }} />
+      {/* All content scrolls naturally on top */}
+      <div style={{ position: 'relative', zIndex: 10, marginTop: '-100vh' }}>
 
-        {/* Hero content */}
-        <div style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', flexDirection: 'column' }}>
+        {/* Hero text — first screen */}
+        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }} dir="rtl">
           <div className="flex-grow flex items-center">
             <div className="container mx-auto px-6 max-w-4xl">
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
@@ -143,7 +145,6 @@ export const Hero = () => {
               </motion.div>
             </div>
           </div>
-
           <div className="container mx-auto px-6 pb-8">
             <div className="flex flex-wrap gap-6 text-white/25 text-xs font-medium">
               {[
@@ -156,11 +157,14 @@ export const Hero = () => {
               ))}
             </div>
           </div>
-
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/15 animate-bounce">
             <ChevronDown size={28} strokeWidth={1} />
           </div>
         </div>
+
+        {/* Extra sections passed as children */}
+        {children}
+
       </div>
     </div>
   );

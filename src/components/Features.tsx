@@ -40,20 +40,19 @@ export const FeatureDeepDive = () => {
   const [idx, setIdx] = useState(0);
   const f = features[idx];
   return (
-    <section id="features" className="py-20 md:py-28 bg-warm" dir="rtl">
+    <section id="features" className="py-20 md:py-28 bg-transparent" dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-3">10 יכולות</p>
-          <h2 className="text-3xl md:text-5xl font-black text-surface-dark tracking-tight">הכל תחת שליטה.</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">הכל תחת שליטה.</h2>
         </div>
 
-        {/* Feature tabs - horizontal scroll */}
         <div className="flex gap-1.5 overflow-x-auto pb-3 mb-10 md:flex-wrap md:overflow-visible">
           {features.map((ft, i) => (
             <button key={i} onClick={() => setIdx(i)}
               className={cn(
                 "flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all shrink-0",
-                i === idx ? "bg-primary text-white" : "bg-white text-gray-400 hover:text-surface-dark border border-gray-200"
+                i === idx ? "bg-primary text-white" : "bg-white/8 text-white/50 hover:text-white border border-white/10"
               )}>
               <span className="font-black">{ft.num}</span>
               <span className="hidden sm:inline">{ft.title}</span>
@@ -61,21 +60,20 @@ export const FeatureDeepDive = () => {
           ))}
         </div>
 
-        {/* Active feature */}
-        <motion.div key={idx} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="card p-6 md:p-10">
+        <motion.div key={idx} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="card-dark p-6 md:p-10">
           <div className="grid md:grid-cols-[1fr_1.2fr] gap-8">
             <div>
               <div className="big-num">{f.num}</div>
-              <h3 className="text-xl md:text-2xl font-black text-surface-dark -mt-6 mb-1 relative z-10">{f.title}</h3>
+              <h3 className="text-xl md:text-2xl font-black text-white -mt-6 mb-1 relative z-10">{f.title}</h3>
               <p className="text-primary text-xs font-semibold mb-4">{f.sub}</p>
-              <p className="text-gray-400 text-sm leading-relaxed">{f.desc}</p>
+              <p className="text-white/40 text-sm leading-relaxed">{f.desc}</p>
             </div>
             <div className="space-y-2">
               {f.points.map((d, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-warm border border-gray-200/80">
+                  className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/8">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <span className="text-sm text-gray-600">{d}</span>
+                  <span className="text-sm text-white/70">{d}</span>
                 </motion.div>
               ))}
             </div>
@@ -83,9 +81,9 @@ export const FeatureDeepDive = () => {
         </motion.div>
 
         <div className="flex items-center justify-center gap-3 mt-6">
-          <button onClick={() => setIdx(i => (i - 1 + features.length) % features.length)} className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary transition-colors"><ChevronRight size={16} /></button>
-          <span className="text-gray-300 text-xs font-mono">{String(idx + 1).padStart(2, '0')}/{features.length}</span>
-          <button onClick={() => setIdx(i => (i + 1) % features.length)} className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary transition-colors"><ChevronLeft size={16} /></button>
+          <button onClick={() => setIdx(i => (i - 1 + features.length) % features.length)} className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center text-white/40 hover:text-primary transition-colors"><ChevronRight size={16} /></button>
+          <span className="text-white/30 text-xs font-mono">{String(idx + 1).padStart(2, '0')}/{features.length}</span>
+          <button onClick={() => setIdx(i => (i + 1) % features.length)} className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center text-white/40 hover:text-primary transition-colors"><ChevronLeft size={16} /></button>
         </div>
       </div>
     </section>
