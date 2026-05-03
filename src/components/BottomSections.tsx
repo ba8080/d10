@@ -20,7 +20,7 @@ export const FAQ = () => {
     <section id="faq" className="py-20 md:py-28 bg-white" dir="rtl">
       <div className="max-w-3xl mx-auto px-6">
         <div className="mb-12">
-          <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-3">שאלות נפוצות</p>
+          <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">שאלות נפוצות</span>
           <h2 className="text-3xl md:text-5xl font-black text-surface-dark tracking-tight">שאלות? תשובות.</h2>
         </div>
         <div className="space-y-2">
@@ -46,7 +46,7 @@ export const FinalCTA = () => (
   <section className="py-20 md:py-28 bg-dark text-center" dir="rtl">
     <div className="max-w-3xl mx-auto px-6">
       <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-        <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-4">מתאם אחד. אפליקציה אחת. שליטה מלאה.</p>
+        <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-4">מתאם אחד. אפליקציה אחת. שליטה מלאה.</span>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">תפסיק לנחש.<br/>תתחיל לדעת.</h2>
         <p className="text-white/60 text-sm mb-8 max-w-md mx-auto">נהג ממוצע מוציא ₪2,000–₪5,000 בשנה על תיקונים מיותרים. D10 משלם על עצמו בשימוש הראשון.</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

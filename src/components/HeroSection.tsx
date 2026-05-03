@@ -132,21 +132,21 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
         <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }} dir="rtl">
           <div className="flex-grow flex items-center">
             <div className="container mx-auto px-6 max-w-4xl">
-              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-[3.75rem] md:pt-0 liquid-glass p-4 md:p-6 w-fit">
-                <p className="text-[#60a5fa] text-xs font-semibold uppercase tracking-[0.2em] mb-6">דיאגנוסטיקה חכמה לרכב</p>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-[3.75rem] md:pt-0">
+                <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-6">דיאגנוסטיקה חכמה לרכב</span>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
                   הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
                 </h1>
-                <p className="text-white/80 text-base md:text-lg max-w-md mb-8 leading-relaxed">מתאם קטן שמתחבר לרכב + אפליקציה חכמה בעברית. תדע בדיוק מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
+                <p className="text-white text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>מתאם קטן שמתחבר לרכב + אפליקציה חכמה בעברית. תדע בדיוק מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">הזמן עכשיו — ₪299</a>
-                  <a href="#features" className="btn-outline border-white/20 text-white/70 hover:text-white hover:border-white/40 text-center">מה בפנים ↓</a>
+                  <a href="#features" className="btn-outline border-white/30 text-white/80 hover:text-white hover:border-white/50 text-center">מה בפנים ↓</a>
                 </div>
               </motion.div>
             </div>
           </div>
           <div className="container mx-auto px-6 pb-8">
-            <div className="flex flex-wrap gap-6 text-white/50 text-xs font-medium">
+            <div className="flex flex-wrap gap-6 text-white/70 text-xs font-medium" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
               {[
                 { icon: <Check size={12} />, t: "משלוח חינם" },
                 { icon: <RotateCcw size={12} />, t: "30 יום החזרה" },

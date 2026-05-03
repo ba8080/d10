@@ -20,7 +20,7 @@ export const Pricing = () => {
     <section id="pricing" className="py-20 md:py-28 bg-dark" dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
-          <p className="text-warning text-xs font-semibold uppercase tracking-[0.2em] mb-3">מחירים</p>
+          <span className="inline-block bg-amber-500/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">מחירים</span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">בחר חבילה.</h2>
           <p className="text-white/40 text-sm mt-2">חד-פעמי. ללא מנוי. משלוח חינם.</p>
         </div>
@@ -69,7 +69,7 @@ export const Testimonials = () => {
     <section className="py-20 md:py-28 bg-warm" dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
-          <p className="text-warning text-xs font-semibold uppercase tracking-[0.2em] mb-3">★★★★★ ביקורות</p>
+          <span className="inline-block bg-amber-500/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">★★★★★ ביקורות</span>
           <h2 className="text-3xl md:text-5xl font-black text-surface-dark tracking-tight">נהגים חכמים<br/>כבר משתמשים.</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-4">

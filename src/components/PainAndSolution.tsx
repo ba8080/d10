@@ -14,7 +14,7 @@ export const PainPoints = () => {
     <section className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
-          <p className="text-danger text-xs font-semibold uppercase tracking-[0.2em] mb-3">הבעיה</p>
+          <span className="inline-block bg-red-500/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">הבעיה</span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">כל נהג מכיר<br/>את הסיוט הזה.</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
@@ -40,7 +40,7 @@ export const SolutionOverview = () => (
     <div className="max-w-5xl mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-4">הפתרון</p>
+          <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-4">הפתרון</span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-6">צ'יפ אחד.<br/>אפליקציה אחת.<br/><span className="text-primary">שליטה מלאה.</span></h2>
           <p className="text-white/70 text-sm leading-relaxed mb-6">מתאם קטן שמתחבר לשקע ברכב + אפליקציה חכמה שמתרגמת את הנתונים לעברית פשוטה. כמו מוסכניק בכיס — לא ישן, לא משקר, לא גובה יותר מדי.</p>
           <div className="flex gap-6 text-white/40 text-xs font-medium">

@@ -43,7 +43,7 @@ export const FeatureDeepDive = () => {
     <section id="features" className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
-          <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-3">10 יכולות</p>
+          <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">10 יכולות</span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">הכל תחת שליטה.</h2>
         </div>
 
