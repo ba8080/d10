@@ -155,11 +155,11 @@ export const AccessibilityWidget = () => {
   }, []);
   const labels: Record<string, string> = { largeText: 'הגדלת טקסט', highContrast: 'ניגודיות', readableFont: 'גופן קריא', highlightLinks: 'הדגשת קישורים' };
   // On mobile when scrolled, move button up to avoid overlapping MobileStickyBar
-  const btnBottom = scrolledPastHero ? 'bottom-16 md:bottom-5' : 'bottom-5';
-  const panelBottom = scrolledPastHero ? 'bottom-[5.5rem] md:bottom-20' : 'bottom-20';
+  const btnBottom = scrolledPastHero ? 'bottom-20 md:bottom-5' : 'bottom-5';
+  const panelBottom = scrolledPastHero ? 'bottom-[6.5rem] md:bottom-20' : 'bottom-20';
   return (
     <>
-      <button onClick={() => setOpen(!open)} className={`fixed ${btnBottom} left-5 z-[150] bg-primary text-white w-11 h-11 rounded-lg shadow-lg flex items-center justify-center hover:bg-primary-dark transition-all`} aria-label="נגישות"><Accessibility size={20} /></button>
+      <button onClick={() => setOpen(!open)} className={`fixed ${btnBottom} left-5 z-[250] bg-primary text-white w-11 h-11 rounded-lg shadow-lg flex items-center justify-center hover:bg-primary-dark transition-all`} aria-label="נגישות"><Accessibility size={20} /></button>
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.15 }} className={`fixed ${panelBottom} left-5 z-[1000] w-56 bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200`} dir="rtl">

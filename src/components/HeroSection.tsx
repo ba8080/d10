@@ -133,7 +133,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
           <div className="flex-grow flex items-center">
             <div className="container mx-auto px-6 max-w-4xl">
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
-                <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-6" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>דיאגנוסטיקה חכמה לרכב</p>
+                <p className="text-[#60a5fa] text-xs font-semibold uppercase tracking-[0.2em] mb-6" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>דיאגנוסטיקה חכמה לרכב</p>
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}>
                   הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
                 </h1>
