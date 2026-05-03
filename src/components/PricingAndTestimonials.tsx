@@ -5,14 +5,14 @@ import { cn, SOLO_PAYMENT_URL, FAMILY_PAYMENT_URL, ULTIMATE_PAYMENT_URL } from '
 
 export const Pricing = () => {
   const bundles = [
-    { name: "סולו", price: "299", per: null as string | null, save: null as string | null, sub: "מתאם + אפליקציה",
-      features: ["מתאם D10 מקורי", "אפליקציית D10 AI", "AI מלא + דאשבורד חי", "אחריות שנה", "תמיכה בדוא\"ל"],
+    { name: "סולו", price: "299", per: null as string | null, save: null as string | null, sub: "מתאם אחד + אפליקציה",
+      features: ["מתאם D10 מקורי", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
       cta: "הזמן עכשיו", hl: false, url: SOLO_PAYMENT_URL },
-    { name: "משפחתי", price: "719", per: "~₪240/יח'", save: "20%–", sub: "3 מערכות מלאות",
-      features: ["3 מתאמים", "אפליקציה לכל יחידה", "AI מלא", "לוח בקרה משפחתי", "תמיכה מועדפת"],
+    { name: "משפחתי", price: "719", per: "~₪240/יח'", save: "20%–", sub: "3 מתאמים + 3 אפליקציות",
+      features: ["3 מתאמים D10", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
       cta: "הכי פופולרי", hl: true, url: FAMILY_PAYMENT_URL },
-    { name: "אולטימייט", price: "800", per: "~₪200/יח'", save: "33%–", sub: "4 מערכות מלאות",
-      features: ["4 מתאמים", "AI מלא", "לוח בקרה מרכזי", "אחריות שנתיים", "תמיכה VIP"],
+    { name: "אולטימייט", price: "800", per: "~₪200/יח'", save: "33%–", sub: "4 מתאמים + 4 אפליקציות",
+      features: ["4 מתאמים D10", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
       cta: "הזמן עכשיו", hl: false, url: ULTIMATE_PAYMENT_URL },
   ];
 
@@ -22,7 +22,7 @@ export const Pricing = () => {
         <div className="mb-14">
           <p className="text-warning text-xs font-semibold uppercase tracking-[0.2em] mb-3">מחירים</p>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">בחר חבילה.</h2>
-          <p className="text-white/30 text-sm mt-2">חד-פעמי. ללא מנוי. משלוח חינם.</p>
+          <p className="text-white/40 text-sm mt-2">חד-פעמי. ללא מנוי. משלוח חינם.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {bundles.map((b, i) => (
@@ -37,7 +37,7 @@ export const Pricing = () => {
               {b.per ? <p className="text-white/20 text-xs mb-5">{b.per}</p> : <div className="mb-5" />}
               <ul className="space-y-2 mb-6 flex-grow">
                 {b.features.map((f, j) => (
-                  <li key={j} className="text-xs text-white/50 flex items-center gap-2"><Check size={10} className="text-primary shrink-0" /> {f}</li>
+                  <li key={j} className="text-xs text-white/70 flex items-center gap-2"><Check size={10} className="text-primary shrink-0" /> {f}</li>
                 ))}
               </ul>
               <a href={b.url} target="_blank" rel="noopener noreferrer"
@@ -47,7 +47,7 @@ export const Pricing = () => {
             </motion.div>
           ))}
         </div>
-        <div className="mt-10 flex flex-wrap gap-6 text-white/20 text-xs font-medium">
+        <div className="mt-10 flex flex-wrap gap-6 text-white/40 text-xs font-medium">
           <div className="flex items-center gap-2"><Lock size={12} /> SSL 256-bit</div>
           <div className="flex items-center gap-2"><Clock size={12} /> 3 ימי עסקים</div>
           <div className="flex items-center gap-2"><RotateCcw size={12} /> 30 יום החזרה</div>

@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { cn } from '../utils';
 
 const features = [
-  { icon: <Cpu />, num: "01", title: "דיאגנוסטיקה AI", sub: "קודי תקלה בעברית",
+  { icon: <Cpu />, num: "01", title: "בדיקת תקלות חכמה", sub: "קודי תקלה בעברית",
     desc: "לא P0420. מה הבעיה, כמה חמור, בטוח לנסוע, עלות תיקון, ומה לעשות. מותאם לדגם.",
     points: ["הסבר בעברית פשוטה", "דירוג חומרה בצבעים", "בטוח לנסוע? כן/לא", "הערכת עלות תיקון", "מותאם לדגם שלך"] },
   { icon: <Gauge />, num: "02", title: "דאשבורד חי", sub: "נתונים בזמן אמת",
@@ -29,8 +29,8 @@ const features = [
     desc: "כל נורת דאשבורד — חומרה, הסבר, מה לעשות. 11 בלילה בכביש? מכוסה.",
     points: ["Check Engine, ABS, שמן", "דירוג חומרה", "הסבר + פעולה", "אופליין לחלוטין", "כל הנורות"] },
   { icon: <Globe />, num: "09", title: "עברית + אנגלית", sub: "דו-לשוני מלא",
-    desc: "כל מסך, כל תגובת AI — עברית או אנגלית. RTL מושלם.",
-    points: ["ממשק מלא בשתי שפות", "AI דו-לשוני", "זיהוי שפה אוטומטי", "RTL מושלם", "פותח בישראל"] },
+    desc: "כל מסך, כל תשובה — עברית או אנגלית. RTL מושלם.",
+    points: ["ממשק מלא בשתי שפות", "תרגום חכם דו-לשוני", "זיהוי שפה אוטומטי", "RTL מושלם", "פותח בישראל"] },
   { icon: <Lock />, num: "10", title: "אימות מאובטח", sub: "Google · Apple · אנונימי",
     desc: "Firebase. AES-256. הנתונים שלך — רק שלך.",
     points: ["Google / Apple / אנונימי", "Firebase Auth", "הצפנת AES-256", "נתונים מקומיים", "פרטיות מוחלטת"] },
@@ -40,7 +40,7 @@ export const FeatureDeepDive = () => {
   const [idx, setIdx] = useState(0);
   const f = features[idx];
   return (
-    <section id="features" className="py-20 md:py-28 bg-transparent" dir="rtl">
+    <section id="features" className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.88)' }} dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-3">10 יכולות</p>
@@ -66,7 +66,7 @@ export const FeatureDeepDive = () => {
               <div className="big-num">{f.num}</div>
               <h3 className="text-xl md:text-2xl font-black text-white -mt-6 mb-1 relative z-10">{f.title}</h3>
               <p className="text-primary text-xs font-semibold mb-4">{f.sub}</p>
-              <p className="text-white/40 text-sm leading-relaxed">{f.desc}</p>
+              <p className="text-white/70 text-sm leading-relaxed">{f.desc}</p>
             </div>
             <div className="space-y-2">
               {f.points.map((d, i) => (

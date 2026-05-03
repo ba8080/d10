@@ -10,7 +10,7 @@ import { FeatureDeepDive } from './components/Features';
 import { HowItWorks } from './components/MiddleSections';
 import { CompatibilityChecker } from './components/Compatibility';
 import { Pricing, Testimonials } from './components/PricingAndTestimonials';
-import { FAQ, FinalCTA, Footer, CookieConsentBanner, MobileStickyBar, AccessibilityWidget } from './components/BottomSections';
+import { FAQ, FinalCTA, Footer, CookieConsentBanner, MobileStickyBar, AccessibilityWidget, InlineCTA } from './components/BottomSections';
 import { PrivacyPolicy, TermsOfUse, AccessibilityStatement, ReturnsCancellationPolicy } from './components/LegalPages';
 
 declare global {
@@ -74,12 +74,13 @@ export default function App() {
             <CompatibilityChecker />
             <Pricing />
             <Testimonials />
+            <InlineCTA variant="dark" />
             <FAQ />
             <FinalCTA />
 
             <div className="bg-dark py-4 px-6 border-t border-white/5" dir="rtl">
               <p className="text-white/15 text-[10px] max-w-5xl mx-auto">
-                * D10 AI הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
+                * D10 הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
               </p>
             </div>
           </main>

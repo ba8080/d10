@@ -122,7 +122,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
       {/* Sticky canvas — stays pinned as content scrolls over it */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 0 }}>
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.7) 0%, rgba(12,12,10,0.3) 50%, rgba(12,12,10,0.85) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.85) 0%, rgba(12,12,10,0.6) 40%, rgba(12,12,10,0.7) 70%, rgba(12,12,10,0.92) 100%)' }} />
       </div>
 
       {/* All content scrolls naturally on top */}
@@ -133,11 +133,11 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
           <div className="flex-grow flex items-center">
             <div className="container mx-auto px-6 max-w-4xl">
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
-                <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-6">Smart Car Diagnostics</p>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-6" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>דיאגנוסטיקה חכמה לרכב</p>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}>
                   הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
                 </h1>
-                <p className="text-white/40 text-base md:text-lg max-w-md mb-8 leading-relaxed">צ'יפ OBD-II + אפליקציה + AI בעברית פשוטה. לדעת מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
+                <p className="text-white/80 text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>מתאם קטן שמתחבר לרכב + אפליקציה חכמה בעברית. תדע בדיוק מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">הזמן עכשיו — ₪299</a>
                   <a href="#features" className="btn-outline border-white/20 text-white/70 hover:text-white hover:border-white/40 text-center">מה בפנים ↓</a>
@@ -146,7 +146,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
             </div>
           </div>
           <div className="container mx-auto px-6 pb-8">
-            <div className="flex flex-wrap gap-6 text-white/25 text-xs font-medium">
+            <div className="flex flex-wrap gap-6 text-white/50 text-xs font-medium">
               {[
                 { icon: <Check size={12} />, t: "משלוח חינם" },
                 { icon: <RotateCcw size={12} />, t: "30 יום החזרה" },
