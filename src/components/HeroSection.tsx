@@ -122,7 +122,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
       {/* Sticky canvas — stays pinned as content scrolls over it */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 0 }}>
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.4) 0%, rgba(12,12,10,0.15) 40%, rgba(12,12,10,0.2) 70%, rgba(12,12,10,0.7) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.5) 0%, rgba(12,12,10,0.2) 40%, rgba(12,12,10,0.25) 70%, rgba(12,12,10,0.75) 100%)' }} />
       </div>
 
       {/* All content scrolls naturally on top */}
@@ -132,7 +132,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
         <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }} dir="rtl">
           <div className="flex-grow flex items-center">
             <div className="container mx-auto px-6 max-w-4xl">
-              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-24 md:pt-0">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-[3.75rem] md:pt-0 liquid-glass p-4 md:p-6 w-fit">
                 <p className="text-[#60a5fa] text-xs font-semibold uppercase tracking-[0.2em] mb-6">דיאגנוסטיקה חכמה לרכב</p>
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
                   הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
