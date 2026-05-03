@@ -60,8 +60,9 @@ export const CompatibilityChecker = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 mt-4">
+      <div className="max-w-5xl mx-auto px-6 mt-4 flex flex-col gap-2">
         <a href="mailto:support@d10.store" className="text-primary text-xs font-semibold hover:underline">לא בטוח? שלח לנו את הדגם ←</a>
+        <p className="text-gray-400 text-[10px]">שמות המותגים והלוגואים שייכים לבעליהם ומוצגים לצורכי תאימות בלבד. אין קשר מסחרי או שותפות עם היצרנים.</p>
       </div>
     </section>
   );

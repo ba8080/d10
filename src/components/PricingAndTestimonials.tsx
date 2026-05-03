@@ -22,7 +22,7 @@ export const Pricing = () => {
         <div className="mb-14">
           <span className="inline-block bg-amber-500/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">מחירים</span>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">בחר חבילה.</h2>
-          <p className="text-white/40 text-sm mt-2">חד-פעמי. ללא מנוי. משלוח חינם.</p>
+          <p className="text-white/40 text-sm mt-2">חד-פעמי. ללא מנוי. משלוח חינם. כולל מע"מ.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {bundles.map((b, i) => (

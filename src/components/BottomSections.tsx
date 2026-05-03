@@ -71,7 +71,7 @@ export const Footer = () => {
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
-            <span className="text-sm font-black text-white">D10 <span className="font-light text-white/30">AI</span></span>
+            <span className="text-sm font-black text-white">D10</span>
             <a href="mailto:support@d10.store" onClick={copy} className="text-white/20 text-xs hover:text-white transition-colors">{copied ? '✓ הועתק' : 'support@d10.store'}</a>
           </div>
           <div className="flex gap-4 text-[10px] font-medium text-white/20">
