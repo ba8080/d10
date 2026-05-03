@@ -40,7 +40,7 @@ export const FeatureDeepDive = () => {
   const [idx, setIdx] = useState(0);
   const f = features[idx];
   return (
-    <section id="features" className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.88)' }} dir="rtl">
+    <section id="features" className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-primary text-xs font-semibold uppercase tracking-[0.2em] mb-3">10 יכולות</p>

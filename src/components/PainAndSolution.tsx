@@ -5,13 +5,13 @@ import { motion } from 'motion/react';
 export const PainPoints = () => {
   const pains = [
     { icon: <AlertTriangle className="w-5 h-5" />, title: "נורה דולקת — אפס מושג", desc: "50 תשובות סותרות בגוגל. מסוכן? אפשר לנסוע?" },
-    { icon: <DollarSign className="w-5 h-5" />, title: "₪3,000 על תיקון של ₪350", desc: "המוסכניק אומר 'רציני'. אין דרך לבדוק." },
+    { icon: <DollarSign className="w-5 h-5" />, title: "משלם יותר מדי במוסך?", desc: "המוסכניק אומר שזה דחוף ויקר. אין לך שום דרך לדעת אם הוא צודק — או סתם מנפח את החשבון." },
     { icon: <Search className="w-5 h-5" />, title: "קונה רכב יד שנייה? בלי לדעת מה עבר עליו", desc: "הק\"מ בשעון לא תמיד אמיתיים. אלפי אנשים בישראל קונים רכב עם מספרים מזויפים — ומגלים רק אחרי שמשלמים." },
     { icon: <BarChart3 className="w-5 h-5" />, title: "אלפי נתונים — אפס גישה", desc: "צריכת דלק, מצבר, נהיגה. הכל שם — מעולם לא הייתה לך גישה." },
   ];
 
   return (
-    <section className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.88)' }} dir="rtl">
+    <section className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-14">
           <p className="text-danger text-xs font-semibold uppercase tracking-[0.2em] mb-3">הבעיה</p>
@@ -36,7 +36,7 @@ export const PainPoints = () => {
 };
 
 export const SolutionOverview = () => (
-  <section className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.88)' }} dir="rtl">
+  <section className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
     <div className="max-w-5xl mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
