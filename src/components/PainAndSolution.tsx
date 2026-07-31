@@ -50,7 +50,7 @@ export const SolutionOverview = () => (
           </div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <img src="/smart-diagnostic.jpg" alt="D10 AI" className="w-full rounded-xl border border-white/10" />
+          <img src="/smart-diagnostic.jpg" alt="מתאם D10 AI מחובר לרכב" width="1024" height="682" loading="lazy" decoding="async" className="w-full rounded-xl border border-white/10" />
         </motion.div>
       </div>
     </div>

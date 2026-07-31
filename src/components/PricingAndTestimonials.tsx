@@ -1,16 +1,16 @@
 import React from 'react';
 import { Check, Lock, Clock, RotateCcw } from 'lucide-react';
 import { motion } from 'motion/react';
-import { cn, SOLO_PAYMENT_URL, FAMILY_PAYMENT_URL, ULTIMATE_PAYMENT_URL } from '../utils';
+import { cn, trackCheckout, SOLO_PAYMENT_URL, FAMILY_PAYMENT_URL, ULTIMATE_PAYMENT_URL } from '../utils';
 
 export const Pricing = () => {
   const bundles = [
     { name: "סולו", price: "299", per: null as string | null, save: null as string | null, sub: "מתאם אחד + אפליקציה",
       features: ["מתאם D10 מקורי", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
       cta: "הזמן עכשיו", hl: false, url: SOLO_PAYMENT_URL },
-    { name: "משפחתי", price: "719", per: "~₪240/יח'", save: "20%–", sub: "3 מתאמים + 3 אפליקציות",
+    { name: "משפחתי", price: "717", per: "~₪239/יח'", save: "הכי פופולרי · 20%–", sub: "3 מתאמים + 3 אפליקציות",
       features: ["3 מתאמים D10", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
-      cta: "הכי פופולרי", hl: true, url: FAMILY_PAYMENT_URL },
+      cta: "הזמן עכשיו", hl: true, url: FAMILY_PAYMENT_URL },
     { name: "אולטימייט", price: "800", per: "~₪200/יח'", save: "33%–", sub: "4 מתאמים + 4 אפליקציות",
       features: ["4 מתאמים D10", "אפליקציה עם כל 10 היכולות", "דאשבורד חי בזמן אמת", "אחריות שנה", "משלוח חינם"],
       cta: "הזמן עכשיו", hl: false, url: ULTIMATE_PAYMENT_URL },
@@ -40,7 +40,7 @@ export const Pricing = () => {
                   <li key={j} className="text-xs text-white/70 flex items-center gap-2"><Check size={10} className="text-primary shrink-0" /> {f}</li>
                 ))}
               </ul>
-              <a href={b.url} target="_blank" rel="noopener noreferrer"
+              <a href={b.url} target="_blank" rel="noopener noreferrer" onClick={() => trackCheckout(Number(b.price))}
                 className={cn("w-full py-3 rounded-lg font-bold text-xs uppercase tracking-widest text-center transition-all",
                   b.hl ? "bg-primary text-white hover:bg-primary-dark" : "bg-white/10 text-white hover:bg-white/15"
                 )}>{b.cta}</a>

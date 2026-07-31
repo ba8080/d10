@@ -10,6 +10,10 @@
     <link rel="canonical" href="https://www.d10.store" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0c0c0a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/frames/frame0001.jpg" fetchpriority="high" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="D10 AI — סוף ללחץ לפני המוסך" />
@@ -51,21 +55,16 @@
           "offers": {
             "@type": "AggregateOffer",
             "lowPrice": "299",
-            "highPrice": "349",
+            "highPrice": "800",
             "priceCurrency": "ILS",
             "availability": "https://schema.org/InStock",
             "offerCount": 3
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "1240"
           }
         },
         {
           "@type": "FAQPage",
           "mainEntity": [
-            {"@type": "Question", "name": "האם D10 AI מתאים לרכב שלי?", "acceptedAnswer": {"@type": "Answer", "text": "D10 AI תואם ל-99% מהרכבים בישראל משנת 2008 ומעלה עם חיבור OBD2."}},
+            {"@type": "Question", "name": "האם D10 AI מתאים לרכב שלי?", "acceptedAnswer": {"@type": "Answer", "text": "D10 AI תואם לכמעט כל רכב בישראל משנת 1996 ומעלה עם חיבור OBD2."}},
             {"@type": "Question", "name": "איך מתקינים את D10?", "acceptedAnswer": {"@type": "Answer", "text": "פשוט מחברים לפורט ה-OBD2 מתחת לדאשבורד, פותחים את האפליקציה, ומקבלים תשובות. 5 שניות."}},
             {"@type": "Question", "name": "האם צריך ידע טכני?", "acceptedAnswer": {"@type": "Answer", "text": "לא! הכל בעברית פשוטה. ה-AI מתרגם את הקודים הטכניים להסברים ברורים."}}
           ]
@@ -84,6 +83,9 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
+      try {
+        if (localStorage.getItem('d10_cookie_consent') !== 'granted') fbq('consent', 'revoke');
+      } catch (e) { fbq('consent', 'revoke'); }
       fbq('init', '1767649204206159');
       fbq('track', 'PageView');
     </script>

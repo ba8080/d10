@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Check, ShieldCheck, RotateCcw, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn, SOLO_PAYMENT_URL } from '../utils';
+import { cn, trackCheckout, SOLO_PAYMENT_URL } from '../utils';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -54,6 +54,20 @@ const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) =>
   `/frames/frame${String(i + 1).padStart(4, '0')}.jpg`
 );
 
+// Progressive load order: frame 0 first, then coarse-to-fine passes (every 64th,
+// 32nd, 16th... frame), so the scroll animation works within ~1s instead of
+// waiting for all ~7MB, and nearby frames fill in as they arrive.
+const LOAD_ORDER: number[] = (() => {
+  const seen = new Set<number>();
+  const order: number[] = [];
+  for (const step of [64, 32, 16, 8, 4, 2, 1]) {
+    for (let i = 0; i < FRAME_COUNT; i += step) {
+      if (!seen.has(i)) { seen.add(i); order.push(i); }
+    }
+  }
+  return order;
+})();
+
 export const Hero = ({ children }: { children?: React.ReactNode }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,9 +82,25 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const isReady = (i: number) => {
+      const img = imagesRef.current[i];
+      return !!(img?.complete && img.naturalWidth);
+    };
+
+    // Nearest already-loaded frame to `index`, so scrolling never shows a blank
+    // canvas while fine-grained frames are still downloading.
+    const nearestLoaded = (index: number) => {
+      for (let d = 0; d < FRAME_COUNT; d++) {
+        if (index - d >= 0 && isReady(index - d)) return index - d;
+        if (index + d < FRAME_COUNT && isReady(index + d)) return index + d;
+      }
+      return -1;
+    };
+
     const drawFrame = (index: number) => {
-      const img = imagesRef.current[index];
-      if (!img?.complete || !img.naturalWidth) return;
+      const actual = nearestLoaded(index);
+      if (actual === -1) return;
+      const img = imagesRef.current[actual];
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
@@ -95,21 +125,33 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
 
     const onResize = () => drawFrame(currentFrameRef.current);
 
-    let loaded = 0;
-    imagesRef.current = FRAMES.map((src, i) => {
+    // Load frames progressively with limited concurrency instead of firing
+    // 121 requests (~7MB) at once — keeps bandwidth free for fonts/JS/LCP.
+    imagesRef.current = new Array(FRAME_COUNT);
+    let cancelled = false;
+    let cursor = 0;
+    const loadNext = () => {
+      if (cancelled || cursor >= LOAD_ORDER.length) return;
+      const idx = LOAD_ORDER[cursor++];
       const img = new Image();
-      img.src = src;
+      img.decoding = 'async';
       img.onload = () => {
-        loaded++;
-        if (i === 0) drawFrame(0);
-        if (loaded === FRAME_COUNT) onScroll();
+        imagesRef.current[idx] = img;
+        // Redraw if this frame is at (or near) the current scroll position.
+        if (idx === 0 || Math.abs(idx - currentFrameRef.current) <= 2) {
+          drawFrame(currentFrameRef.current);
+        }
+        loadNext();
       };
-      return img;
-    });
+      img.onerror = () => loadNext();
+      img.src = FRAMES[idx];
+    };
+    for (let c = 0; c < 6; c++) loadNext();
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
     return () => {
+      cancelled = true;
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       cancelAnimationFrame(rafRef.current);
@@ -122,7 +164,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
       {/* Sticky canvas — stays pinned as content scrolls over it */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 0 }}>
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.5) 0%, rgba(12,12,10,0.2) 40%, rgba(12,12,10,0.25) 70%, rgba(12,12,10,0.75) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.72) 0%, rgba(12,12,10,0.35) 22%, rgba(12,12,10,0.2) 45%, rgba(12,12,10,0.3) 70%, rgba(12,12,10,0.8) 100%)' }} />
       </div>
 
       {/* All content scrolls naturally on top */}
@@ -139,7 +181,7 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
                 </h1>
                 <p className="text-white text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>מתאם קטן שמתחבר לרכב + אפליקציה חכמה בעברית. תדע בדיוק מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">הזמן עכשיו — ₪299</a>
+                  <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCheckout(299)} className="btn-primary text-center">הזמן עכשיו — ₪299</a>
                   <a href="#features" className="btn-outline border-white/30 text-white/80 hover:text-white hover:border-white/50 text-center">מה בפנים ↓</a>
                 </div>
               </motion.div>
