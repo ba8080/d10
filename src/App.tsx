@@ -53,8 +53,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-primary selection:text-white">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[300] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md">דלג לתוכן</a>
+    <div className="min-h-screen bg-[#06070a] font-sans selection:bg-primary selection:text-white">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[300] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-md">דלג לתוכן</a>
       <Navbar />
 
       {currentPage ? (
@@ -78,8 +78,8 @@ export default function App() {
             <FAQ />
             <FinalCTA />
 
-            <div className="bg-dark py-4 px-6 border-t border-white/5" dir="rtl">
-              <p className="text-white/15 text-[10px] max-w-5xl mx-auto">
+            <div className="section-dark py-5 px-6 border-t border-white/6" dir="rtl">
+              <p className="text-white/25 text-[10px] max-w-6xl mx-auto leading-relaxed">
                 * D10 הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
               </p>
             </div>

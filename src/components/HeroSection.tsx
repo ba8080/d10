@@ -18,29 +18,37 @@ export const Navbar = () => {
 
   return (
     <>
-    <nav className={cn("fixed z-[100] transition-all duration-300 px-6 md:px-12 py-4", scrolled ? "top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm" : "top-0 left-0 right-0 bg-transparent")} dir="rtl">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-5 md:px-10",
+      scrolled ? "py-2.5" : "py-4"
+    )} dir="rtl">
+      <div className={cn(
+        "max-w-6xl mx-auto flex items-center justify-between rounded-2xl px-4 md:px-6 py-2.5 transition-all duration-300",
+        scrolled
+          ? "bg-[#0b0d12]/80 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+          : "bg-transparent border border-transparent"
+      )}>
         <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="flex items-center gap-1.5">
-          <span className={cn("text-xl font-black tracking-tight", scrolled ? "text-surface-dark" : "text-white")}>D10</span>
-          <span className={cn("text-sm font-light", scrolled ? "text-primary" : "text-white/60")}>AI</span>
+          <span className="text-xl font-black tracking-tight text-white">D10</span>
+          <span className="text-sm font-light text-gradient font-bold">AI</span>
         </a>
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (<a key={l.name} href={l.href} className={cn("text-xs font-medium tracking-wide transition-colors", scrolled ? "text-gray-500 hover:text-surface-dark" : "text-white/60 hover:text-white")}>{l.name}</a>))}
-          <a href="#pricing" className={cn("text-xs font-bold px-5 py-2 rounded-lg transition-all", scrolled ? "bg-primary text-white hover:bg-primary-dark" : "bg-white text-surface-dark hover:bg-white/90")}>הזמן עכשיו</a>
+        <div className="hidden md:flex items-center gap-7">
+          {links.map((l) => (<a key={l.name} href={l.href} className="text-[13px] font-medium tracking-wide text-white/60 hover:text-white transition-colors">{l.name}</a>))}
+          <a href="#pricing" className="text-xs font-bold px-5 py-2.5 rounded-xl bg-gradient-to-l from-blue-500 to-blue-600 text-white shadow-[0_4px_20px_-4px_rgba(37,99,235,0.6)] hover:shadow-[0_8px_28px_-4px_rgba(37,99,235,0.8)] hover:-translate-y-px transition-all">הזמן עכשיו</a>
         </div>
-        <button className={cn("md:hidden p-2", scrolled ? "text-surface-dark" : "text-white")} onClick={() => setMobileOpen(true)} aria-label="תפריט"><Menu size={22} /></button>
+        <button className="md:hidden p-2 text-white" onClick={() => setMobileOpen(true)} aria-label="תפריט"><Menu size={22} /></button>
       </div>
     </nav>
     <AnimatePresence>
       {mobileOpen && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="md:hidden fixed inset-0 z-[200] bg-white" dir="rtl">
-          <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-            <span className="text-xl font-black">D10 <span className="text-primary font-light text-sm">AI</span></span>
-            <button onClick={() => setMobileOpen(false)} aria-label="סגור"><X size={24} /></button>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="md:hidden fixed inset-0 z-[200] bg-[#06070a]" dir="rtl">
+          <div className="flex justify-between items-center px-6 py-5 border-b border-white/8">
+            <span className="text-xl font-black text-white">D10 <span className="text-gradient text-sm">AI</span></span>
+            <button onClick={() => setMobileOpen(false)} aria-label="סגור" className="text-white"><X size={24} /></button>
           </div>
           <div className="flex flex-col gap-1 px-6 pt-6">
-            {links.map((l) => (<a key={l.name} href={l.href} onClick={() => setMobileOpen(false)} className="text-lg font-medium text-gray-800 py-3 border-b border-gray-50">{l.name}</a>))}
-            <a href="#pricing" onClick={() => setMobileOpen(false)} className="mt-4 bg-primary text-white text-center py-3.5 rounded-lg font-bold">הזמן עכשיו</a>
+            {links.map((l) => (<a key={l.name} href={l.href} onClick={() => setMobileOpen(false)} className="text-lg font-medium text-white/85 py-3.5 border-b border-white/6">{l.name}</a>))}
+            <a href="#pricing" onClick={() => setMobileOpen(false)} className="mt-6 btn-primary text-center">הזמן עכשיו</a>
           </div>
         </motion.div>
       )}
@@ -54,9 +62,8 @@ const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) =>
   `/frames/frame${String(i + 1).padStart(4, '0')}.jpg`
 );
 
-// Progressive load order: frame 0 first, then coarse-to-fine passes (every 64th,
-// 32nd, 16th... frame), so the scroll animation works within ~1s instead of
-// waiting for all ~7MB, and nearby frames fill in as they arrive.
+// Progressive load order: frame 0 first, then coarse-to-fine passes, so the
+// scroll animation works within ~1s instead of waiting for all ~7MB.
 const LOAD_ORDER: number[] = (() => {
   const seen = new Set<number>();
   const order: number[] = [];
@@ -87,8 +94,6 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
       return !!(img?.complete && img.naturalWidth);
     };
 
-    // Nearest already-loaded frame to `index`, so scrolling never shows a blank
-    // canvas while fine-grained frames are still downloading.
     const nearestLoaded = (index: number) => {
       for (let d = 0; d < FRAME_COUNT; d++) {
         if (index - d >= 0 && isReady(index - d)) return index - d;
@@ -125,8 +130,6 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
 
     const onResize = () => drawFrame(currentFrameRef.current);
 
-    // Load frames progressively with limited concurrency instead of firing
-    // 121 requests (~7MB) at once — keeps bandwidth free for fonts/JS/LCP.
     imagesRef.current = new Array(FRAME_COUNT);
     let cancelled = false;
     let cursor = 0;
@@ -137,7 +140,6 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
       img.decoding = 'async';
       img.onload = () => {
         imagesRef.current[idx] = img;
-        // Redraw if this frame is at (or near) the current scroll position.
         if (idx === 0 || Math.abs(idx - currentFrameRef.current) <= 2) {
           drawFrame(currentFrameRef.current);
         }
@@ -159,52 +161,61 @@ export const Hero = ({ children }: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <div ref={sectionRef} style={{ position: 'relative', background: '#0c0c0a' }}>
+    <div ref={sectionRef} style={{ position: 'relative', background: '#06070a' }}>
 
-      {/* Sticky canvas — stays pinned as content scrolls over it */}
+      {/* Sticky canvas — pinned while content scrolls over it */}
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 0 }}>
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,12,10,0.72) 0%, rgba(12,12,10,0.35) 22%, rgba(12,12,10,0.2) 45%, rgba(12,12,10,0.3) 70%, rgba(12,12,10,0.8) 100%)' }} />
+        {/* Cinematic grade: darken + tint toward the site's ink color */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,7,10,0.82) 0%, rgba(6,7,10,0.45) 24%, rgba(6,7,10,0.3) 48%, rgba(6,7,10,0.45) 72%, rgba(6,7,10,0.92) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(120% 70% at 80% 30%, transparent 40%, rgba(6,7,10,0.55) 100%)' }} />
       </div>
 
-      {/* All content scrolls naturally on top */}
+      {/* Content scrolls on top */}
       <div style={{ position: 'relative', zIndex: 10, marginTop: '-100vh' }}>
 
-        {/* Hero text — first screen */}
-        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }} dir="rtl">
+        {/* First screen */}
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }} dir="rtl">
           <div className="flex-grow flex items-center">
-            <div className="container mx-auto px-6 max-w-4xl">
-              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="pt-[3.75rem] md:pt-0">
-                <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-6">דיאגנוסטיקה חכמה לרכב</span>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
-                  הרכב שלך<br/>מדבר. עכשיו<br/><span className="text-primary">תבין אותו.</span>
+            <div className="container mx-auto px-6 max-w-6xl">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="pt-24 md:pt-16 max-w-2xl">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-4 py-1.5 text-[11px] font-bold tracking-[0.18em] uppercase text-white/85 mb-7">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse" />
+                  דיאגנוסטיקה חכמה לרכב · פותח בישראל
+                </span>
+                <h1 className="h-display text-[2.75rem] sm:text-6xl md:text-[5.25rem] text-white mb-6" style={{ textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}>
+                  הרכב שלך מדבר.
+                  <br />
+                  <span className="text-gradient">עכשיו תבין אותו.</span>
                 </h1>
-                <p className="text-white text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>מתאם קטן שמתחבר לרכב + אפליקציה חכמה בעברית. תדע בדיוק מה קורה ברכב — לפני שמוציאים שקל במוסך.</p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCheckout(299)} className="btn-primary text-center">הזמן עכשיו — ₪299</a>
-                  <a href="#features" className="btn-outline border-white/30 text-white/80 hover:text-white hover:border-white/50 text-center">מה בפנים ↓</a>
+                <p className="text-white/80 text-base md:text-xl max-w-lg mb-9 leading-relaxed font-light" style={{ textShadow: '0 1px 12px rgba(0,0,0,0.5)' }}>
+                  מתאם קטן + אפליקציה חכמה בעברית. כל תקלה, כל נתון, כל נורה —
+                  מוסבר בפשטות, <span className="font-semibold text-white">לפני שאתה מוציא שקל במוסך.</span>
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3.5">
+                  <a href={SOLO_PAYMENT_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCheckout(299)} className="btn-primary text-center text-base px-10">הזמן עכשיו — ₪299</a>
+                  <a href="#features" className="btn-ghost text-center">גלה את היכולות</a>
                 </div>
               </motion.div>
             </div>
           </div>
-          <div className="container mx-auto px-6 pb-8">
-            <div className="flex flex-wrap gap-6 text-white/70 text-xs font-medium" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
+          <div className="container mx-auto px-6 pb-10 max-w-6xl">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="flex flex-wrap gap-x-8 gap-y-3 text-white/70 text-xs font-medium">
               {[
-                { icon: <Check size={12} />, t: "משלוח חינם" },
-                { icon: <RotateCcw size={12} />, t: "30 יום החזרה" },
-                { icon: <ShieldCheck size={12} />, t: "כל רכב מ-1996" },
-                { icon: <Lock size={12} />, t: "AES-256" },
+                { icon: <Check size={13} />, t: "משלוח חינם" },
+                { icon: <RotateCcw size={13} />, t: "30 יום החזרה מלאה" },
+                { icon: <ShieldCheck size={13} />, t: "תואם לכל רכב מ-1996" },
+                { icon: <Lock size={13} />, t: "הצפנת AES-256" },
               ].map((i, idx) => (
-                <div key={idx} className="flex items-center gap-2"><span className="text-primary">{i.icon}</span>{i.t}</div>
+                <div key={idx} className="flex items-center gap-2" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}><span className="text-cyan-300">{i.icon}</span>{i.t}</div>
               ))}
-            </div>
+            </motion.div>
           </div>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/15 animate-bounce">
-            <ChevronDown size={28} strokeWidth={1} />
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/25 animate-bounce">
+            <ChevronDown size={26} strokeWidth={1.5} />
           </div>
         </div>
 
-        {/* Extra sections passed as children */}
         {children}
 
       </div>

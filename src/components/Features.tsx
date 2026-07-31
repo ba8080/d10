@@ -1,91 +1,120 @@
-import React, { useState } from 'react';
-import { Cpu, Gauge, Search, Battery, MapPin, FileText, Wrench, Lightbulb, Globe, Lock, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Cpu, Gauge, Search, Battery, MapPin, FileText, Wrench, Lightbulb, Globe, Lock, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { cn } from '../utils';
 
-const features = [
-  { icon: <Cpu />, num: "01", title: "בדיקת תקלות חכמה", sub: "קודי תקלה בעברית",
-    desc: "לא P0420. מה הבעיה, כמה חמור, בטוח לנסוע, עלות תיקון, ומה לעשות. מותאם לדגם.",
-    points: ["הסבר בעברית פשוטה", "דירוג חומרה בצבעים", "בטוח לנסוע? כן/לא", "הערכת עלות תיקון", "מותאם לדגם שלך"] },
-  { icon: <Gauge />, num: "02", title: "דאשבורד חי", sub: "נתונים בזמן אמת",
-    desc: "RPM, מהירות, טמפרטורה, מצבר, מצערת — חי, באנימציה.",
-    points: ["RPM + מהירות", "טמפרטורת קירור", "עומס מנוע", "מתח מצבר", "מיקום מצערת"] },
-  { icon: <Search />, num: "03", title: "זיהוי הונאת ק\"מ", sub: "בדיקה שעולה ₪200-500 — חינם",
-    desc: "קורא ק\"מ ממספר מודולים. אם הוזז — הנתונים לא יתאימו. תוצאות מיידיות.",
-    points: ["רמת סיכון", "ציון ביטחון", "השוואה לפי VIN", "חינם ומיידי", "אף אפליקציה צרכנית לא עושה את זה"] },
-  { icon: <Battery />, num: "04", title: "בריאות מצבר", sub: "התראה לפני שנתקעים",
-    desc: "ניטור רציף של מתח ומערכת טעינה. מזהה חולשה ימים לפני כשל.",
-    points: ["בריא / נחלש / החלף", "ניתוח מגמות", "זיהוי בעיות אלטרנטור", "התראה מוקדמת", "חיזוי לינארי"] },
-  { icon: <MapPin />, num: "05", title: "מעקב נסיעות", sub: "ציון נהיגה + דלק",
-    desc: "זיהוי אוטומטי. מרחק, דלק, עלות, ציון 0-100 לפי האצות ובלימות.",
-    points: ["זיהוי אוטומטי", "חישוב מרחק + דלק", "ציון נהיגה 0-100", "עלות דלק", "תובנות חיסכון"] },
-  { icon: <FileText />, num: "06", title: "חיפוש רכב", sub: "VIN או לוחית רישוי",
-    desc: "יצרן, דגם, שנה, מנוע, טסט, זיהום — ממאגר ממשלתי רשמי.",
-    points: ["יצרן + דגם + שנה", "סוג מנוע", "תוקף טסט", "קבוצת זיהום", "נתונים רשמיים"] },
-  { icon: <Wrench />, num: "07", title: "מעקב טיפולים", sub: "היסטוריית שירות",
-    desc: "שמן, צמיגים, בלמים, פילטרים. תאריך, ק\"מ, עלות. תזכורות.",
-    points: ["כל סוגי הטיפולים", "תאריך + ק\"מ + עלות", "תזכורות טסט", "היסטוריה מלאה", "ייצוא נתונים"] },
-  { icon: <Lightbulb />, num: "08", title: "מדריך נורות", sub: "עובד אופליין",
-    desc: "כל נורת דאשבורד — חומרה, הסבר, מה לעשות. 11 בלילה בכביש? מכוסה.",
-    points: ["Check Engine, ABS, שמן", "דירוג חומרה", "הסבר + פעולה", "אופליין לחלוטין", "כל הנורות"] },
-  { icon: <Globe />, num: "09", title: "עברית + אנגלית", sub: "דו-לשוני מלא",
-    desc: "כל מסך, כל תשובה — עברית או אנגלית. RTL מושלם.",
-    points: ["ממשק מלא בשתי שפות", "תרגום חכם דו-לשוני", "זיהוי שפה אוטומטי", "RTL מושלם", "פותח בישראל"] },
-  { icon: <Lock />, num: "10", title: "אימות מאובטח", sub: "Google · Apple · אנונימי",
-    desc: "Firebase. AES-256. הנתונים שלך — רק שלך.",
-    points: ["Google / Apple / אנונימי", "Firebase Auth", "הצפנת AES-256", "נתונים מקומיים", "פרטיות מוחלטת"] },
+const featured = [
+  {
+    icon: <Cpu className="w-6 h-6" />, tag: "01 · הדגל שלנו", title: "בדיקת תקלות בעברית פשוטה",
+    desc: "לא עוד P0420. המערכת מסבירה מה הבעיה, כמה היא חמורה, אם בטוח לנסוע, וכמה אמור לעלות התיקון — מותאם לדגם הרכב שלך.",
+    points: ["הסבר בעברית פשוטה", "דירוג חומרה בצבעים", "בטוח לנסוע? כן / לא", "הערכת עלות תיקון"],
+    visual: "dtc" as const,
+  },
+  {
+    icon: <Search className="w-6 h-6" />, tag: "03 · בלעדי", title: "זיהוי הונאת קילומטראז'",
+    desc: "בדיקה שעולה ₪200–500 אצל מכון — כלולה חינם. המערכת קוראת ק\"מ ממספר מודולים ברכב; אם השעון הוזז, המספרים לא יתאימו.",
+    points: ["רמת סיכון + ציון ביטחון", "השוואה מול נתוני VIN", "תוצאה תוך שניות", "אף אפליקציה צרכנית לא עושה את זה"],
+    visual: "km" as const,
+  },
 ];
 
-export const FeatureDeepDive = () => {
-  const [idx, setIdx] = useState(0);
-  const f = features[idx];
-  return (
-    <section id="features" className="py-20 md:py-28" style={{ background: 'rgba(12,12,10,0.35)' }} dir="rtl">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-14">
-          <span className="inline-block bg-primary/90 text-white text-xs font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full mb-3">10 יכולות</span>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">הכל תחת שליטה.</h2>
-        </div>
+const rest = [
+  { icon: <Gauge />, title: "דאשבורד חי", desc: "RPM, מהירות, טמפרטורה, מצבר — בזמן אמת, באנימציה." },
+  { icon: <Battery />, title: "בריאות מצבר", desc: "מזהה חולשה ימים לפני שנתקעים. בריא / נחלש / החלף." },
+  { icon: <MapPin />, title: "מעקב נסיעות", desc: "מרחק, דלק, עלות וציון נהיגה 0–100 — אוטומטית." },
+  { icon: <FileText />, title: "חיפוש רכב", desc: "VIN או לוחית → יצרן, דגם, טסט, זיהום. ממאגר ממשלתי." },
+  { icon: <Wrench />, title: "מעקב טיפולים", desc: "שמן, צמיגים, בלמים — היסטוריה מלאה + תזכורות." },
+  { icon: <Lightbulb />, title: "מדריך נורות", desc: "כל נורת אזהרה — חומרה והסבר. עובד גם אופליין." },
+  { icon: <Globe />, title: "עברית + אנגלית", desc: "ממשק דו-לשוני מלא, RTL מושלם. פותח בישראל." },
+  { icon: <Lock />, title: "פרטיות מלאה", desc: "Google / Apple, הצפנת AES-256. הנתונים שלך — שלך." },
+];
 
-        <div className="flex gap-1.5 overflow-x-auto pb-3 mb-10 md:flex-wrap md:overflow-visible">
-          {features.map((ft, i) => (
-            <button key={i} onClick={() => setIdx(i)}
-              className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all shrink-0",
-                i === idx ? "bg-primary text-white" : "bg-white/8 text-white/50 hover:text-white border border-white/10"
-              )}>
-              <span className="font-black">{ft.num}</span>
-              <span className="hidden sm:inline">{ft.title}</span>
-            </button>
-          ))}
-        </div>
-
-        <motion.div key={idx} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="card-dark p-6 md:p-10">
-          <div className="grid md:grid-cols-[1fr_1.2fr] gap-8">
-            <div>
-              <div className="big-num">{f.num}</div>
-              <h3 className="text-xl md:text-2xl font-black text-white -mt-6 mb-1 relative z-10">{f.title}</h3>
-              <p className="text-primary text-xs font-semibold mb-4">{f.sub}</p>
-              <p className="text-white/70 text-sm leading-relaxed">{f.desc}</p>
-            </div>
-            <div className="space-y-2">
-              {f.points.map((d, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/8">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <span className="text-sm text-white/70">{d}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="flex items-center justify-center gap-3 mt-6">
-          <button onClick={() => setIdx(i => (i - 1 + features.length) % features.length)} className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center text-white/40 hover:text-primary transition-colors"><ChevronRight size={16} /></button>
-          <span className="text-white/30 text-xs font-mono">{String(idx + 1).padStart(2, '0')}/{features.length}</span>
-          <button onClick={() => setIdx(i => (i + 1) % features.length)} className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center text-white/40 hover:text-primary transition-colors"><ChevronLeft size={16} /></button>
-        </div>
+const DtcVisual = () => (
+  <div className="glass !rounded-xl p-4 space-y-2.5 select-none" aria-hidden="true">
+    <div className="flex items-center justify-between">
+      <span className="text-[10px] font-bold text-white/40 tracking-widest">סריקת תקלות</span>
+      <span className="text-[10px] font-mono text-emerald-300">הושלמה ✓</span>
+    </div>
+    <div className="rounded-lg bg-amber-400/10 border border-amber-400/25 p-3">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-xs font-bold text-white">חיישן חמצן — בנק 1</span>
+        <span className="text-[9px] font-bold bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full">בינונית</span>
       </div>
-    </section>
-  );
-};
+      <p className="text-[11px] text-white/60 leading-snug">לא דחוף. בטוח לנסוע. מומלץ לטפל בחודש הקרוב. עלות משוערת: ₪350–500.</p>
+    </div>
+    <div className="rounded-lg bg-white/4 border border-white/8 p-3 flex items-center justify-between">
+      <span className="text-xs text-white/70">מערכות נוספות</span>
+      <span className="text-[10px] font-mono text-emerald-300">תקינות ✓</span>
+    </div>
+  </div>
+);
+
+const KmVisual = () => (
+  <div className="glass !rounded-xl p-4 select-none" aria-hidden="true">
+    <div className="flex items-center justify-between mb-3">
+      <span className="text-[10px] font-bold text-white/40 tracking-widest">בדיקת ק"מ</span>
+      <span className="text-[10px] font-mono text-emerald-300">3 מקורות</span>
+    </div>
+    <div className="space-y-2">
+      {[
+        { l: "לוח מחוונים", v: "142,300", ok: true },
+        { l: "מודול מנוע", v: "142,280", ok: true },
+        { l: "נתוני יבואן", v: "141,900", ok: true },
+      ].map((r, i) => (
+        <div key={i} className="flex items-center justify-between rounded-lg bg-white/4 border border-white/8 px-3 py-2">
+          <span className="text-[11px] text-white/60">{r.l}</span>
+          <span className="text-xs font-mono text-white">{r.v}</span>
+        </div>
+      ))}
+    </div>
+    <div className="mt-3 rounded-lg bg-emerald-400/10 border border-emerald-400/25 px-3 py-2 flex items-center gap-2">
+      <CheckCircle2 size={13} className="text-emerald-300 shrink-0" />
+      <span className="text-[11px] font-bold text-emerald-200">הנתונים תואמים — סיכון נמוך להונאה</span>
+    </div>
+  </div>
+);
+
+export const FeatureDeepDive = () => (
+  <section id="features" className="py-24 md:py-32" style={{ background: 'rgba(6,7,10,0.45)', backdropFilter: 'blur(2px)' }} dir="rtl">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="mb-14">
+        <span className="kicker mb-4">10 יכולות</span>
+        <h2 className="h-display text-4xl md:text-6xl text-white mt-3">הכל תחת שליטה.</h2>
+      </div>
+
+      {/* Two featured cards */}
+      <div className="grid md:grid-cols-2 gap-4 mb-4">
+        {featured.map((f, i) => (
+          <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.1 }}
+            className="glass glass-hover p-7 md:p-8 flex flex-col gap-6">
+            <div>
+              <div className="flex items-center justify-between mb-5">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/12 border border-blue-400/25 flex items-center justify-center text-blue-300">{f.icon}</div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">{f.tag}</span>
+              </div>
+              <h3 className="text-xl md:text-2xl font-black text-white mb-3">{f.title}</h3>
+              <p className="muted text-sm leading-relaxed mb-4">{f.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {f.points.map((p, j) => (
+                  <span key={j} className="text-[11px] font-medium text-white/65 bg-white/5 border border-white/10 rounded-full px-3 py-1">{p}</span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-auto">{f.visual === 'dtc' ? <DtcVisual /> : <KmVisual />}</div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Compact grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {rest.map((f, i) => (
+          <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.05 }}
+            className="glass glass-hover p-5 md:p-6">
+            <div className="w-10 h-10 rounded-xl bg-white/6 border border-white/10 flex items-center justify-center text-cyan-300 mb-4 [&>svg]:w-5 [&>svg]:h-5">{f.icon}</div>
+            <h3 className="text-sm font-bold text-white mb-1.5">{f.title}</h3>
+            <p className="muted text-xs leading-relaxed">{f.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
