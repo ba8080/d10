@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpLeft, CarFront, Check, ChevronDown, MessageCircle, Pa
 import { FAMILY_PAYMENT_URL, SOLO_PAYMENT_URL, ULTIMATE_PAYMENT_URL, trackCheckout } from '../utils';
 import '../purchase.css';
 
-const WHATSAPP_NUMBER = '972547669122';
+const WHATSAPP_NUMBER = '972552674465';
 const generalWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('היי, אשמח לקבל פרטים על D10')}`;
 
 type CarDetails = { brand: string; model: string; year: string; platform: string };

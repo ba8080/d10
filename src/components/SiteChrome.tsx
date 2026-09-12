@@ -89,7 +89,7 @@ export function Footer() {
         </div>
         <div className="sc-footer-column">
           <h2>כאן בשבילכם</h2>
-          <a href="https://wa.me/972547669122" target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" /> דברו איתנו בוואטסאפ</a>
+          <a href="https://wa.me/972552674465" target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" /> דברו איתנו בוואטסאפ</a>
           <a href="mailto:support@d10.store"><Mail size={16} aria-hidden="true" /><span dir="ltr">support@d10.store</span></a>
           <p>מתלבטים אם זה מתאים לרכב שלכם?<br />נשמח לעזור לפני ההזמנה.</p>
         </div>
