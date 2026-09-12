@@ -1,11 +1,11 @@
 import React from 'react';
 
 const LegalPage = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="min-h-screen bg-[#06070a] pt-32 pb-20" dir="rtl">
-    <div className="max-w-3xl mx-auto px-6">
-      <a href="#" className="text-blue-300 text-xs font-semibold hover:underline mb-8 inline-block">→ חזרה</a>
-      <h1 className="text-3xl font-black text-white mb-8 tracking-tight">{title}</h1>
-      <div className="space-y-5 text-white/60 text-sm leading-relaxed">{children}</div>
+  <div className="legal-page" dir="rtl">
+    <div className="shell">
+      <a href="#home" className="legal-back">→ חזרה לאתר</a>
+      <h1>{title}</h1>
+      <div className="legal-content">{children}</div>
     </div>
   </div>
 );
@@ -28,7 +28,7 @@ export const PrivacyPolicy = () => (
     <ul className="list-disc pr-6 space-y-1"><li>עיון במידע שנאסף עליך</li><li>תיקון מידע שגוי</li><li>מחיקת מידע אישי</li><li>הסרה מרשימות תפוצה</li></ul>
     <p>לכל בקשה: <a href="mailto:support@d10.store" className="text-blue-300 underline">support@d10.store</a></p>
     <h2 className="text-base font-bold text-white">7. עוגיות (Cookies)</h2>
-    <p>האתר משתמש בעוגיות לצורכי תפעול ושיפור חוויית הגלישה. ניתן לנהל את העדפות העוגיות דרך הגדרות הדפדפן. שימוש באתר בכפוף לאישור העוגיות כפי שמוצג בבאנר הייעודי.</p>
+    <p>האתר משתמש בעוגיות לצורכי תפעול ושיפור חוויית הגלישה. ניתן לשנות את הבחירה באמצעות כפתור העדפות העוגיות בתחתית האתר ובאמצעות הגדרות הדפדפן. שימוש באתר בכפוף לאישור העוגיות כפי שמוצג בבאנר הייעודי.</p>
   </LegalPage>
 );
 
@@ -66,7 +66,7 @@ export const AccessibilityStatement = () => (
     <h2 className="text-base font-bold text-white">מחויבות לנגישות</h2>
     <p>D10 מחויבת להנגיש את האתר לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, תשנ"ח-1998 ותקנות הנגישות הרלוונטיות.</p>
     <h2 className="text-base font-bold text-white">רמת נגישות</h2>
-    <p>האתר נבנה לעמידה בתקן WCAG 2.0 ברמה AA, הכולל:</p>
+    <p>באתר שולבו אמצעים לשיפור הנגישות, ובהם:</p>
     <ul className="list-disc pr-6 space-y-1">
       <li>HTML סמנטי ומובנה</li>
       <li>ניווט מלא באמצעות מקלדת</li>
@@ -85,7 +85,7 @@ export const AccessibilityStatement = () => (
       <li>הדגשת קישורים</li>
     </ul>
     <h2 className="text-base font-bold text-white">חריגים ידועים</h2>
-    <p>ייתכנו רכיבים באתר שאינם נגישים במלואם, כגון תוכן מדיה (סרטון ברקע). אנו פועלים לשפר את הנגישות באופן מתמשך.</p>
+    <p>תכנים ושירותים חיצוניים, כגון עמוד התשלום ו־WhatsApp, מופעלים על ידי ספקים אחרים. אם נתקלתם בקושי, ניתן לפנות אלינו לקבלת סיוע.</p>
     <h2 className="text-base font-bold text-white">פניות בנושא נגישות</h2>
     <p>נתקלתם בבעיית נגישות? נשמח לסייע.</p>
     <ul className="list-disc pr-6 space-y-1">

@@ -1,0 +1,29 @@
+.device-scene { position: relative; isolation: isolate; width: 100%; height: 100%; min-height: 370px; color: #c1c4d5; }
+.device-scene-viewport { position: absolute; inset: 0; outline: none; touch-action: pan-y pinch-zoom; cursor: grab; border-radius: 20px; }
+.device-scene-viewport:active { cursor: grabbing; }
+.device-scene-viewport:focus-visible { outline: 2px solid #a6f9df; outline-offset: -7px; }
+.device-scene-viewport canvas { display: block; width: 100%; height: 100%; touch-action: pan-y pinch-zoom !important; }
+.device-scene-caption { position: absolute; right: 28px; left: 28px; bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; line-height: 1.8; pointer-events: none; color: #9a9eb1; }
+.device-scene-caption > span { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+.device-scene-caption i { display: inline-block; width: 5px; height: 5px; background: #8cede0; border-radius: 50%; box-shadow: 0 0 8px #8cede059; }
+.device-scene-caption small { font: inherit; color: #878c9e; }
+.device-scene-caption-separator { color: #565b72; }
+.device-scene-caption button { pointer-events: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 5px 9px; color: #bbc0d3; background: #141723b3; border: 1px solid #34384b; border-radius: 7px; font: inherit; cursor: pointer; }
+.device-scene-caption button:hover { color: #ecfff8; border-color: #6f8d87; background: #192a29; }
+.device-scene-caption button:focus-visible { outline: 2px solid #a6f9df; outline-offset: 4px; }
+.device-scene-caption button > span { font-size: 17px; line-height: 1; }
+.device-scene-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 12px; color: #b0b9d0; pointer-events: none; }
+.device-scene-loading > span { width: 17px; height: 17px; border: 1px solid #657784; border-top-color: #a3f8dd; border-radius: 50%; animation: device-loading-turn 1.2s linear infinite; }
+.device-scene-fallback { position: absolute; inset: 0; border-radius: 18px; overflow: hidden; display: grid; place-items: center; }
+.device-scene-fallback img { width: 100%; height: 100%; object-fit: cover; }
+.device-scene-fallback > span { position: absolute; bottom: 19px; right: 20px; background: #11161bce; color: #cbd4d9; font-size: 11px; padding: 6px 10px; border-radius: 6px; }
+.device-scene--fallback .device-scene-viewport { visibility: hidden; }
+@keyframes device-loading-turn { to { transform: rotate(360deg); } }
+@media (max-width: 650px) {
+  .device-scene { min-height: 350px; }
+  .device-scene-caption { right: 14px; left: 14px; bottom: 8px; font-size: 9px; gap: 8px; }
+  .device-scene-caption > span { gap: 5px; }
+  .device-scene-caption button { min-height: 34px; padding-inline: 7px; }
+}
+@media (max-width: 360px) { .device-scene-caption-separator, .device-scene-caption small { display: none; } }
+@media (prefers-reduced-motion: reduce) { .device-scene-loading > span { animation: none; } }

@@ -1,96 +1,47 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState, useEffect } from 'react';
-import { Navbar, Hero } from './components/HeroSection';
-import { PainPoints, SolutionOverview } from './components/PainAndSolution';
-import { FeatureDeepDive } from './components/Features';
-import { HowItWorks } from './components/MiddleSections';
-import { CompatibilityChecker } from './components/Compatibility';
-import { Pricing, Testimonials } from './components/PricingAndTestimonials';
-import { FAQ, FinalCTA, Footer, CookieConsentBanner, MobileStickyBar, AccessibilityWidget, InlineCTA } from './components/BottomSections';
+import { useEffect, useState } from 'react';
+import { Header, Footer, ConsentBanner, MobilePurchaseBar, AccessibilityControls } from './components/SiteChrome';
+import { ProductExperience, HowItWorks, FinalInvitation } from './components/ProductStory';
+import { CompatibilitySection, PurchaseSection, FAQSection } from './components/PurchaseSections';
 import { PrivacyPolicy, TermsOfUse, AccessibilityStatement, ReturnsCancellationPolicy } from './components/LegalPages';
+import { initializeAnalytics } from './utils';
+import { Hero } from './components/TechHero';
+import { useScrollReveal } from './useScrollReveal';
 
-declare global {
-  interface Window { fbq: any; }
-}
+const legalPages = { privacy: PrivacyPolicy, terms: TermsOfUse, accessibility: AccessibilityStatement, returns: ReturnsCancellationPolicy };
+const titles: Record<string, string> = { privacy: 'מדיניות פרטיות', terms: 'תנאי שימוש', accessibility: 'הצהרת נגישות', returns: 'ביטולים והחזרות' };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<string>('');
-
+  const [hash, setHash] = useState(() => window.location.hash.slice(1));
+  useScrollReveal(hash);
+  const LegalContent = Object.hasOwn(legalPages, hash) ? legalPages[hash as keyof typeof legalPages] : undefined;
   useEffect(() => {
-    const handleHash = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (['privacy', 'terms', 'accessibility', 'returns'].includes(hash)) {
-        setCurrentPage(hash);
-        window.scrollTo(0, 0);
+    const update = () => setHash(window.location.hash.slice(1));
+    window.addEventListener('hashchange', update);
+    initializeAnalytics();
+    return () => window.removeEventListener('hashchange', update);
+  }, []);
+  useEffect(() => {
+    document.title = LegalContent ? `${titles[hash]} | D10 AI` : 'D10 AI — הרכב שלך. עכשיו מחובר אליך.';
+    const frame = requestAnimationFrame(() => {
+      if (LegalContent || !hash || hash === 'home') {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        if (LegalContent) document.getElementById('main-content')?.focus({ preventScroll: true });
       } else {
-        setCurrentPage('');
+        const section = document.getElementById(hash);
+        section?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        if (hash === 'main-content') section?.focus({ preventScroll: true });
       }
-    };
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
-  }, []);
-
-  useEffect(() => {
-    const consent = localStorage.getItem('d10_cookie_consent');
-    if (consent === 'granted' && typeof window.fbq === 'function') {
-      window.fbq('consent', 'grant');
-    }
-  }, []);
-
-  const renderLegalPage = () => {
-    switch (currentPage) {
-      case 'privacy': return <PrivacyPolicy />;
-      case 'terms': return <TermsOfUse />;
-      case 'accessibility': return <AccessibilityStatement />;
-      case 'returns': return <ReturnsCancellationPolicy />;
-      default: return null;
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#06070a] font-sans selection:bg-primary selection:text-white">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 focus:z-[300] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-md">דלג לתוכן</a>
-      <Navbar />
-
-      {currentPage ? (
-        <>
-          {renderLegalPage()}
-          <Footer />
-        </>
-      ) : (
-        <>
-          <main id="main-content" role="main">
-            <Hero>
-              <PainPoints />
-              <SolutionOverview />
-              <FeatureDeepDive />
-            </Hero>
-            <HowItWorks />
-            <CompatibilityChecker />
-            <Pricing />
-            <Testimonials />
-            <InlineCTA variant="dark" />
-            <FAQ />
-            <FinalCTA />
-
-            <div className="section-dark py-5 px-6 border-t border-white/6" dir="rtl">
-              <p className="text-white/25 text-[10px] max-w-6xl mx-auto leading-relaxed">
-                * D10 הוא מכשיר דיאגנוסטי אינפורמטיבי ואינו מהווה תחליף לבדיקה מקצועית. יש להתייעץ עם מוסכניק מוסמך לפני ביצוע תיקונים. המחירים כוללים מע"מ.
-              </p>
-            </div>
-          </main>
-          <Footer />
-        </>
-      )}
-
-      <MobileStickyBar />
-      <CookieConsentBanner />
-      <AccessibilityWidget />
-    </div>
-  );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [hash, LegalContent]);
+  return <div className="site" dir="rtl" id="home">
+    <Header />
+    <main id="main-content" tabIndex={-1}>
+      {LegalContent ? <LegalContent /> : <>
+        <Hero /><ProductExperience /><HowItWorks /><CompatibilitySection /><PurchaseSection /><FAQSection /><FinalInvitation />
+        <div className="product-note shell">D10 מספק מידע על הרכב ואינו תחליף לבדיקה מקצועית. זמינות הנתונים והיכולות משתנה בהתאם לרכב. יש להשתמש באפליקציה רק כשהרכב עומד במקום בטוח.</div>
+      </>}
+    </main>
+    <Footer /><MobilePurchaseBar hidden={!!LegalContent} /><ConsentBanner /><AccessibilityControls />
+  </div>;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "D10 AI - The Smart Car Diagnostic Tool",
-  "description": "A high-converting landing page for D10 AI, a revolutionary OBD2 diagnostic tool with AI-powered insights in Hebrew and English.",
+  "name": "D10 AI — הרכב שלך. עכשיו מחובר אליך.",
+  "description": "Hebrew RTL storefront for the D10 OBD2 adapter and app, with an interactive WebGL 3D product experience, vehicle compatibility inquiry and package selection.",
   "requestFramePermissions": []
 }
