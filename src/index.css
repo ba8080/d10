@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-@import "tailwindcss";
+@import "tailwindcss" source(".");
 @theme { --font-sans: "Heebo", Arial, sans-serif; --color-primary: #c8ff82; }
 :root{font-family:"Heebo",Arial,sans-serif;color:#eef3f8;background:#06070b;font-synthesis:none;--accent:#c8ff82;--paper:#06070b;--ink:#eef3f8;--muted:#96a2b4;--line:#aabedc24;--violet:#a99bff;--mono:"Space Grotesk",monospace;color-scheme:dark}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:0}body{margin:0;-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button,a,summary,select{-webkit-tap-highlight-color:transparent}button,a,summary{touch-action:manipulation}button,summary{cursor:pointer}a{color:inherit;text-decoration:none}button{color:inherit}img{display:block;max-width:100%}button:disabled{cursor:wait}button svg,a svg{flex-shrink:0}:focus-visible{outline:2px solid #c8ff82;outline-offset:5px}::selection{background:#c8ff82;color:#11190a}[hidden]{display:none!important}
