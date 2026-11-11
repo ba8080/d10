@@ -1,8 +1,8 @@
 import { useState, useRef, type KeyboardEvent } from 'react';
-import { ArrowLeft, ArrowUpLeft, Check, CheckCheck, Activity, ScanLine, Wrench, Cable, Smartphone, MessageCircle, Truck, ShieldCheck, CreditCard, Languages, CircleHelp, Gauge, Battery, Thermometer, Bluetooth, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowUpLeft, Check, CheckCheck, Activity, ScanLine, Wrench, Cable, Smartphone, MessageCircle, Truck, ShieldCheck, CreditCard, Languages, CircleHelp, Gauge, Battery, Thermometer, Bluetooth, ChevronDown, MapPin, Wallet } from 'lucide-react';
 
 const experiences = [
-  {id:'diagnostics', Icon:ScanLine, number:'01', title:'מקוד תקלה לתשובה ברורה.', short:'סריקת תקלות', text:'נורת המנוע נדלקה? קבלו הסבר בעברית על הקוד שהרכב מדווח, כדי לדעת מה לשאול בבדיקה המקצועית.'},
+  {id:'diagnostics', Icon:ScanLine, number:'01', title:'אבחון חכם. לא רק קריאת קוד.', short:'אבחון תקלות', text:'למה התקלה קרתה, מה אפשר לעשות, כמה עשוי לעלות התיקון ואיפה אפשר לחפש מוסך קרוב.'},
   {id:'live', Icon:Activity, number:'02', title:'כל הנתונים, במבט אחד.', short:'נתוני רכב', text:'סל״ד, טמפרטורה ונתוני מצבר — מרוכזים בתצוגה נוחה. הנתונים הזמינים תלויים בדגם הרכב.'},
   {id:'maintenance', Icon:Wrench, number:'03', title:'גם לטיפול הבא יש מקום.', short:'מעקב טיפולים', text:'מרכזים את היסטוריית הטיפולים והתזכורות, ושומרים את הדברים שחשוב לזכור במקום אחד.'},
 ];
@@ -16,14 +16,27 @@ function AppDemo({ active }: { active:number }) {
       <div className="app-tabs" aria-hidden="true">{experiences.map((item,i)=><span className={active===i?'active':''} key={item.id}>{item.short}</span>)}</div>
       {experiences.map((item,index)=><div className="app-panel" id={`experience-${item.id}`} key={item.id} role="tabpanel" hidden={active!==index} aria-labelledby={`tab-${item.id}`} tabIndex={0}>
         {index===0 && <>
-          <div className="scan-complete"><span><CheckCheck size={18}/> הסריקה הושלמה</span><span>דוח לדוגמה</span></div>
+          <div className="scan-complete"><span><CheckCheck size={18}/> האבחון הושלם</span><span>דוגמה להמחשה</span></div>
           <div className="diagnostic-card">
-            <div className="diagnostic-top"><span className="engine-icon"><ScanLine size={23}/></span><span className="status-tag">לבירור מקצועי</span></div>
-            <span className="app-label">זוהה קוד תקלה</span><h3>מערכת ניהול המנוע</h3><p>הרכב מדווח על חריגה. D10 עוזר להבין את משמעות הקוד ולרכז מידע לקראת הבדיקה במוסך.</p>
-            <button className="report-button" onClick={()=>setExpanded(!expanded)} aria-expanded={expanded} aria-controls="sample-report">{expanded?'סגירת ההסבר':'מה זה אומר?'}<ArrowLeft size={16}/></button>
-            <div className="sample-report" id="sample-report" hidden={!expanded}>קוד תקלה הוא נקודת התחלה לבדיקה. הוא אינו מוכיח שחלק מסוים דורש החלפה. מומלץ להציג את המידע לאיש מקצוע לפני ביצוע תיקון.</div>
+            <div className="diagnostic-top"><span className="engine-icon"><ScanLine size={23}/></span><span className="status-tag">מומלץ לבדוק במוסך</span></div>
+            <span className="app-label">קוד תקלה <bdi dir="ltr">P0420</bdi></span>
+            <h3>יעילות הממיר הקטליטי נמוכה</h3>
+            <p>הרכב מזהה ירידה ביעילות מערכת הפחתת הפליטות. לא בהכרח צריך להחליף ממיר: ייתכן שהגורם הוא דליפת פליטה או חיישן.</p>
+            <button className="report-button" onClick={()=>setExpanded(!expanded)} aria-expanded={expanded} aria-controls="sample-report">
+              {expanded?'סגירת ניתוח התקלה':'למה זה קרה, איך מתקנים וכמה זה עולה?'}<ArrowLeft size={16}/>
+            </button>
+            <div className="sample-report" id="sample-report" hidden={!expanded}>
+              <strong>מה הסיבות האפשריות?</strong>
+              <ul><li>דליפה במערכת הפליטה</li><li>חיישן חמצן שמדווח נתונים לא תקינים</li><li>ממיר קטליטי בלוי או תקלה בפעולת המנוע</li></ul>
+              <strong>מה כדאי לעשות?</strong>
+              <p>מבקשים מהמוסך לבדוק קודים נוספים, נזילות ונתוני חיישנים לפני שמחליפים חלק.</p>
+              <strong><Wallet size={12} aria-hidden="true" style={{display:'inline',verticalAlign:'middle'}}/> כמה זה עשוי לעלות?</strong>
+              <p>החלפת חיישן חמצן: <bdi>₪600–1,400</bdi>. ממיר קטליטי (חלק בלבד): <bdi>₪1,500–7,000+</bdi>.</p>
+              <a className="demo-garage-link" href="https://www.google.com/maps/search/?api=1&query=%D7%9E%D7%95%D7%A1%D7%9A%20%D7%93%D7%99%D7%90%D7%92%D7%A0%D7%95%D7%A1%D7%98%D7%99%D7%A7%D7%94%20%D7%A8%D7%9B%D7%91" target="_blank" rel="noopener noreferrer"><MapPin size={14} aria-hidden="true" /> חיפוש מוסך ב־Google Maps <ArrowUpLeft size={13} aria-hidden="true"/></a>
+              <small>טווחי מחיר לדוגמה בלבד; תלויים בדגם, בעבודה ובמע״מ. אין להסיק מהקוד לבדו מהו החלק התקול.</small>
+            </div>
           </div>
-          <div className="app-hint"><CircleHelp size={15}/><span>התמונה ברורה יותר. השיחה במוסך פשוטה יותר.</span></div>
+          <div className="app-hint"><CircleHelp size={15}/><span>מבינים את הגורמים, את הפעולות האפשריות ואת טווחי המחיר — לא רק את הקוד.</span></div>
         </>}
         {index===1 && <>
           <div className="scan-complete"><span><Activity size={18}/> תמונת מצב של הרכב</span><span>נתונים לדוגמה</span></div>
