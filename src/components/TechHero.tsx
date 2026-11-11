@@ -1,5 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { ArrowLeft, ArrowDown, ScanLine, Layers3, Pause, Play, Move3D, Check, Languages, CreditCard, Truck, ShieldCheck, Activity, Bluetooth } from 'lucide-react';
+import {
+  ArrowLeft, ArrowDown, Check, CircleCheck, Layers3, Move3D,
+  Pause, Play, ScanLine, ShieldCheck, Truck, Languages, CreditCard
+} from 'lucide-react';
 
 const DeviceScene = lazy(() => import('./DeviceScene'));
 
@@ -9,52 +12,92 @@ export function Hero() {
   const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false);
   const [ready, setReady] = useState(false);
+
   useEffect(() => {
     if (!scanning) return;
     const started = performance.now();
     const timer = window.setInterval(() => {
-      const value = Math.min(100, Math.round((performance.now() - started) / 42));
-      setProgress(value);
-      if (value >= 100) setScanning(false);
+      const next = Math.min(100, Math.round((performance.now() - started) / 40));
+      setProgress(next);
+      if (next === 100) setScanning(false);
     }, 80);
     return () => window.clearInterval(timer);
   }, [scanning]);
-  const scan = () => { setProgress(0); setScanning(true); };
-  return <>
-    <section className={`tech-hero ${scanning ? 'is-scanning' : ''} ${paused ? 'motion-paused' : ''}`} aria-labelledby="hero-title">
-      <div className="hero-grid" aria-hidden="true" /><div className="hero-ambient ambient-violet" aria-hidden="true" /><div className="hero-ambient ambient-mint" aria-hidden="true" />
-      <div className="hero-shell shell">
-        <div className="hero-copy">
-          <div className="hero-eyebrow"><span className="hero-line"/><span dir="ltr">THE NEXT LEVEL OF CAR INTELLIGENCE</span></div>
-          <h1 id="hero-title">הרכב שלך.<br/><span className="hero-word-gradient">עכשיו מחובר</span><br/>אליך.</h1>
-          <p>פחות לנחש. יותר לדעת. מתאם <bdi>D10 AI</bdi> ואפליקציה בעברית שמחברים אותך למידע של הרכב, ומתרגמים קודי תקלות להבנה.</p>
-          <div className="hero-actions"><a href="#pricing" className="button button-primary hero-buy">לשדרוג שלי <ArrowLeft size={20}/></a><div className="hero-price"><strong dir="ltr">₪299</strong><span>מתאם + אפליקציה. בלי מנוי.</span></div></div>
-          <a className="hero-secondary" href="#features">לגלות מה אפשר לעשות <ArrowDown size={15}/></a>
-          <div className="hero-tags"><span><Check size={13}/> משלוח חינם</span><span><Check size={13}/> שנה אחריות</span><span><Check size={13}/> עברית מלאה</span></div>
+
+  return (
+    <>
+      <section className="studio-hero" aria-labelledby="hero-title">
+        <div className="shell studio-hero-layout">
+          <div className="studio-hero-copy">
+            <span className="studio-eyebrow"><span className="studio-eyebrow-dot" /> הטכנולוגיה שנותנת לרכב שלך קול</span>
+            <h1 id="hero-title">הרכב שלך.<br /><span>הרבה יותר ברור.</span></h1>
+            <p className="studio-hero-lead">
+              הכירו את D10 AI. מתאם קטן ואפליקציה בעברית שעוזרים להבין קודי תקלות,
+              לראות נתוני רכב ולנהל טיפולים — בלי ללכת לאיבוד במונחים טכניים.
+            </p>
+            <div className="studio-hero-buttons">
+              <a className="studio-button studio-button-primary" href="#pricing">לגלות את D10 שלי <ArrowLeft size={18} aria-hidden="true" /></a>
+              <a className="studio-button studio-button-secondary" href="#features">איך זה עובד <ArrowDown size={17} aria-hidden="true" /></a>
+            </div>
+            <div className="studio-hero-offer">
+              <strong dir="ltr">₪299</strong>
+              <span>מתאם + אפליקציה<br /><b>תשלום חד־פעמי. בלי מנוי.</b></span>
+            </div>
+          </div>
+
+          <div className="studio-device-card">
+            <div className="studio-device-top">
+              <div className="studio-device-brand" dir="ltr"><strong>D10</strong><span>AI</span></div>
+              <span className="studio-device-edition">YOUR CAR, DECODED.</span>
+            </div>
+            <div className="studio-device-viewer">
+              <Suspense fallback={<div className="studio-device-loading" role="status"><span />טוענים את הדגם התלת־ממדי…</div>}>
+                <DeviceScene exploded={exploded} scanning={scanning} paused={paused} onReady={() => setReady(true)} />
+              </Suspense>
+            </div>
+            <div className="studio-device-bottom">
+              <div className="studio-device-hint"><Move3D size={16} aria-hidden="true" /><span>{ready ? 'גררו את המתאם לסיבוב 360°' : 'המחשת מוצר אינטראקטיבית'}</span></div>
+              <button type="button" className="studio-motion-button" onClick={() => setPaused(value => !value)} aria-label={paused ? 'הפעלת תנועת המודל' : 'עצירת תנועת המודל'} aria-pressed={paused}>
+                {paused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}
+              </button>
+            </div>
+            <div className="studio-device-controls" aria-label="התנסות בדגם המוצר">
+              <button type="button" disabled={!ready} aria-pressed={exploded} onClick={() => setExploded(value => !value)}>
+                <Layers3 size={17} aria-hidden="true" /> {exploded ? 'סגירת המכשיר' : 'לגלות מה בפנים'}
+              </button>
+              <button type="button" disabled={!ready || scanning} onClick={() => { setProgress(0); setScanning(true); }}>
+                {progress === 100 && !scanning ? <CircleCheck size={17} aria-hidden="true" /> : <ScanLine size={17} aria-hidden="true" />}
+                {scanning ? 'סריקה לדוגמה ' + progress + '%' : progress === 100 ? 'סריקה הושלמה · נסו שוב' : 'הדגמת סריקה'}
+              </button>
+            </div>
+            <div className="studio-demo-caption" aria-live="polite">
+              <span>{exploded ? 'המבנה הפנימי הוא להמחשה בלבד.' : 'המחשה תלת־ממדית של המוצר. הסריקה היא הדגמה בלבד.'}</span>
+              <span className="studio-demo-progress" aria-hidden="true"><span style={{ width: progress + '%' }} /></span>
+            </div>
+          </div>
         </div>
-        <div className={`hero-visual ${exploded?'is-exploded':''}`}>
-          <span className="hero-watermark" aria-hidden="true" dir="ltr">D10</span>
-          <div className="scene-topline"><span className="scene-mode" dir="ltr"><span/> {exploded?'INSIDE THE INTELLIGENCE':'D10 AI / INTERACTIVE 3D'}</span><button className="scene-motion" onClick={()=>setPaused(!paused)} aria-label={paused?'הפעלת תנועה אוטומטית':'עצירת תנועה אוטומטית'} aria-pressed={paused}>{paused?<Play size={14}/>:<Pause size={14}/>}</button></div>
-          <div className="scene-mount">
-            <Suspense fallback={<div className="scene-loading"><span className="scene-loading-orbit"/><span>טוענים את חוויית התלת־ממד</span></div>}><DeviceScene exploded={exploded} scanning={scanning} paused={paused} onReady={()=>setReady(true)}/></Suspense>
-          </div>
-          <div className="scene-data data-connection" aria-hidden="true"><span className="data-icon"><Bluetooth size={17}/></span><div><span dir="ltr">CONNECTED INTELLIGENCE</span><strong>הכול מתחבר.</strong></div><span className="data-pulse"/></div>
-          <div className="scene-data data-diagnostics" aria-hidden="true"><div className="data-wave"><Activity size={22}/></div><div><span dir="ltr">YOUR CAR. DECODED.</span><strong>כל נתון. בשפה שלך.</strong></div></div>
-          <div className="scene-bottom"><span><Move3D size={15}/>{ready?'גררו כדי לסובב ב־360°':'תצוגת מוצר אינטראקטיבית'}</span><span className="scene-illustration">{exploded?'מבנה פנימי להמחשה בלבד':'המחשה תלת־ממדית'}</span></div>
-          <div className="scene-controls" aria-label="פעולות הדגמת המוצר">
-            <button onClick={()=>setExploded(!exploded)} disabled={!ready} aria-pressed={exploded}><Layers3 size={16}/>{exploded?'לסגור את המכשיר':'להציץ פנימה'}<span dir="ltr">01</span></button>
-            <button onClick={scan} disabled={scanning || !ready} className={scanning?'active':''}><ScanLine size={16}/>{scanning?`סורקים… ${progress}%`:'להפעיל סריקת דמו'}<span dir="ltr">02</span></button>
-          </div>
-          <div className="scan-feedback" aria-live="polite" aria-atomic="true">
-            {progress===100?<span><Check size={13}/> ההדמיה הושלמה. <a href="#features">גלו את התשובות באפליקציה <ArrowLeft size={12}/></a></span>:<span>הדגמה בלבד · לא מתבצע חיבור לרכב</span>}
-          </div>
-          <div className="scan-progress" aria-hidden="true"><span style={{width:`${progress}%`}}/></div>
+        <div className="shell studio-trust">
+          <div><Check size={16} aria-hidden="true" /><span>בלי מנוי חודשי</span></div>
+          <div><Check size={16} aria-hidden="true" /><span>אפליקציה בעברית</span></div>
+          <div><Check size={16} aria-hidden="true" /><span>משלוח חינם</span></div>
+          <div><Check size={16} aria-hidden="true" /><span>שנה אחריות</span></div>
         </div>
-      </div>
-      <div className="hero-footer shell"><span dir="ltr">SMALL DEVICE. BIG INTELLIGENCE.</span><a href="#features" aria-label="המשך ליכולות המוצר"><ArrowDown size={17}/></a><span dir="ltr">ENGINEERED FOR CLARITY / 2026</span></div>
-    </section>
-    <div className="trust-strip shell">
-      {[{Icon:Languages,title:'בשפה שלך',text:'ממשק והסברים בעברית'},{Icon:CreditCard,title:'קונים פעם אחת',text:'בלי דמי מנוי חודשיים'},{Icon:Truck,title:'משלוח חינם',text:'עד הבית, ברחבי ישראל'},{Icon:ShieldCheck,title:'שנה אחריות',text:'על פגמי ייצור'}].map(({Icon,title,text})=><div className="trust-item" key={title}><Icon size={22} strokeWidth={1.5}/><div><b>{title}</b><span>{text}</span></div></div>)}
-    </div>
-  </>;
+      </section>
+      <section className="studio-benefits" aria-label="היתרונות של D10">
+        <div className="shell studio-benefits-grid">
+          {[
+            { Icon: Languages, name: 'פשוט להבין', detail: 'מונחים ברורים בעברית' },
+            { Icon: CreditCard, name: 'שלך לתמיד', detail: 'רכישה אחת, בלי מנוי' },
+            { Icon: Truck, name: 'עד הדלת', detail: 'משלוח חינם בישראל' },
+            { Icon: ShieldCheck, name: 'קונים בביטחון', detail: 'שנה אחריות על פגמי ייצור' }
+          ].map(({ Icon, name, detail }) => (
+            <div className="studio-benefit" key={name}>
+              <span className="studio-benefit-icon"><Icon size={22} strokeWidth={1.65} aria-hidden="true" /></span>
+              <span><strong>{name}</strong><small>{detail}</small></span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
 }

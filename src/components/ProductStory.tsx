@@ -55,7 +55,7 @@ export function ProductExperience() {
     event.preventDefault();setActive(next);tabs.current[next]?.focus();
   }
   return <section className="experience-section shell" id="features" aria-labelledby="experience-title">
-    <div className="section-heading"><div><span className="eyebrow" dir="ltr">YOUR CAR. DECODED.</span><h2 className="section-title" id="experience-title">מאחורי כל נורה,<br/>יש תשובה.</h2></div><p>לא צריך להיות מכונאים כדי להבין יותר.<br/>צריך פשוט את המידע הנכון, בשפה שלכם.</p></div>
+    <div className="section-heading"><div><span className="eyebrow" dir="ltr">THE D10 EXPERIENCE</span><h2 className="section-title" id="experience-title">המכונית שלך.<br/>הרבה יותר מובנת.</h2></div><p>הצצה אינטראקטיבית לאפליקציה: קודי תקלות, נתונים בזמן אמת ומעקב טיפולים. הכול במקום אחד.</p></div>
     <div className="experience-layout">
       <div className="experience-options" role="tablist" aria-label="בחרו יכולת להדגמה" aria-orientation="vertical">
         {experiences.map(({id,Icon,number,title,text},index)=><button key={id} ref={el=>{tabs.current[index]=el;}} id={`tab-${id}`} role="tab" aria-selected={active===index} aria-controls={`experience-${id}`} tabIndex={active===index?0:-1} onKeyDown={event=>onTabKey(event,index)} onClick={()=>setActive(index)} className={`experience-option ${active===index?'selected':''}`}><div className="experience-option-top"><Icon size={22} strokeWidth={1.5}/><span>{number}</span></div><h3>{title}</h3><p>{text}</p><span className="experience-see">לצפייה בהדגמה <ArrowLeft size={15}/></span></button>)}
