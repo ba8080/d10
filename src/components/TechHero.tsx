@@ -29,15 +29,14 @@ export function Hero() {
       <section className="studio-hero" aria-labelledby="hero-title">
         <div className="shell studio-hero-layout">
           <div className="studio-hero-copy">
-            <span className="studio-eyebrow"><span className="studio-eyebrow-dot" /> הטכנולוגיה שנותנת לרכב שלך קול</span>
-            <h1 id="hero-title">הרכב שלך.<br /><span>הרבה יותר ברור.</span></h1>
+            <span className="studio-eyebrow"><span className="studio-eyebrow-dot" /> הרבה יותר מסורק תקלות</span>
+            <h1 id="hero-title">נורת תקלה נדלקה?<br /><span>עכשיו יש תשובות.</span></h1>
             <p className="studio-hero-lead">
-              הכירו את D10 AI. מתאם קטן ואפליקציה בעברית שעוזרים להבין קודי תקלות,
-              לראות נתוני רכב ולנהל טיפולים — בלי ללכת לאיבוד במונחים טכניים.
+              D10 AI מסביר לא רק מה קוד התקלה אומר, אלא גם למה הוא יכול להופיע, איך מתקדמים לתיקון וכמה זה עשוי לעלות. בנוסף תוכלו לחפש מוסכים קרובים, לעקוב אחר טיפולים ולראות נתוני רכב — הכול בעברית.
             </p>
             <div className="studio-hero-buttons">
               <a className="studio-button studio-button-primary" href="#pricing">לגלות את D10 שלי <ArrowLeft size={18} aria-hidden="true" /></a>
-              <a className="studio-button studio-button-secondary" href="#features">איך זה עובד <ArrowDown size={17} aria-hidden="true" /></a>
+              <a className="studio-button studio-button-secondary" href="#features">הצצה לאבחון <ArrowDown size={17} aria-hidden="true" /></a>
             </div>
             <div className="studio-hero-offer">
               <strong dir="ltr">₪299</strong>
