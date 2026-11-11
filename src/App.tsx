@@ -5,6 +5,7 @@ import { CompatibilitySection, PurchaseSection, FAQSection } from './components/
 import { PrivacyPolicy, TermsOfUse, AccessibilityStatement, ReturnsCancellationPolicy } from './components/LegalPages';
 import { initializeAnalytics } from './utils';
 import { Hero } from './components/TechHero';
+import { StudioOverview } from './components/StudioOverview';
 import { useScrollReveal } from './useScrollReveal';
 
 const legalPages = { privacy: PrivacyPolicy, terms: TermsOfUse, accessibility: AccessibilityStatement, returns: ReturnsCancellationPolicy };
@@ -38,7 +39,7 @@ export default function App() {
     <Header />
     <main id="main-content" tabIndex={-1}>
       {LegalContent ? <LegalContent /> : <>
-        <Hero /><ProductExperience /><HowItWorks /><CompatibilitySection /><PurchaseSection /><FAQSection /><FinalInvitation />
+        <Hero /><StudioOverview /><ProductExperience /><HowItWorks /><CompatibilitySection /><PurchaseSection /><FAQSection /><FinalInvitation />
         <div className="product-note shell">D10 מספק מידע על הרכב ואינו תחליף לבדיקה מקצועית. זמינות הנתונים והיכולות משתנה בהתאם לרכב. יש להשתמש באפליקציה רק כשהרכב עומד במקום בטוח.</div>
       </>}
     </main>
