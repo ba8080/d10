@@ -402,3 +402,131 @@ body { background: #fff; color: var(--studio-ink); }
   .studio-device-loading > span { animation: none; }
 }
 body.sc-a11y-reduced-motion .studio-device-loading > span { animation: none; }
+
+
+/* Full-depth D10 AI diagnosis showcase */
+.studio-bento-diagnostic {
+  grid-column: 1 / -1;
+  grid-row: auto;
+  display: grid;
+  grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+  gap: clamp(25px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(28px, 5vw, 60px);
+  min-height: 0;
+  background: linear-gradient(125deg, #fff 5%, #f7faff 95%);
+}
+.studio-diagnostic-intro { min-width: 0; align-self: center; }
+.studio-diagnostic-intro .studio-card-heading { margin-bottom: 35px; }
+.studio-diagnostic-intro h3 {
+  margin: 0 0 24px;
+  color: #191a1d;
+  font-size: clamp(30px, 3.7vw, 49px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: 1.15;
+}
+.studio-diagnostic-intro h3 > span { color: #0071e3; }
+.studio-diagnostic-intro > p { margin: 0; color: #626974; max-width: 430px; font-size: 16px; line-height: 1.95; }
+.studio-diagnostic-promises {
+  display: grid;
+  gap: 17px;
+  margin-top: 37px;
+}
+.studio-diagnostic-promises > span { display: flex; align-items: center; gap: 11px; color: #313c49; font-size: 14px; font-weight: 650; }
+.studio-diagnostic-promises svg { color: #0b9663; flex-shrink: 0; }
+.studio-bento-diagnostic .studio-diagnostic-preview {
+  margin: 0;
+  padding: 25px;
+  min-width: 0;
+  transform: none;
+  border: 1px solid #e0e7f1;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 65px rgba(20,42,74,.10);
+}
+.studio-bento-diagnostic .studio-preview-top {
+  margin-bottom: 14px;
+  padding-bottom: 15px;
+}
+.studio-bento-diagnostic .studio-preview-code { margin: 0 0 9px; }
+.studio-bento-diagnostic .studio-preview-code span { font-size: 28px; color: #0071e3; }
+.studio-bento-diagnostic .studio-preview-code small { color: #90621f; background: #fff2db; }
+.studio-diagnostic-result > strong { display: block; font-size: 18px; color: #1f262d; letter-spacing: -.025em; }
+.studio-diagnostic-result > p { margin: 8px 0 18px; color: #606a76; font-size: 12px; line-height: 1.85; }
+.studio-diagnostic-details { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.studio-diagnostic-details > section { min-width: 0; padding: 15px; border-radius: 15px; border: 1px solid #e9edf3; background: #f7f9fc; }
+.studio-diagnostic-details h4,
+.studio-diagnostic-costs h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 11px;
+  font-size: 12px;
+  font-weight: 750;
+  color: #222b35;
+}
+.studio-diagnostic-details h4 svg,
+.studio-diagnostic-costs h4 svg { color: #0071e3; flex-shrink: 0; }
+.studio-diagnostic-details ul { margin: 0; padding-right: 16px; color: #626a74; font-size: 11px; line-height: 1.8; }
+.studio-diagnostic-details p { margin: 0; color: #626a74; font-size: 11px; line-height: 1.9; }
+.studio-diagnostic-costs { margin-top: 14px; padding: 15px 18px 13px; background: #edf6ff; border: 1px solid #dcecff; border-radius: 16px; }
+.studio-diagnostic-costs h4 { font-size: 13px; color: #075da9; margin-bottom: 9px; }
+.studio-diagnostic-costs > div { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 8px 0; border-bottom: 1px solid #d9e6f6; color: #485768; font-size: 11px; }
+.studio-diagnostic-costs > div:last-of-type { border-bottom: 0; }
+.studio-diagnostic-costs > div strong { font-size: 13px; color: #1d2937; font-weight: 750; white-space: nowrap; }
+.studio-diagnostic-costs > small { display: block; margin-top: 10px; color: #667b92; font-size: 10px; line-height: 1.65; }
+.studio-diagnostic-garages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 13px 16px;
+  min-height: 45px;
+  border-radius: 12px;
+  background: #0071e3;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 750;
+  text-align: center;
+  transition: background .2s ease;
+}
+.studio-diagnostic-garages:hover { color: #fff; background: #005ebf; }
+.studio-diagnostic-disclaimer { margin: 10px 0 0 !important; color: #89919b !important; font-size: 10px !important; text-align: center; line-height: 1.65 !important; }
+.studio-bento-live, .studio-bento-care { min-height: 345px; }
+.studio-bento-live h3, .studio-bento-care h3 { font-size: clamp(24px, 2.6vw, 34px); }
+
+/* More informative diagnostic illustration inside the interactive phone demo. */
+.diagnostic-card .sample-report { background: #fff; border: 1px solid #e9e1d3; border-radius: 11px; padding: 12px; margin-top: 8px; }
+.sample-report strong { display: block; margin: 0 0 3px; color: #2b333c; font-size: 11px; }
+.sample-report p { margin: 0 0 10px; color: #5e6570; font-size: 11px; line-height: 1.65; }
+.sample-report ul { margin: 0 0 10px; padding-right: 17px; color: #5e6570; font-size: 11px; line-height: 1.7; }
+.sample-report small { color: #7b838b; line-height: 1.65; font-size: 10px; }
+.sample-report .demo-garage-link { display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 9px; padding: 10px; background: #eaf3ff; color: #0066c7; font-size: 11px; font-weight: 750; text-decoration: none; }
+.sample-report .demo-garage-link:hover { background: #dcecff; }
+@media (max-width: 970px) {
+  .studio-bento-diagnostic { grid-template-columns: 1fr; gap: 30px; }
+  .studio-diagnostic-intro .studio-card-heading { margin-bottom: 21px; }
+  .studio-diagnostic-intro > p { max-width: 680px; }
+  .studio-diagnostic-promises { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 13px 22px; margin-top: 24px; }
+}
+@media (max-width: 700px) {
+  .studio-bento-diagnostic { padding: 22px; gap: 25px; }
+  .studio-diagnostic-intro h3 { font-size: clamp(29px,7.5vw,38px); }
+  .studio-diagnostic-intro > p { font-size: 14px; }
+  .studio-diagnostic-promises { grid-template-columns: 1fr; gap: 12px; margin-top: 22px; }
+  .studio-diagnostic-promises > span { font-size: 13px; }
+  .studio-bento-diagnostic .studio-diagnostic-preview { padding: 17px; border-radius: 18px; }
+  .studio-diagnostic-details { grid-template-columns: 1fr; gap: 8px; }
+  .studio-diagnostic-details > section { padding: 12px 13px; }
+  .studio-diagnostic-costs { padding: 13px; }
+  .studio-diagnostic-garages { font-size: 11px; }
+  .studio-diagnostic-result > strong { font-size: 16px; }
+}
+@media (max-width: 380px) {
+  .studio-bento-diagnostic { padding: 14px; }
+  .studio-bento-diagnostic .studio-diagnostic-preview { padding: 13px; }
+  .studio-diagnostic-costs > div { font-size: 10px; gap: 8px; }
+  .studio-diagnostic-costs > div strong { font-size: 11px; }
+}
