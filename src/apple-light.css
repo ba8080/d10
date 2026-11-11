@@ -1,0 +1,210 @@
+/* D10 Studio Light — Apple-inspired visual refresh.
+   Loaded after the existing styles; functionality and responsive layout are preserved. */
+:root{color-scheme:light;--accent:#0071e3;--paper:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:#e5e5ea;--violet:#0071e3;color:#1d1d1f;background:#fff}
+body{background:#fff;color:#1d1d1f}
+:focus-visible{outline-color:#0071e3}
+::selection{background:#d8eaff;color:#1d1d1f}
+.button-primary,.sc-purchase-link,.ps-checkout-button.button,.ps-prepare-button.button,.ps-whatsapp-button.button{background:#0071e3;border-color:#0071e3;color:#fff;box-shadow:none;text-shadow:none}
+.button-primary:hover,.sc-purchase-link:hover,.ps-checkout-button.button:hover,.ps-prepare-button.button:hover,.ps-whatsapp-button.button:hover{background:#0077ed;border-color:#0077ed;color:#fff;box-shadow:0 8px 24px #0071e32b}
+.eyebrow,.text-link,.legal-back,.more-capabilities>a{color:#0071e3}
+.section-title,.step h3,.experience-option h3{color:#1d1d1f;letter-spacing:-.035em}
+.section-heading>p,.experience-option p,.step p,.product-note{color:#6e6e73}
+/* Header and navigation */
+.sc-announcement{background:#f5f5f7;color:#515154;border-color:#e8e8ed}
+.sc-announcement::before{background:#0071e3;box-shadow:none}
+.sc-announcement span{color:#8e8e93}
+.sc-header{background:#ffffffeb;border-color:#e8e8ed;backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+.sc-brand-link{color:#1d1d1f}
+.sc-wordmark{font-style:normal;letter-spacing:-.075em;font-weight:800}
+.sc-wordmark-ai{color:#0071e3;background:#eaf3ff;border-color:#d8eaff;box-shadow:none}
+.sc-desktop-nav a{color:#515154}
+.sc-desktop-nav a:hover{color:#0071e3}
+.sc-desktop-nav a::after{background:#0071e3}
+.sc-menu-toggle{background:#f5f5f7;border-color:#e5e5ea;color:#1d1d1f}
+.sc-menu-toggle:hover{background:#eaf3ff;border-color:#bfdafa}
+.sc-mobile-nav:not([hidden]){background:#fff;border-color:#e5e5ea;box-shadow:0 20px 50px #1d1d1f12}
+.sc-mobile-nav a{color:#1d1d1f;border-color:#ededf0}
+.sc-mobile-nav a:hover{background:#f5f5f7;color:#0071e3}
+.sc-skip-link{background:#0071e3;color:#fff}
+/* Header utilities, footer, privacy and accessibility */
+.sc-footer{color:#1d1d1f;background:#f5f5f7;border-color:#e5e5ea}
+.sc-footer-brand p,.sc-footer-column p,.sc-footer-bottom small,.sc-legal-links a,.sc-legal-links button,.sc-footer-column a{color:#6e6e73}
+.sc-footer-column h2{color:#1d1d1f}
+.sc-footer-bottom{border-color:#dedee2}
+.sc-social-links a{background:#fff;color:#515154;border-color:#dedee2}
+.sc-social-links a:hover{background:#eaf3ff;color:#0071e3;border-color:#c4dcff}
+.sc-footer-column a:hover,.sc-legal-links a:hover,.sc-legal-links button:hover{color:#0071e3}
+.sc-consent,.sc-accessibility-panel{background:#fff;color:#1d1d1f;border:1px solid #dedee2;box-shadow:0 16px 56px #1d1d1f21;scrollbar-color:#b9bdc5 #f5f5f7}
+.sc-consent p,.sc-accessibility-statement{color:#6e6e73}
+.sc-consent p a{color:#0071e3}
+.sc-consent-actions button,.sc-accessibility-heading button,.sc-accessibility-options button{background:#f5f5f7;border-color:#e5e5ea;color:#1d1d1f}
+.sc-consent-actions button:first-child{background:#0071e3;border-color:#0071e3;color:#fff}
+.sc-accessibility-trigger{background:#fff;color:#0071e3;border-color:#c8ddf5;box-shadow:0 5px 18px #1d1d1f1c}
+.sc-accessibility-trigger:hover{background:#eaf3ff}
+.sc-accessibility-options button[aria-pressed=true]{background:#eaf3ff;color:#005bb5;border-color:#a5cefa}
+.sc-accessibility-reset{color:#0071e3}
+.sc-mobile-purchase{background:#ffffffef;color:#1d1d1f;border-color:#e5e5ea;box-shadow:0 -8px 24px #1d1d1f12}
+.sc-mobile-price strong{color:#1d1d1f}
+.sc-mobile-price span{color:#6e6e73}
+/* Hero — clean white product stage */
+.tech-hero{background:linear-gradient(180deg,#fff 0%,#fbfcff 73%,#f5f5f7 100%);border-color:#e5e5ea}
+.hero-grid{background-image:linear-gradient(#0071e307 1px,transparent 1px),linear-gradient(90deg,#0071e307 1px,transparent 1px);opacity:.55}
+.ambient-violet{background:#b9d7ff52;filter:blur(95px)}
+.ambient-mint{background:#e4edf8bd;filter:blur(100px)}
+.hero-eyebrow{color:#6e6e73}
+.hero-line{background:#0071e3;box-shadow:none}
+.hero-copy h1{color:#1d1d1f;letter-spacing:-.055em}
+.hero-word-gradient{color:#0071e3;background:linear-gradient(110deg,#0065c9,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-copy>p{color:#515154}
+.hero-price strong{color:#1d1d1f}
+.hero-price span,.hero-secondary,.hero-tags{color:#6e6e73}
+.hero-secondary:hover{color:#0071e3}
+.hero-tags svg{color:#24845d}
+.hero-watermark{-webkit-text-stroke-color:#0071e310}
+.hero-visual{background:radial-gradient(ellipse at 48% 46%,#eaf3ff96 0%,#f7faff52 45%,transparent 71%);border-radius:36px}
+.scene-mode,.scene-bottom,.scene-illustration,.scan-feedback{color:#6e6e73}
+.scene-mode>span{background:#24845d;box-shadow:none}
+.scene-motion{background:#fff;border-color:#dedee2;color:#515154}
+.scene-motion:hover{background:#eaf3ff;color:#0071e3}
+.scene-data{background:#fffffff0;border-color:#e5e5ea;box-shadow:0 12px 32px #1d1d1f15}
+.scene-data div>span{color:#86868b}
+.scene-data strong{color:#1d1d1f}
+.data-icon,.data-wave{background:#eaf3ff;border-color:#d8eaff;color:#0071e3}
+.data-pulse{background:repeating-linear-gradient(90deg,#0071e3 0 2px,transparent 2px 5px)}
+.scene-bottom svg{color:#0071e3}
+.scene-controls button{background:#fffffff0;border-color:#e5e5ea;color:#1d1d1f;backdrop-filter:blur(18px);border-radius:14px}
+.scene-controls button>svg{color:#0071e3}
+.scene-controls button>span{color:#86868b}
+.scene-controls button:hover,.scene-controls button[aria-pressed=true]{background:#eaf3ff;border-color:#abd0fa;box-shadow:none}
+.scene-controls button.active,.scan-feedback a{color:#0071e3;border-color:#abd0fa}
+.scan-progress{background:#dceafb}
+.scan-progress>span{background:#0071e3;box-shadow:none}
+.scene-loading{color:#6e6e73}
+.scene-loading-orbit{border-color:#d8eaff;border-top-color:#0071e3;box-shadow:none}
+.hero-footer{color:#86868b;border-color:#e5e5ea}
+.hero-footer a{color:#0071e3;border-color:#d8eaff}
+.hero-visual .device-scene-caption button{background:#fff;color:#515154;border-color:#e5e5ea}
+.device-scene{color:#515154}
+.device-scene-caption,.device-scene-caption small{color:#6e6e73}
+.device-scene-caption button{background:#fff;color:#515154;border-color:#e5e5ea}
+.device-scene-viewport:focus-visible{outline-color:#0071e3}
+.device-scene-fallback{background:#f5f5f7}
+.device-scene-fallback>span{background:#ffffffeb;color:#1d1d1f}
+/* Benefits, app demonstrations, feature cards */
+.trust-strip{border-color:#e5e5ea}
+.trust-item{border-color:#e5e5ea}
+.trust-item>svg{color:#0071e3}
+.trust-item b{color:#1d1d1f}
+.trust-item span{color:#6e6e73}
+.experience-section{background:#fff}
+.experience-option:hover{background:#f5f5f7}
+.experience-option.selected{background:#f5f5f7;border-color:#dceafa;box-shadow:none}
+.experience-option.selected:before{background:#0071e3;box-shadow:none}
+.experience-option-top{color:#86868b}
+.experience-option.selected .experience-option-top>svg,.experience-see{color:#0071e3}
+.demo-stage{background:linear-gradient(145deg,#f5f5f7,#eaf3ff);border-color:#e5e5ea;border-radius:30px}
+.demo-stage:before{background-image:linear-gradient(#0071e306 1px,transparent 1px),linear-gradient(90deg,#0071e306 1px,transparent 1px)}
+.demo-stage:after{background:#7eb8fa;opacity:.12}
+.demo-stage-label .eyebrow{color:#0071e3}
+.demo-stage-label>span:last-child,.demo-caption{color:#6e6e73}
+.app-window{background:#fff;border-color:#c9cdd3;border-top-color:#e1e3e6;border-left-color:#bfc3ca;box-shadow:12px 15px 0 -9px #e3e8ee,18px 27px 38px #1d1d1f20}
+.app-header,.app-tabs,.app-bottom{border-color:#e5e5ea}
+.app-logo,.app-car strong,.app-panel,.app-window{color:#1d1d1f}
+.app-logo>span,.app-tabs .active{color:#0071e3}
+.app-tabs .active{border-bottom-color:#0071e3}
+.app-car span,.scan-complete,.app-hint,.app-bottom{color:#6e6e73}
+.app-connected{color:#24845d}
+.app-avatar{background:#eaf3ff;border-color:#d8eaff;color:#0071e3}
+.car-icon{background:#eaf3ff;border-color:#d8eaff;color:#0071e3}
+.diagnostic-card{background:#fff9ee;border-color:#efd6a2}
+.diagnostic-card h3{color:#3e3427}
+.diagnostic-card p,.sample-report{color:#695b45}
+.app-label{color:#79623e}
+.status-tag{background:#fff0d3;color:#95611d;border-color:#efd7a4}
+.report-button{color:#0071e3;border-color:#ead9b8}
+.gauge-arc{border-color:#e8eff8}
+.gauge-arc:before{border-top-color:#0071e3;border-right-color:#67b5f5;filter:none}
+.gauge-arc strong{color:#0071e3}
+.gauge-arc span,.gauge-arc small,.gauge-ticks{color:#6e6e73}
+.live-signal path{stroke:#0071e3;filter:none}
+.live-readings>div{background:#f5f5f7;border-color:#e5e5ea}
+.live-readings svg,.maintenance-rows small{color:#0071e3}
+.live-readings span,.maintenance-rows div>div>span{color:#6e6e73}
+.maintenance-head{background:#eaf3ff;border-color:#d8eaff}
+.maintenance-head>span{color:#0071e3}
+.maintenance-head h3{color:#1d1d1f}
+.maintenance-rows>div{border-color:#e5e5ea}
+.maintenance-dot.complete{background:#eaf8f1;border-color:#bde5d4;color:#24845d}
+.more-capabilities{color:#6e6e73}
+.more-capabilities>div>svg{color:#0071e3}
+.how-section{background:#f5f5f7;border-color:#e5e5ea}
+.how-section .eyebrow,.step-top,.step-detail{color:#0071e3}
+.step{background:#fff;border:1px solid #e5e5ea;border-radius:24px;box-shadow:0 4px 22px #1d1d1f05}
+.step:hover{border-color:#bad9fb;box-shadow:0 14px 35px #1d1d1f0c}
+.step:before{background:linear-gradient(90deg,transparent,#c5dcfc,transparent)}
+.step-top svg{background:#eaf3ff;border-color:#d8eaff}
+/* Vehicle compatibility, selection and checkout */
+.ps-compatibility,.ps-purchase,.ps-faq{--ps-bg:#fff;--ps-card:#fff;--ps-ink:#1d1d1f;--ps-muted:#6e6e73;--ps-mint:#0071e3;--ps-lavender:#0071e3;--ps-line:#e5e5ea;color:#1d1d1f}
+.ps-compatibility{background:#fff;border-color:#e5e5ea}
+.ps-compatibility::before{opacity:0}
+.ps-compatibility-detail{color:#515154}
+.ps-compatibility-detail svg{background:#eaf3ff;color:#0071e3;border-color:#d8eaff}
+.ps-compatibility-form,.ps-order{background:#fff;border:1px solid #e5e5ea;box-shadow:0 16px 48px #1d1d1f0b;backdrop-filter:none;border-radius:28px}
+.ps-compatibility-form::before,.ps-order::before{display:none}
+.ps-terminal-line,.ps-form-note,.ps-request-ready>span{color:#86868b}
+.ps-terminal-lights{background:radial-gradient(circle at 3px 3px,#0071e3 2.5px,transparent 3px),radial-gradient(circle at 15px 3px,#92c4f8 2.5px,transparent 3px),radial-gradient(circle at 27px 3px,#d8eaff 2.5px,transparent 3px)}
+.ps-form-grid label{color:#515154}
+.ps-form-grid input,.ps-form-grid select{color-scheme:light;background:#f5f5f7;border-color:#e1e1e6;color:#1d1d1f;box-shadow:none;border-radius:12px}
+.ps-form-grid input::placeholder,.ps-form-grid select:has(option[value=""]:checked){color:#86868b}
+.ps-form-grid input:hover,.ps-form-grid select:hover{border-color:#b8bdc6}
+.ps-form-grid input:focus,.ps-form-grid select:focus{background:#fff;border-color:#0071e3;box-shadow:0 0 0 3px #0071e319}
+.ps-select-wrap>svg{color:#6e6e73}
+.ps-form-error{color:#bf2a36}
+.ps-request-ready>p{color:#24845d}
+.ps-purchase{background:#f5f5f7}
+.ps-packages legend{color:#515154}
+.ps-package{background:#fff;border:1px solid #e5e5ea;border-radius:24px;box-shadow:0 3px 14px #1d1d1f05}
+.ps-package::before{background:radial-gradient(ellipse,#0071e30a,transparent 65%)}
+.ps-package:hover{border-color:#b2d2f5}
+.ps-package-selected{background:#eef6ff;border-color:#0071e3;box-shadow:0 0 0 1px #0071e31c,0 12px 25px #0071e30a}
+.ps-package-selected:hover{border-color:#0071e3}
+.ps-package input{background:#fff;border-color:#a1a1a6}
+.ps-package input:checked{background:#fff;border-color:#0071e3;box-shadow:none}
+.ps-package-code,.ps-package-description,.ps-package-price>span{color:#6e6e73}
+.ps-package-selected .ps-package-code,.ps-package-saving{color:#0067cf}
+.ps-package-price>strong,.ps-package-selected .ps-package-price>strong{color:#1d1d1f;text-shadow:none}
+.ps-package-help a{color:#0071e3}
+.ps-order-label{color:#86868b}
+.ps-order-label>span:first-child{color:#0071e3}
+.ps-product-symbol{color:#0071e3;background:linear-gradient(145deg,#eff6ff,#d7e9ff);border-color:#bedaff;box-shadow:4px 5px 0 #d2e3f8,7px 10px 18px #1d1d1f12}
+.ps-product-symbol::after{background:#0071e3;box-shadow:none}
+.ps-product-symbol>svg{filter:none}
+.ps-product-wordmark>span{color:#0071e3}
+.ps-order-benefits li{color:#515154}
+.ps-order-benefits svg{color:#24845d}
+.ps-order-total>strong{color:#1d1d1f}
+.ps-checkout-note,.ps-returns-link{color:#6e6e73}
+.ps-faq{background:#fff;border-color:#e5e5ea}
+.ps-faq-contact,.ps-faq-answer a{color:#0071e3}
+.ps-faq-contact:hover{color:#005bb5}
+.ps-faq-item{background:#f5f5f7;border-color:#e5e5ea;border-radius:18px}
+.ps-faq-item[open]{background:#fff;border-color:#bad9fb}
+.ps-faq-item summary{color:#1d1d1f}
+.ps-faq-item summary>svg{color:#6e6e73;background:#fff;border-color:#e5e5ea}
+.ps-faq-item[open] summary>svg,.ps-faq-item[open] .ps-faq-number{color:#0071e3}
+.ps-faq-number,.ps-faq-answer{color:#6e6e73}
+.ps-faq-item summary:hover{color:#0071e3}
+/* CTA and legal */
+.final-invitation{background:linear-gradient(135deg,#edf5ff,#f8fbff 65%,#fff);border-color:#dce9fa;border-radius:32px;box-shadow:none}
+.final-invitation:after{border-color:#0071e310;box-shadow:0 0 0 35px #0071e305,0 0 0 75px #0071e303}
+.final-invitation .eyebrow,.final-invitation h2>span{color:#0071e3}
+.final-invitation h2{color:#1d1d1f}
+.final-monogram{-webkit-text-stroke-color:#0071e34d;text-shadow:none}
+.final-monogram span{color:#0071e3}
+.legal-page{background:#fff;color:#1d1d1f}
+.legal-content{color:#515154}
+.legal-content h2,.legal-content strong,.legal-content .text-white{color:#1d1d1f}
+.legal-content .text-white\/30{color:#86868b}
+.legal-content a{color:#0071e3}
+@media(max-width:650px){.hero-copy>p{color:#515154}.hero-visual{border-radius:24px;background:radial-gradient(ellipse at 50% 38%,#eaf3ff7a,transparent 67%)}.hero-footer{border-color:#e5e5ea}.experience-option{border-color:#e5e5ea}.experience-option.selected{border-color:#a8cdfa}.app-window{box-shadow:8px 14px 32px #1d1d1f1f}.sc-mobile-nav:not([hidden]){background:#fff}}
+@media(prefers-reduced-motion:reduce){.step:hover,.ps-package:hover,.experience-option:hover{transform:none}}
