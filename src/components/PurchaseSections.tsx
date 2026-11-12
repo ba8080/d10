@@ -85,9 +85,9 @@ export function CompatibilitySection() {
 }
 
 const packages = [
-  { id: 'solo', title: 'לרכב שלך', quantity: 1, description: 'מתאם D10 אחד + אפליקציה', price: 299, perUnit: 299, saving: 0, url: SOLO_PAYMENT_URL },
-  { id: 'family', title: 'לשלושה רכבים', quantity: 3, description: '3 מתאמי D10 + אפליקציה', price: 717, perUnit: 239, saving: 180, url: FAMILY_PAYMENT_URL },
-  { id: 'four', title: 'לארבעה רכבים', quantity: 4, description: '4 מתאמי D10 + אפליקציה', price: 800, perUnit: 200, saving: 396, url: ULTIMATE_PAYMENT_URL },
+  { id: 'solo', title: 'לרכב שלך', quantity: 1, description: 'מתאם D10 אחד + מנוי Pro לשנה', price: 300, perUnit: 300, saving: 0, url: SOLO_PAYMENT_URL },
+  { id: 'family', title: 'לשלושה רכבים', quantity: 3, description: '3 מתאמי D10 + Pro לשנה', price: 717, perUnit: 239, saving: 183, url: FAMILY_PAYMENT_URL },
+  { id: 'four', title: 'לארבעה רכבים', quantity: 4, description: '4 מתאמי D10 + Pro לשנה', price: 800, perUnit: 200, saving: 400, url: ULTIMATE_PAYMENT_URL },
 ];
 const PACKAGE_STORAGE_KEY = 'd10_selected_package';
 
@@ -113,7 +113,7 @@ export function PurchaseSection() {
       <div className="shell">
         <div className="ps-purchase-heading">
           <div><span className="eyebrow">הצעד הבא שלך</span><h2 id="ps-purchase-title" className="section-title">יותר להבין.<br />פחות לנחש.</h2></div>
-          <p>בוחרים חבילה שמתאימה לך.<br /><strong>תשלום חד־פעמי. בלי מנוי.</strong></p>
+          <p>בוחרים חבילה שמתאימה לך.<br /><strong>מנוי Pro לשנה כלול בחבילה.</strong></p>
         </div>
         <div className="ps-purchase-layout">
           <div className="ps-packages-wrap">
@@ -134,16 +134,17 @@ export function PurchaseSection() {
             <div className="ps-order-label" dir="ltr" aria-hidden="true"><span>YOUR D10</span><span>CONFIGURATION</span></div>
             <div className="ps-order-product"><span className="ps-product-symbol" aria-hidden="true"><PlugZap size={33} strokeWidth={1.5} /></span><div><span className="ps-product-wordmark" dir="ltr">D10<span>AI</span></span><p>המידע של הרכב, בשפה שלך.</p></div></div>
             <ul className="ps-order-benefits">
-              <li><Package size={18} aria-hidden="true" /><span>מתאם D10 וגישה לאפליקציה</span></li>
+              <li><Package size={18} aria-hidden="true" /><span>מתאם D10 ומנוי Pro לשנה</span></li>
               <li><Truck size={18} aria-hidden="true" /><span>משלוח חינם בתוך 3 ימי עסקים</span></li>
               <li><ShieldCheck size={18} aria-hidden="true" /><span>שנה אחריות על פגמי ייצור</span></li>
             </ul>
             <div className="ps-order-totals" aria-live="polite" aria-atomic="true">
-              <div className="ps-order-line"><span>{selected.quantity === 1 ? 'מתאם אחד + אפליקציה' : `${selected.quantity} מתאמים + אפליקציה`}</span><span><bdi>₪{selected.price}</bdi></span></div>
+              <div className="ps-order-line"><span>{selected.quantity === 1 ? 'מתאם אחד + Pro לשנה' : `${selected.quantity} מתאמים + Pro לשנה`}</span><span><bdi>₪{selected.price}</bdi></span></div>
               <div className="ps-order-line"><span>משלוח</span><span>ללא עלות</span></div>
               <div className="ps-order-total"><span>סה״כ לתשלום<small>כולל מע״מ</small></span><strong><bdi>₪{selected.price}</bdi></strong></div>
             </div>
             <a className="button button-primary ps-checkout-button" href={selected.url} target="_blank" rel="noopener noreferrer" onClick={() => trackCheckout(selected.price)}>להזמנה — <bdi>₪{selected.price}</bdi><ArrowLeft size={19} aria-hidden="true" /></a>
+            <p className="ps-checkout-note">לאחר השנה הראשונה ניתן לבחור להמשיך במנוי Pro בכ־20 ₪ לחודש. המחיר המדויק יוצג לפני ההצטרפות להמשך המנוי.</p>
             <p className="ps-checkout-note">מעבר לעמוד התשלום של HYP בחלון חדש</p>
             <a className="ps-returns-link" href="#returns">מדיניות ביטולים והחזרות</a>
           </aside>
@@ -157,7 +158,7 @@ const faqs = [
   { question: 'איך יודעים ש־D10 מתאים לרכב ולטלפון שלי?', answer: <>התאימות תלויה בדגם, בשנת הייצור, במערכות הרכב ובטלפון. לפני ההזמנה ממלאים את <a href="#compatibility">פרטי הרכב והטלפון</a>, וממשיכים לבדיקת התאמה עם הצוות ב־WhatsApp.</> },
   { question: 'איך מתחילים להשתמש?', answer: <>מחברים את המתאם לשקע האבחון OBD ברכב, מתקינים את האפליקציה ופועלים לפי הוראות החיבור. מיקום השקע ואופן ההתקנה משתנים בין דגמים. את ההתקנה ואת השימוש בטלפון מבצעים כשהרכב חונה, בהתאם להוראות.</> },
   { question: 'האם כל היכולות זמינות בכל רכב?', answer: <>לא. הנתונים והיכולות הזמינים תלויים במידע שמערכות הרכב חושפות ובתמיכה בדגם. קריאת קודי תקלות, נתונים בזמן אמת ובדיקות נוספות עשויות להשתנות בין רכבים. הצוות יוכל לבדוק את היכולות הרלוונטיות לדגם שלך לפני הרכישה.</> },
-  { question: 'צריך לשלם מנוי חודשי?', answer: <>ההצעה הנוכחית כוללת את המתאם ואת האפליקציה בתשלום חד־פעמי, ללא מנוי חודשי. חבילת מתאם אחד עולה 299 ₪, והחבילות לשלושה ולארבעה מתאמים מוצגות למעלה. כל המחירים כוללים מע״מ.</> },
+  { question: 'צריך לשלם מנוי חודשי?', answer: <>חבילת מתאם אחד עולה 300 ₪ וכוללת מנוי Pro לשנה. לאחר השנה הראשונה ניתן לבחור להמשיך במנוי Pro בתשלום של כ־20 ₪ לחודש. המחיר המדויק יוצג לפני ההצטרפות להמשך המנוי. מחירי החבילות לשלושה ולארבעה מתאמים מוצגים למעלה. כל המחירים כוללים מע״מ.</> },
   { question: 'מתי ההזמנה מגיעה ומה לגבי אחריות והחזרות?', answer: <>המשלוח ללא עלות, בתוך 3 ימי עסקים. המתאם מגיע עם אחריות לשנה על פגמי ייצור. לתנאי ביטול עסקה והחזרת מוצר, ראו את <a href="#returns">מדיניות הביטולים וההחזרות</a>. לשאלה לגבי הזמנה אפשר לפנות לצוות.</> },
   { question: 'האם D10 מחליף בדיקה במוסך?', answer: <>D10 מספק מידע ממערכות הרכב ועוזר להבין אותו. הוא אינו תחליף לאבחון מקצועי, לבדיקה מכנית או לבדיקה לפני קנייה, ואינו קובע אם בטוח להמשיך בנסיעה. במקרה של תקלה או נורת אזהרה, פועלים לפי ספר הרכב ופונים לאיש מקצוע.</> },
 ];

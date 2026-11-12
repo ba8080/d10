@@ -47,7 +47,7 @@ export function Header() {
       main?.focus({ preventScroll: true });
       main?.scrollIntoView({ behavior: 'instant', block: 'start' });
     }}>דילוג לתוכן הראשי</a>
-    <div className="sc-announcement" dir="rtl">משלוח חינם עד הבית <span aria-hidden="true">·</span> תשלום אחד, בלי מנוי</div>
+    <div className="sc-announcement" dir="rtl">משלוח חינם עד הבית <span aria-hidden="true">·</span> מתאם + Pro לשנה ב־300 ₪</div>
     <header className="sc-header" dir="rtl">
       <div className="shell sc-header-inner">
         <a href="#home" className="sc-brand-link" aria-label="D10 — לעמוד הבית" onClick={() => setOpen(false)}><Wordmark /></a>
@@ -174,7 +174,7 @@ export function MobilePurchaseBar({ hidden = false }: { hidden?: boolean }) {
   }, [visible]);
   if (!visible) return null;
   return <aside className="sc-mobile-purchase" aria-label="בחירת חבילה" dir="rtl">
-    <div className="sc-mobile-price"><strong dir="ltr">₪299</strong><span>מתאם בודד · משלוח חינם</span></div>
+    <div className="sc-mobile-price"><strong dir="ltr">₪300</strong><span>מתאם + Pro לשנה</span></div>
     <a className="sc-purchase-link" href="#pricing">לבחירת החבילה <ArrowLeft size={16} aria-hidden="true" /></a>
   </aside>;
 }
