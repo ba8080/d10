@@ -39,7 +39,7 @@ export function Hero() {
               <a className="studio-button studio-button-secondary" href="#features">הצצה לאבחון <ArrowDown size={17} aria-hidden="true" /></a>
             </div>
             <div className="studio-hero-offer">
-              <strong dir="ltr">₪300</strong>
+              <strong dir="ltr">₪299</strong>
               <span>מתאם + מנוי Pro לשנה<br /><b>לאחר שנה: המשך לבחירתך בכ־20 ₪ לחודש.</b></span>
             </div>
           </div>
