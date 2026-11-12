@@ -39,8 +39,8 @@ export function Hero() {
               <a className="studio-button studio-button-secondary" href="#features">הצצה לאבחון <ArrowDown size={17} aria-hidden="true" /></a>
             </div>
             <div className="studio-hero-offer">
-              <strong dir="ltr">₪299</strong>
-              <span>מתאם + אפליקציה<br /><b>תשלום חד־פעמי. בלי מנוי.</b></span>
+              <strong dir="ltr">₪300</strong>
+              <span>מתאם + מנוי Pro לשנה<br /><b>לאחר שנה: המשך לבחירתך בכ־20 ₪ לחודש.</b></span>
             </div>
           </div>
 
@@ -76,7 +76,7 @@ export function Hero() {
           </div>
         </div>
         <div className="shell studio-trust">
-          <div><Check size={16} aria-hidden="true" /><span>בלי מנוי חודשי</span></div>
+          <div><Check size={16} aria-hidden="true" /><span>Pro כלול לשנה</span></div>
           <div><Check size={16} aria-hidden="true" /><span>אפליקציה בעברית</span></div>
           <div><Check size={16} aria-hidden="true" /><span>משלוח חינם</span></div>
           <div><Check size={16} aria-hidden="true" /><span>שנה אחריות</span></div>
@@ -86,7 +86,7 @@ export function Hero() {
         <div className="shell studio-benefits-grid">
           {[
             { Icon: Languages, name: 'פשוט להבין', detail: 'מונחים ברורים בעברית' },
-            { Icon: CreditCard, name: 'שלך לתמיד', detail: 'רכישה אחת, בלי מנוי' },
+            { Icon: CreditCard, name: 'Pro לשנה', detail: 'כלול במחיר המתאם' },
             { Icon: Truck, name: 'עד הדלת', detail: 'משלוח חינם בישראל' },
             { Icon: ShieldCheck, name: 'קונים בביטחון', detail: 'שנה אחריות על פגמי ייצור' }
           ].map(({ Icon, name, detail }) => (
